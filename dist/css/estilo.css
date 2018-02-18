@@ -1,0 +1,16 @@
+.margin-left-0 {
+    padding-left: 0;
+}
+.margin-right-0 {
+    padding-right: 0;
+}
+.margin-left-right-0 {
+    padding-left: 0;
+    padding-right: 0;
+}
+.nicEdit-pane {
+    width: 280px !important;
+}
+.font-normal {
+    font-weight: normal;
+}
