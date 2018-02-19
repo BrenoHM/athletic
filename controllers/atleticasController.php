@@ -60,6 +60,55 @@ class atleticasController extends controller {
     
     public function editar($idAtletica) {
         
+        /*if(isset($_POST['frmAtletica'])) {
+            echo '<pre>';
+            print_r($_POST);
+            echo '</pre>';
+        }
+         * 
+         */
+        
+        $dados        = array();
+        $obrigatorios = array();
+        $formValidado = TRUE;
+        
+        $a = new Atleticas();
+        $dados['atletica'] = $a->getAtleticas($idAtletica);
+        $passo = $dados['atletica']['passoFormulario'];
+        
+        if( isset($_POST['frmAtletica']) ) {
+            switch ($passo){
+                case 1:
+                    $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro');
+                    break;
+                case 2:
+                    $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro');
+                    break;
+                case 3:
+                    $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro');
+                    break;
+                case 4:
+                    $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro');
+                    break;
+                case 5:
+                    $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro');
+                    break;
+            }
+            
+            foreach ( $obrigatorios as $obrigatorio ) {
+                if( isset($_POST[$obrigatorio]) && empty($_POST[$obrigatorio]) ) {
+                    $formValidado = FALSE;
+                }
+            }
+            
+            if( $formValidado ) {
+                $dados['atletica']['passoFormulario'] = ++$passo;
+                $dados['aviso'] = $this->mensagemSucesso("Dados atualizados com sucesso!");
+            }else{
+                $dados['aviso'] = $this->mensagemErro("Todos os campos são de preenchimento obrigatório!");
+            }
+        }
+        
         /*if(Sessao::getSessionId() != ""){
             
             $dados = array();
@@ -109,10 +158,12 @@ class atleticasController extends controller {
          * 
          */
         
-        $dados = array();
+        
+        
+        $dados['post'] = $_POST; //CASO DE ERRO NA VALIDACAO, OS DADOS POSSAM SER RETORNADOS PARA A VIEW.
+        
         $u = new Universidades();
         $dados['universidades'] = $u->getUniversidades();
-        $dados['atletica'] = array();
         $this->loadTemplate("atleticas/editar", $dados);
         
     }

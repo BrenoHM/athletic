@@ -7,8 +7,9 @@ class model {
     function __construct() {
         
         global $config;
-        
-        $this->db = new PDO("mysql:dbname=".$config['dbname'].";host=".$config['host'], $config['dbuser'], $config['dbpass'], array(PDO::ATTR_PERSISTENT => true));
+        $options = array();
+	//$options = array(PDO::ATTR_PERSISTENT => true);
+        $this->db = new PDO("mysql:dbname=".$config['dbname'].";host=".$config['host'], $config['dbuser'], $config['dbpass'], $options);
         
     }
     

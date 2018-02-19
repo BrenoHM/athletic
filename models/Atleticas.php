@@ -2,75 +2,309 @@
 
 class Atleticas extends model {
     
-    public $tabela = "c018cli";
+    public $tabela = "formulario";
 
-    private $codCli;
-    private $nomCli;
-    private $urlCli;
-    private $imgCli;
-    private $status;
+    private $idFormulario;
+    private $registroCartorio;
+    private $cnpj;
+    private $qtdeCampos;
+    private $campus;
+    private $qtdeAlunosCurso;
+    private $qtdeAlunosFaculdade;
+    private $salaPropria;
+    private $repasseFinanceiro;
+    private $passoFormulario;
+    private $cursos;
+    private $possuiUniforme;
+    private $possuiBandeirao;
+    private $possuiMascote;
+    private $possuiBateria;
+    private $principaisEventos;
+    private $meiosComunicacaoAluno;
+    private $meiosComunicacaoPatrocinadora;
+    private $patrocinio;
+    private $patrocinioCervejaria;
+    private $patrocinioEnergetico;
+    private $patrocinioCerimonial;
+    private $observacao;
+    private $autorizacaoTermo;
+    private $urlEstatuto;
+    private $urlAta;
+    private $urlLogo;
+    private $dataCad;
+    private $idUsuarioAtletica;
+    private $idAtletica;
+    private $idUniversidade;
 
-    public function setCodCli($codCli){
-        $this->codCli = $codCli;
+    function getIdFormulario() {
+        return $this->idFormulario;
     }
 
-    public function getCodCli(){
-        return $this->codCli;
+    function getRegistroCartorio() {
+        return $this->registroCartorio;
     }
 
-    public function setNomCli($nomCli){
-        $this->nomCli = $nomCli;
+    function getCnpj() {
+        return $this->cnpj;
     }
 
-    public function getNomCli(){
-        return $this->nomCli;
+    function getQtdeCampos() {
+        return $this->qtdeCampos;
     }
 
-    public function setUrlCli($urlCli){
-        $this->urlCli = $urlCli;
+    function getCampus() {
+        return $this->campus;
     }
 
-    public function getUrlCli(){
-        return $this->urlCli;
+    function getQtdeAlunosCurso() {
+        return $this->qtdeAlunosCurso;
     }
 
-    public function setImgCli($imgCli){
-        $this->imgCli = $imgCli;
+    function getQtdeAlunosFaculdade() {
+        return $this->qtdeAlunosFaculdade;
     }
 
-    public function getImgCli(){
-        return $this->imgCli;
+    function getSalaPropria() {
+        return $this->salaPropria;
     }
 
-    public function setStatus($status){
-        $this->status = $status;
+    function getRepasseFinanceiro() {
+        return $this->repasseFinanceiro;
     }
 
-    public function getStatus(){
-        return $this->status;
+    function getPassoFormulario() {
+        return $this->passoFormulario;
     }
-    
+
+    function getCursos() {
+        return $this->cursos;
+    }
+
+    function getPossuiUniforme() {
+        return $this->possuiUniforme;
+    }
+
+    function getPossuiBandeirao() {
+        return $this->possuiBandeirao;
+    }
+
+    function getPossuiMascote() {
+        return $this->possuiMascote;
+    }
+
+    function getPossuiBateria() {
+        return $this->possuiBateria;
+    }
+
+    function getPrincipaisEventos() {
+        return $this->principaisEventos;
+    }
+
+    function getMeiosComunicacaoAluno() {
+        return $this->meiosComunicacaoAluno;
+    }
+
+    function getMeiosComunicacaoPatrocinadora() {
+        return $this->meiosComunicacaoPatrocinadora;
+    }
+
+    function getPatrocinio() {
+        return $this->patrocinio;
+    }
+
+    function getPatrocinioCervejaria() {
+        return $this->patrocinioCervejaria;
+    }
+
+    function getPatrocinioEnergetico() {
+        return $this->patrocinioEnergetico;
+    }
+
+    function getPatrocinioCerimonial() {
+        return $this->patrocinioCerimonial;
+    }
+
+    function getObservacao() {
+        return $this->observacao;
+    }
+
+    function getAutorizacaoTermo() {
+        return $this->autorizacaoTermo;
+    }
+
+    function getUrlEstatuto() {
+        return $this->urlEstatuto;
+    }
+
+    function getUrlAta() {
+        return $this->urlAta;
+    }
+
+    function getUrlLogo() {
+        return $this->urlLogo;
+    }
+
+    function getDataCad() {
+        return $this->dataCad;
+    }
+
+    function getIdUsuarioAtletica() {
+        return $this->idUsuarioAtletica;
+    }
+
+    function getIdAtletica() {
+        return $this->idAtletica;
+    }
+
+    function getIdUniversidade() {
+        return $this->idUniversidade;
+    }
+
+    function setIdFormulario($idFormulario) {
+        $this->idFormulario = $idFormulario;
+    }
+
+    function setRegistroCartorio($registroCartorio) {
+        $this->registroCartorio = $registroCartorio;
+    }
+
+    function setCnpj($cnpj) {
+        $this->cnpj = $cnpj;
+    }
+
+    function setQtdeCampos($qtdeCampos) {
+        $this->qtdeCampos = $qtdeCampos;
+    }
+
+    function setCampus($campus) {
+        $this->campus = $campus;
+    }
+
+    function setQtdeAlunosCurso($qtdeAlunosCurso) {
+        $this->qtdeAlunosCurso = $qtdeAlunosCurso;
+    }
+
+    function setQtdeAlunosFaculdade($qtdeAlunosFaculdade) {
+        $this->qtdeAlunosFaculdade = $qtdeAlunosFaculdade;
+    }
+
+    function setSalaPropria($salaPropria) {
+        $this->salaPropria = $salaPropria;
+    }
+
+    function setRepasseFinanceiro($repasseFinanceiro) {
+        $this->repasseFinanceiro = $repasseFinanceiro;
+    }
+
+    function setPassoFormulario($passoFormulario) {
+        $this->passoFormulario = $passoFormulario;
+    }
+
+    function setCursos($cursos) {
+        $this->cursos = $cursos;
+    }
+
+    function setPossuiUniforme($possuiUniforme) {
+        $this->possuiUniforme = $possuiUniforme;
+    }
+
+    function setPossuiBandeirao($possuiBandeirao) {
+        $this->possuiBandeirao = $possuiBandeirao;
+    }
+
+    function setPossuiMascote($possuiMascote) {
+        $this->possuiMascote = $possuiMascote;
+    }
+
+    function setPossuiBateria($possuiBateria) {
+        $this->possuiBateria = $possuiBateria;
+    }
+
+    function setPrincipaisEventos($principaisEventos) {
+        $this->principaisEventos = $principaisEventos;
+    }
+
+    function setMeiosComunicacaoAluno($meiosComunicacaoAluno) {
+        $this->meiosComunicacaoAluno = $meiosComunicacaoAluno;
+    }
+
+    function setMeiosComunicacaoPatrocinadora($meiosComunicacaoPatrocinadora) {
+        $this->meiosComunicacaoPatrocinadora = $meiosComunicacaoPatrocinadora;
+    }
+
+    function setPatrocinio($patrocinio) {
+        $this->patrocinio = $patrocinio;
+    }
+
+    function setPatrocinioCervejaria($patrocinioCervejaria) {
+        $this->patrocinioCervejaria = $patrocinioCervejaria;
+    }
+
+    function setPatrocinioEnergetico($patrocinioEnergetico) {
+        $this->patrocinioEnergetico = $patrocinioEnergetico;
+    }
+
+    function setPatrocinioCerimonial($patrocinioCerimonial) {
+        $this->patrocinioCerimonial = $patrocinioCerimonial;
+    }
+
+    function setObservacao($observacao) {
+        $this->observacao = $observacao;
+    }
+
+    function setAutorizacaoTermo($autorizacaoTermo) {
+        $this->autorizacaoTermo = $autorizacaoTermo;
+    }
+
+    function setUrlEstatuto($urlEstatuto) {
+        $this->urlEstatuto = $urlEstatuto;
+    }
+
+    function setUrlAta($urlAta) {
+        $this->urlAta = $urlAta;
+    }
+
+    function setUrlLogo($urlLogo) {
+        $this->urlLogo = $urlLogo;
+    }
+
+    function setDataCad($dataCad) {
+        $this->dataCad = $dataCad;
+    }
+
+    function setIdUsuarioAtletica($idUsuarioAtletica) {
+        $this->idUsuarioAtletica = $idUsuarioAtletica;
+    }
+
+    function setIdAtletica($idAtletica) {
+        $this->idAtletica = $idAtletica;
+    }
+
+    function setIdUniversidade($idUniversidade) {
+        $this->idUniversidade = $idUniversidade;
+    }
+        
     public function __construct() {
         parent::__construct();
     }
     
-    public function getAtleticas($idCliente = "") {
+    public function getAtleticas($idAtletica = "") {
 
         $dados = array();
 
-        $where = ($idCliente != "") ? "WHERE codCli = :codCli" : "";
+        $where = ($idAtletica != "") ? "WHERE idAtletica = :idAtletica" : "";
             
         $sql = "SELECT * FROM {$this->tabela} $where";
         $sql = $this->db->prepare($sql);
 
-        if( $idCliente != "" ){
-            $sql->bindValue(":codCli", $idCliente);
+        if( $idAtletica != "" ){
+            $sql->bindValue(":idAtletica", $idAtletica);
         }
 
         $sql->execute();
 
         if( $sql->rowCount() > 0 ) {
-            $dados = ( $idCliente != "" ) ? $sql->fetch() : $sql->fetchAll();
+            $dados = ( $idAtletica != "" ) ? $sql->fetch() : $sql->fetchAll();
         }
 
         return $dados;
