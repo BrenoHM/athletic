@@ -15,8 +15,8 @@
                 
                 <div class="form-group col-md-2">
                     <label for="">Possui registro em cartório</label><br />
-                    <label class="font-normal"><input type="radio" id="" name="registroCartorio" value="SIM" <?php echo ( isset($atletica['registroCartorio']) && $atletica['registroCartorio'] == 'SIM' ) ? 'checked' : ''; ?>> Sim</label>&nbsp;
-                    <label class="font-normal"><input type="radio" id="" name="registroCartorio" value="NÃO" <?php echo ( isset($atletica['registroCartorio']) && $atletica['registroCartorio'] == 'NÃO' ) ? 'checked' : ''; ?>> Não</label>
+                    <label class="font-normal"><input type="radio" name="registroCartorio" value="SIM" <?php echo ( isset($atletica['registroCartorio']) && $atletica['registroCartorio'] == 'SIM' ) ? 'checked' : ''; ?>> Sim</label>&nbsp;
+                    <label class="font-normal"><input type="radio" name="registroCartorio" value="NÃO" <?php echo ( isset($atletica['registroCartorio']) && $atletica['registroCartorio'] == 'NÃO' ) ? 'checked' : ''; ?>> Não</label>
                 </div>
                 
                 <div class="form-group col-md-4">
@@ -95,17 +95,91 @@
             
             <!-- INICIO PASSO3 -->
             <div class="tab-pane" id="passo_3">
-                Passo3
+                
+                <div class="form-group">
+                    <label>Possui uniforme de equipe?</label><br />
+                    <label class="font-normal"><input type="radio" name="possuiUniforme" value="SIM" <?php echo ( isset($atletica['possuiUniforme']) && $atletica['possuiUniforme'] == 'SIM' ) ? 'checked' : ''; ?>> Sim</label>&nbsp;
+                    <label class="font-normal"><input type="radio" name="possuiUniforme" value="NÃO" <?php echo ( isset($atletica['possuiUniforme']) && $atletica['possuiUniforme'] == 'NÃO' ) ? 'checked' : ''; ?>> Não</label>
+                </div>
+                
+                <div class="form-group">
+                    <label>Possui bandeirão?</label><br />
+                    <label class="font-normal"><input type="radio" name="possuiBandeirao" value="SIM" <?php echo ( isset($atletica['possuiBandeirao']) && $atletica['possuiBandeirao'] == 'SIM' ) ? 'checked' : ''; ?>> Sim</label>&nbsp;
+                    <label class="font-normal"><input type="radio" name="possuiBandeirao" value="NÃO" <?php echo ( isset($atletica['possuiBandeirao']) && $atletica['possuiBandeirao'] == 'NÃO' ) ? 'checked' : ''; ?>> Não</label>
+                </div>
+                
+                <div class="form-group">
+                    <label>Possui mascote?</label><br />
+                    <label class="font-normal"><input type="radio" name="possuiMascote" value="SIM" <?php echo ( isset($atletica['possuiMascote']) && $atletica['possuiMascote'] == 'SIM' ) ? 'checked' : ''; ?>> Sim</label>&nbsp;
+                    <label class="font-normal"><input type="radio" name="possuiMascote" value="NÃO" <?php echo ( isset($atletica['possuiMascote']) && $atletica['possuiMascote'] == 'NÃO' ) ? 'checked' : ''; ?>> Não</label>
+                </div>
+                
+                <div class="form-group">
+                    <label>Possui bateria?</label><br />
+                    <label class="font-normal"><input type="radio" name="possuiBateria" value="SIM" <?php echo ( isset($atletica['possuiBateria']) && $atletica['possuiBateria'] == 'SIM' ) ? 'checked' : ''; ?>> Sim</label>&nbsp;
+                    <label class="font-normal"><input type="radio" name="possuiBateria" value="NÃO" <?php echo ( isset($atletica['possuiBateria']) && $atletica['possuiBateria'] == 'NÃO' ) ? 'checked' : ''; ?>> Não</label>
+                </div>
+                
+                <div class="form-group">
+                    <label for="principaisEventos">Quais os principais eventos que a Atlética participa e em que data/período?</label>
+                    <textarea class="form-control" rows="10" id="principaisEventos" style="resize: none;"><?php echo isset($atletica['principaisEventos']) ? $atletica['principaisEventos'] : ''; ?></textarea>
+                </div>
+                
             </div>
             <!-- FIM PASSO3 -->
             
+            <!-- INICIO PASSO4 -->
             <div class="tab-pane" id="passo_4">
-                Passo4
+                
+                <label for="meiosComunicacaoAluno">Quais os meios de comunicação da atlética com os alunos representados?</label>
+                <div class="form-group">
+                    <select name="meiosComunicacaoAluno[]" id="meiosComunicacaoAluno" class="form-control select2" multiple="multiple" data-placeholder="Meios de Comunicação" style="width: 100%;">
+                        <option value="Facebook Perfil">Facebook Perfil</option>
+                        <option value="Facebook Fanpage">Facebook Fanpage</option>
+                        <option value="Grupos de Whatsapp">Grupos de Whatsapp</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="Snapchat">Snapchat</option>
+                        <option value="Twitter">Twitter</option>
+                        <option value="Mailling (Lista de email dos Associados)">Mailling (Lista de email dos Associados)</option>
+                        <option value="Através do site da Instituição">Através do site da Instituição</option>
+                        <option value="Quadro de Aviso próprio (Mural de Recados)">Quadro de Aviso próprio (Mural de Recados)</option>
+                        <option value="Passagem em sala de aula">Passagem em sala de aula</option>
+                        <option value="Ação de ativação de marketing dentro da instituição">Ação de ativação de marketing dentro da instituição</option>
+                    </select>
+                </div>
+                
+                <label for="meiosComunicacaoPatrocinadora">Quais os meios de comunicação que a empresa patrocinadora poderia utilizar para comunicar e apresentar os produtos e serviços aos alunos representados da Atlética?</label>
+                <div class="form-group">
+                    <select name="meiosComunicacaoPatrocinadora[]" id="meiosComunicacaoPatrocinadora" class="form-control select2" multiple="multiple" data-placeholder="Meios de Comunicação da Patrocinadora" style="width: 100%;">
+                        <option value="Facebook Perfil">Facebook Perfil</option>
+                        <option value="Facebook Fanpage">Facebook Fanpage</option>
+                        <option value="Grupos de Whatsapp">Grupos de Whatsapp</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="Snapchat">Snapchat</option>
+                        <option value="Twitter">Twitter</option>
+                        <option value="Mailling (Lista de email dos Associados)">Mailling (Lista de email dos Associados)</option>
+                        <option value="Através do site da Instituição">Através do site da Instituição</option>
+                        <option value="Quadro de Aviso próprio (Mural de Recados)">Quadro de Aviso próprio (Mural de Recados)</option>
+                        <option value="Passagem em sala de aula">Passagem em sala de aula</option>
+                        <option value="Ação de ativação de marketing dentro da instituição">Ação de ativação de marketing dentro da instituição</option>
+                    </select>
+                </div>
+                
+                <div class="clearfix"></div>
+                
             </div>
+            <!-- FIM PASSO4 -->
             
+            <!-- INICIO PASSO5 -->
             <div class="tab-pane" id="passo_5">
-                Passo5
+                
+                <div class="form-group col-md-4">
+                    <label for="repasseFinanceiro">Repasse</label>
+                    <input type="text" id="repasseFinanceiro" class="form-control" name="repasseFinanceiro" placeholder="Repasse Financeiro" value="<?php echo isset($atletica['repasseFinanceiro']) ? $atletica['repasseFinanceiro'] : ''; ?>">
+                </div>
+                
             </div>
+            <!-- FIM PASSO5 -->
             
           <!-- /.tab-pane -->
         </div>
