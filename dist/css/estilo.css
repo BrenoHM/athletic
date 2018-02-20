@@ -14,3 +14,6 @@
 .font-normal {
     font-weight: normal;
 }
+.has-error .select2-selection {
+    border-color: red;
+}

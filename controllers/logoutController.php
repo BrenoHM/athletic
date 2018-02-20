@@ -8,8 +8,13 @@ class logoutController extends controller {
     
     public function index() {
         
+        $redirect = "";
+        if( Sessao::getSessionNivel() == 'atletica' ){
+            $redirect = "/login/atletica";
+        }
+        
         unset($_SESSION['sessionUser']);
-        header("Location: ".BASE_URL);
+        header("Location: " . BASE_URL . $redirect);
         
     }
  

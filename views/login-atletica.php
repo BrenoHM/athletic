@@ -42,7 +42,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Administrador</b></a>
+    <a href="#"><b>Administrador - Atlética</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

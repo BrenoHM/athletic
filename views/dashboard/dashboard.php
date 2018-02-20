@@ -1,3 +1,8 @@
+<?php
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
+?>
 <section class="content-header">
     <h1>Estatísticas</h1>
     <ol class="breadcrumb">
@@ -8,7 +13,7 @@
 <section class="content">
 	<div id="linhas" style="width: 100%; height: 500px;"></div>
 </section>
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<!--<script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
@@ -16,9 +21,9 @@
 	  //montando o array com os dados
         var data = google.visualization.arrayToDataTable([
           ['Dia da Semana', 'Acessos'],
-          <?php if($acessos): foreach($acessos as $valor):?>
-          ['<?php echo $valor['diaDaSemana']; ?>', <?php echo $valor['porcentagemAcesso'];?>],
-        <?php endforeach; endif?>
+          <?php //if($acessos): foreach($acessos as $valor):?>
+          ['<?php //echo $valor['diaDaSemana']; ?>', <?php //echo $valor['porcentagemAcesso'];?>],
+        <?php //endforeach; endif?>
         ]);
 		//opçoes para o gráfico barras
         
@@ -34,4 +39,4 @@
         linhas.draw(data, options1);
 		
       }
-    </script>
+    </script>-->

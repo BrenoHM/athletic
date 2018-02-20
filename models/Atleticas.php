@@ -201,7 +201,7 @@ class Atleticas extends model {
     }
 
     function setCursos($cursos) {
-        $this->cursos = $cursos;
+        $this->cursos = !empty($cursos) ? implode(",", $cursos) : null;
     }
 
     function setPossuiUniforme($possuiUniforme) {
@@ -225,11 +225,11 @@ class Atleticas extends model {
     }
 
     function setMeiosComunicacaoAluno($meiosComunicacaoAluno) {
-        $this->meiosComunicacaoAluno = $meiosComunicacaoAluno;
+        $this->meiosComunicacaoAluno = !empty($meiosComunicacaoAluno) ? implode(",", $meiosComunicacaoAluno) : null;
     }
 
     function setMeiosComunicacaoPatrocinadora($meiosComunicacaoPatrocinadora) {
-        $this->meiosComunicacaoPatrocinadora = $meiosComunicacaoPatrocinadora;
+        $this->meiosComunicacaoPatrocinadora = !empty($meiosComunicacaoPatrocinadora) ? implode(",", $meiosComunicacaoPatrocinadora) : null;
     }
 
     function setPatrocinio($patrocinio) {
@@ -327,25 +327,86 @@ class Atleticas extends model {
     
     public function atualizar() {
         
-        $imgCli = "";
-        if( !empty($this->getImgCli()) ){
-            $imgCli = "imgCli = :imgCli, ";
+        $docEstatuto = "";
+        if( !empty($this->getUrlEstatuto()) ){
+            $docEstatuto = "urlEstatuto = :urlEstatuto, ";
+        }
+        
+        $docAta = "";
+        if( !empty($this->getUrlAta()) ){
+            $docAta = "urlAta = :urlAta, ";
+        }
+        
+        $docLogo = "";
+        if( !empty($this->getUrlLogo()) ){
+            $docLogo = "urlLogo = :urlLogo, ";
         }
         
         $sql = "UPDATE {$this->tabela} SET "
-            . "datAtu = NOW(), "
-            . "nomCli = :nomCli, "
-            . "$imgCli urlCli = :urlCli "
-            . "WHERE codCli = :codCli";
+            . "registroCartorio = :registroCartorio, "
+            . "cnpj = :cnpj, "
+            . "qtdeCampus = :qtdeCampus, "
+            . "campus = :campus, "
+            . "qtdeAlunosCurso = :qtdeAlunosCurso, "
+            . "qtdeAlunosFaculdade = :qtdeAlunosFaculdade, "
+            . "salaPropria = :salaPropria, "
+            . "repasseFinanceiro = :repasseFinanceiro, "
+            . "passoFormulario = :passoFormulario, "
+            . "cursos = :cursos, "
+            . "possuiUniforme = :possuiUniforme, "
+            . "possuiBandeirao = :possuiBandeirao, "
+            . "possuiMascote = :possuiMascote, "
+            . "possuiBateria = :possuiBateria, "
+            . "principaisEventos = :principaisEventos, "
+            . "meiosComunicacaoAluno = :meiosComunicacaoAluno, "
+            . "meiosComunicacaoPatrocinadora = :meiosComunicacaoPatrocinadora, "
+            . "patrocinio = :patrocinio, "
+            . "patrocinioCervejaria = :patrocinioCervejaria, "
+            . "patrocinioEnergetico = :patrocinioEnergetico, "
+            . "patrocinioCerimonial = :patrocinioCerimonial, "
+            . "observacao = :observacao, "
+            . "idUniversidade = :idUniversidade, "
+            . "$docEstatuto $docAta $docLogo autorizacaoTermo = :autorizacaoTermo "
+            . "WHERE idAtletica = :idAtletica";
         
         $sql = $this->db->prepare($sql);
 
-        $sql->bindValue(":nomCli", $this->getNomCli());
-        $sql->bindValue(":urlCli", $this->getUrlCli());
-        $sql->bindValue(":codCli", $this->getCodCli());
+        $sql->bindValue(":registroCartorio", $this->getRegistroCartorio());
+        $sql->bindValue(":cnpj", $this->getCnpj());
+        $sql->bindValue(":qtdeCampus", $this->getQtdeCampos());
+        $sql->bindValue(":campus", $this->getCampus());
+        $sql->bindValue(":qtdeAlunosCurso", $this->getQtdeAlunosCurso());
+        $sql->bindValue(":qtdeAlunosFaculdade", $this->getQtdeAlunosFaculdade());
+        $sql->bindValue(":salaPropria", $this->getSalaPropria());
+        $sql->bindValue(":repasseFinanceiro", $this->getRepasseFinanceiro());
+        $sql->bindValue(":passoFormulario", $this->getPassoFormulario());
+        $sql->bindValue(":cursos", $this->getCursos());
+        $sql->bindValue(":possuiUniforme", $this->getPossuiUniforme());
+        $sql->bindValue(":possuiBandeirao", $this->getPossuiBandeirao());
+        $sql->bindValue(":possuiMascote", $this->getPossuiMascote());
+        $sql->bindValue(":possuiBateria", $this->getPossuiBateria());
+        $sql->bindValue(":principaisEventos", $this->getPrincipaisEventos());
+        $sql->bindValue(":meiosComunicacaoAluno", $this->getMeiosComunicacaoAluno());
+        $sql->bindValue(":meiosComunicacaoPatrocinadora", $this->getMeiosComunicacaoPatrocinadora());
+        $sql->bindValue(":patrocinio", $this->getPatrocinio());
+        $sql->bindValue(":patrocinioCervejaria", $this->getPatrocinioCervejaria());
+        $sql->bindValue(":patrocinioEnergetico", $this->getPatrocinioEnergetico());
+        $sql->bindValue(":patrocinioCerimonial", $this->getPatrocinioCerimonial());
+        $sql->bindValue(":observacao", $this->getObservacao());
+        $sql->bindValue(":idUniversidade", $this->getIdUniversidade());
+        $sql->bindValue(":autorizacaoTermo", $this->getAutorizacaoTermo());
+        $sql->bindValue(":idAtletica", $this->getIdAtletica());
 
-        if( !empty($this->getImgCli()) ){
-            $sql->bindValue(":imgCli", $this->getImgCli());
+        if( !empty($this->getUrlEstatuto()) ){
+            $sql->bindValue(":urlEstatuto", $this->getUrlEstatuto());
+        }
+        
+        if( !empty($this->getUrlAta()) ){
+            $sql->bindValue(":urlAta", $this->getUrlAta());
+        }
+        
+        if( !empty($this->getUrlLogo()) ){
+            $sql->bindValue(":urlLogo", $this->getUrlLogo());
         }
 
         $sql->execute();
@@ -366,6 +427,34 @@ class Atleticas extends model {
         
         return ( $sql->rowCount() > 0 ) ? true : false;
 
+    }
+    
+    public function populaObjeto($post) {
+        
+        $this->setRegistroCartorio($post['registroCartorio']);
+        $this->setCnpj($post['cnpj']);
+        $this->setQtdeCampos($post['qtdeCampos']);
+        $this->setCampus($post['campus']);
+        $this->setQtdeAlunosCurso($post['qtdeAlunosCurso']);
+        $this->setQtdeAlunosFaculdade($post['qtdeAlunosFaculdade']);
+        $this->setSalaPropria($post['salaPropria']);
+        $this->setRepasseFinanceiro($post['repasseFinanceiro']);
+        $this->setCursos(isset($post['cursos']) ? $post['cursos'] : "");
+        $this->setPossuiUniforme($post['possuiUniforme']);
+        $this->setPossuiBandeirao($post['possuiBandeirao']);
+        $this->setPossuiMascote($post['possuiMascote']);
+        $this->setPossuiBateria(isset($post['possuiBateria']) ? $post['possuiBateria'] : "");
+        $this->setPrincipaisEventos($post['principaisEventos']);
+        $this->setMeiosComunicacaoAluno(isset($post['meiosComunicacaoAluno']) ? $post['meiosComunicacaoAluno'] : "");
+        $this->setMeiosComunicacaoPatrocinadora(isset($post['meiosComunicacaoPatrocinadora']) ? $post['meiosComunicacaoPatrocinadora'] : "");
+        $this->setPatrocinio($post['patrocinio']);
+        $this->setPatrocinioCervejaria($post['patrocinioCervejaria']);
+        $this->setPatrocinioEnergetico($post['patrocinioEnergetico']);
+        $this->setPatrocinioCerimonial($post['patrocinioCerimonial']);
+        $this->setObservacao($post['observacao']);
+        $this->setAutorizacaoTermo(isset($post['autorizacaoTermo']) ? $post['autorizacaoTermo'] : "");
+        $this->setIdUniversidade($post['idUniversidade']);
+        
     }
     
 }

@@ -25,4 +25,10 @@ class Sessao {
         return $_SESSION['sessionUser']['imgUser'];
         
     }
+    
+    public static function getSessionNivel() {
+        
+        return $_SESSION['sessionUser']['nivelUser'];
+        
+    }
 }

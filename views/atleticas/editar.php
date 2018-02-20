@@ -22,7 +22,8 @@
             $dados = array(
                 'atletica' => $atletica,
                 'universidades' => $universidades,
-                'post' => $post
+                'post' => $post,
+                'error' => $error
             );
             $this->loadView("atleticas/form", $dados);
         ?>
