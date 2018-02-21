@@ -22,6 +22,7 @@
             $dados = array(
                 'atletica' => $atletica,
                 'universidades' => $universidades,
+                'meiosComunicacao' => $meiosComunicacao,
                 'post' => $post,
                 'error' => $error
             );

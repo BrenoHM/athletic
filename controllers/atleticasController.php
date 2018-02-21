@@ -73,6 +73,7 @@ class atleticasController extends controller {
 
             $u = new Universidades();
             $dados['universidades'] = $u->getUniversidades();
+            $dados['meiosComunicacao'] = $this->meiosComunicacao();
 
             if( isset($_POST['frmAtletica']) ) {
 
@@ -245,6 +246,23 @@ class atleticasController extends controller {
         if( !isset($_POST['autorizacaoTermo']) ){
             $_POST['autorizacaoTermo'] = "";
         }
+    }
+    
+    public function meiosComunicacao(){
+        $meios = array(
+            'Facebook Perfil',
+            'Facebook Fanpage',
+            'Grupos de Whatsapp',
+            'Instagram',
+            'Snapchat',
+            'Twitter',
+            'Mailling (Lista de email dos Associados)',
+            'Através do site da Instituição',
+            'Quadro de Aviso próprio (Mural de Recados)',
+            'Passagem em sala de aula',
+            'Ação de ativação de marketing dentro da instituição'
+        );
+        return $meios;
     }
     
     public function deletar($id) {
