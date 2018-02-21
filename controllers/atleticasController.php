@@ -211,15 +211,6 @@ class atleticasController extends controller {
         $dados = array();
         $a = new Atleticas();
         $dados['atletica'] = $a->getAtleticaDetalhe($idAtletica);
-//        $e = new Email();
-//        $e->para = "emaildobrenomol@gmail.com";
-//        $e->paraNome = "BRENO MOL";
-//        $e->assunto = "assunto";
-//        $e->mensagems = "mensagem";
-//        if($e->enviaEmail()){
-//            echo 'ok';
-//        }else{ echo 'nok'; }
-        
         $this->loadTemplate('atleticas/detalhe', $dados);
         
     }

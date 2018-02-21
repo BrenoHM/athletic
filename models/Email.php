@@ -1,5 +1,25 @@
 <?php
-
+/* EXEMPLO DE COMO UTILIZAR
+ * 
+ *  $e = new Email();
+    $emails[] = array(
+        'email' => 'emaildobrenomol@gmail.com',
+        'nome' => 'BRENO GMAIL',
+    );
+    $emails[] = array(
+        'email' => 'breno.mol@pbh.gov.br',
+        'nome' => 'BRENO PBH',
+    );
+    $e->para = "emaildobrenomol@gmail.com";
+    $e->paraNome = "BRENO MOL";
+    $e->assunto = "assunto";
+    $e->mensagems = "mensagem";
+    $e->anexo = "uploads/ata/17d0033f7f12a781f5b80226249e76a5.pdf";
+    $e->anexoNome = "file";
+    if($e->enviaEmail()){
+        echo 'ok';
+    }else{ echo 'nok'; }
+ */
 class Email extends model {
     
     private $host     = 'smtp.casg.com.br';
@@ -12,7 +32,7 @@ class Email extends model {
     public $assunto;
     public $mensagems;
     public $anexo;
-    public $anexoNome;
+    public $anexoNome = "";
     
     public function __construct() {
         parent::__construct();
