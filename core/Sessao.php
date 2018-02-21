@@ -26,6 +26,12 @@ class Sessao {
         
     }
     
+    public static function getSessionIdAtletica() {
+        
+        return $_SESSION['sessionUser']['idAtletica'];
+        
+    }
+    
     public static function getSessionNivel() {
         
         return $_SESSION['sessionUser']['nivelUser'];

@@ -1,8 +1,3 @@
-<?php
-//echo '<pre>';
-//print_r($error);
-//echo '</pre>';
-?>
 <form action="" method="post" enctype="multipart/form-data">
     
     <div class="nav-tabs-custom">
@@ -36,7 +31,7 @@
                 
                 <div class="form-group col-md-4 <?php echo ( isset($error) && in_array('cnpj', $error) ) ? 'has-error' : ''; ?>">
                     <label for="cnpj">CNPJ</label>
-                    <input type="text" id="cnpj" class="form-control" name="cnpj" placeholder="CNPJ da Atlética" value="<?php echo ( isset($atletica['cnpj']) && !empty($atletica['cnpj']) ) ? $atletica['cnpj'] : ( isset($post['cnpj']) && !empty($post['cnpj']) ) ? $post['cnpj'] : ''; ?>">
+                    <input type="text" id="cnpj" class="form-control" name="cnpj" placeholder="CNPJ da Atlética" value="<?php echo ( isset($post['cnpj']) && !empty($post['cnpj']) ) ? $post['cnpj'] : ( isset($atletica['cnpj']) && !empty($atletica['cnpj']) ) ? $atletica['cnpj'] : ''; ?>">
                 </div>
                 
                 <div class="form-group col-md-6 <?php echo ( isset($error) && in_array('idUniversidade', $error) ) ? 'has-error' : ''; ?>">
@@ -44,7 +39,7 @@
                     <select class="form-control select2" name="idUniversidade" id="idUniversidade" style="width: 100%;">
                         <option value="">Selecione</option>
                         <?php foreach ( $universidades as $universidade ): ?>
-                            <option value="<?php echo $universidade['idUniversidade']; ?>" <?php echo ( isset($atletica['idUniversidade']) && $atletica['idUniversidade'] == $universidade['idUniversidade'] ) ? 'selected' : ( isset($post['idUniversidade']) && $post['idUniversidade'] == $universidade['idUniversidade'] ) ? 'selected' : ''; ?>>
+                            <option value="<?php echo $universidade['idUniversidade']; ?>" <?php echo ( isset($post['idUniversidade']) && $post['idUniversidade'] == $universidade['idUniversidade'] ) ? 'selected' : ( isset($atletica['idUniversidade']) && $atletica['idUniversidade'] == $universidade['idUniversidade'] ) ? 'selected' : ''; ?>>
                                 <?php echo $universidade['nome']; ?>
                             </option>
                         <?php endforeach; ?>
@@ -54,26 +49,26 @@
                 <div class="form-group col-md-12 <?php echo ( isset($error) && in_array('qtdeCampos', $error) ) ? 'has-error' : ''; ?>">
                     <label for="qtdeCampos" class="col-md-9 margin-left-0">Quantos Campus a Atlética tem representação dentro da Faculdade/Universidade?</label>
                     <div class="col-md-3 margin-right-0">
-                        <input type="number" min="1" id="qtdeCampos" class="form-control" name="qtdeCampos" value="<?php echo ( isset($atletica['qtdeCampos']) && !empty($atletica['qtdeCampos']) ) ? $atletica['qtdeCampos'] : ( isset($post['qtdeCampos']) && !empty($post['qtdeCampos']) ) ? $post['qtdeCampos'] : ''; ?>">
+                        <input type="number" min="1" id="qtdeCampos" class="form-control" name="qtdeCampos" value="<?php echo ( isset($post['qtdeCampus']) && !empty($post['qtdeCampus']) ) ? $post['qtdeCampus'] : ( isset($atletica['qtdeCampus']) && !empty($atletica['qtdeCampus']) ) ? $atletica['qtdeCampus'] : ''; ?>">
                     </div>
                 </div>
                 
                 <div class="form-group col-md-12 <?php echo ( isset($error) && in_array('campus', $error) ) ? 'has-error' : ''; ?>">    
                     <label for="campus">Quais?</label>
-                    <textarea name="campus" class="form-control" rows="5" id="campus"><?php echo ( isset($atletica['campus']) && !empty($atletica['campus']) ) ? $atletica['campus'] : ( isset($post['campus']) && !empty($post['campus']) ) ? $post['campus'] : ''; ?></textarea>
+                    <textarea name="campus" class="form-control" rows="5" id="campus"><?php echo ( isset($post['campus']) && !empty($post['campus']) ) ? $post['campus'] : ( isset($atletica['campus']) && !empty($atletica['campus']) ) ? $atletica['campus'] : ''; ?></textarea>
                 </div>
                 
                 <div class="form-group col-md-6 <?php echo ( isset($error) && in_array('qtdeAlunosCurso', $error) ) ? 'has-error' : ''; ?>">
                     <label for="qtdeAlunosCurso" class="col-md-9 margin-left-0">Número de alunos do curso</label>
                     <div class="col-md-3 margin-right-0 margin-bottom">
-                        <input type="number" min="1" id="qtdeAlunosCurso" class="form-control" name="qtdeAlunosCurso" value="<?php echo ( isset($atletica['qtdeAlunosCurso']) && !empty($atletica['qtdeAlunosCurso']) ) ? $atletica['qtdeAlunosCurso'] : ( isset($post['qtdeAlunosCurso']) && !empty($post['qtdeAlunosCurso']) ) ? $post['qtdeAlunosCurso'] : ''; ?>">
+                        <input type="number" min="1" id="qtdeAlunosCurso" class="form-control" name="qtdeAlunosCurso" value="<?php echo ( isset($post['qtdeAlunosCurso']) && !empty($post['qtdeAlunosCurso']) ) ? $post['qtdeAlunosCurso'] : ( isset($atletica['qtdeAlunosCurso']) && !empty($atletica['qtdeAlunosCurso']) ) ? $atletica['qtdeAlunosCurso'] : ''; ?>">
                     </div>
                 </div>
                 
                 <div class="form-group col-md-6 <?php echo ( isset($error) && in_array('qtdeAlunosFaculdade', $error) ) ? 'has-error' : ''; ?>">    
                     <label for="qtdeAlunosFaculdade" class="col-md-9 margin-left-0">Número de alunos de toda a faculdade</label>
                     <div class="col-md-3 margin-right-0">
-                        <input type="number" min="1" id="qtdeAlunosFaculdade" class="form-control" name="qtdeAlunosFaculdade" value="<?php echo ( isset($atletica['qtdeAlunosFaculdade']) && !empty($atletica['qtdeAlunosFaculdade']) ) ? $atletica['qtdeAlunosFaculdade'] : ( isset($post['qtdeAlunosFaculdade']) && !empty($post['qtdeAlunosFaculdade']) ) ? $post['qtdeAlunosFaculdade'] : ''; ?>">
+                        <input type="number" min="1" id="qtdeAlunosFaculdade" class="form-control" name="qtdeAlunosFaculdade" value="<?php echo ( isset($post['qtdeAlunosFaculdade']) && !empty($post['qtdeAlunosFaculdade']) ) ? $post['qtdeAlunosFaculdade'] : ( isset($atletica['qtdeAlunosFaculdade']) && !empty($atletica['qtdeAlunosFaculdade']) ) ? $atletica['qtdeAlunosFaculdade'] : ''; ?>">
                     </div>
                 </div>
                 
@@ -85,7 +80,7 @@
                 
                 <div class="form-group col-md-4 <?php echo ( isset($error) && in_array('repasseFinanceiro', $error) ) ? 'has-error' : ''; ?>">
                     <label for="repasseFinanceiro">Repasse</label>
-                    <input type="text" id="repasseFinanceiro" class="form-control" name="repasseFinanceiro" placeholder="Repasse Financeiro" value="<?php echo ( isset($atletica['repasseFinanceiro']) && !empty($atletica['repasseFinanceiro']) ) ? $atletica['repasseFinanceiro'] : ( isset($post['repasseFinanceiro']) && !empty($post['repasseFinanceiro']) ) ? $post['repasseFinanceiro'] : ''; ?>">
+                    <input type="text" id="repasseFinanceiro" class="form-control" name="repasseFinanceiro" placeholder="Repasse Financeiro" value="<?php echo ( isset($post['repasseFinanceiro']) && !empty($post['repasseFinanceiro']) ) ? $post['repasseFinanceiro'] : ( isset($atletica['repasseFinanceiro']) && !empty($atletica['repasseFinanceiro']) ) ? $atletica['repasseFinanceiro'] : ''; ?>">
                 </div>
                 
                 <div class="clearfix"></div>
@@ -97,6 +92,7 @@
             <div class="tab-pane <?php echo ( isset($atletica['passoFormulario']) && $atletica['passoFormulario'] == 2 ) ? 'active' : ''; ?>" id="passo_2">
                 
                 <div class="form-group <?php echo ( isset($error) && in_array('cursos', $error) ) ? 'has-error' : ''; ?>">
+                    <?php $atletica['cursos'] = explode(",", $atletica['cursos']); ?>
                     <label for="cursos">Cursos</label>
                     <select name="cursos[]" class="form-control select2" multiple="multiple" data-placeholder="Cursos" style="width: 100%;">
                         <option value="1" <?php echo ( isset($post['cursos']) && in_array(1, $post['cursos']) ) ? 'selected' : ( isset($atletica['cursos']) && in_array(1, $atletica['cursos']) ) ? 'selected' : ''; ?>>Alabama</option>
@@ -143,7 +139,7 @@
                 
                 <div class="form-group <?php echo ( isset($error) && in_array('principaisEventos', $error) ) ? 'has-error' : ''; ?>">
                     <label for="principaisEventos">Quais os principais eventos que a Atlética participa e em que data/período?</label>
-                    <textarea name="principaisEventos" class="form-control" rows="10" id="principaisEventos" style="resize: none;"><?php echo ( isset($atletica['principaisEventos']) && !empty($atletica['principaisEventos']) ) ? $atletica['principaisEventos'] : ( isset($post['principaisEventos']) && !empty($post['principaisEventos']) ) ? $post['principaisEventos'] : ''; ?></textarea>
+                    <textarea name="principaisEventos" class="form-control" rows="10" id="principaisEventos" style="resize: none;"><?php echo ( isset($post['principaisEventos']) && !empty($post['principaisEventos']) ) ? $post['principaisEventos'] : ( isset($atletica['principaisEventos']) && !empty($atletica['principaisEventos']) ) ? $atletica['principaisEventos'] : ''; ?></textarea>
                 </div>
                 
             </div>
@@ -153,6 +149,7 @@
             <div class="tab-pane <?php echo ( isset($atletica['passoFormulario']) && $atletica['passoFormulario'] == 4 ) ? 'active' : ''; ?>" id="passo_4">
                 
                 <div class="form-group <?php echo ( isset($error) && in_array('meiosComunicacaoAluno', $error) ) ? 'has-error' : ''; ?>">
+                    <?php $atletica['meiosComunicacaoAluno'] = explode(",", $atletica['meiosComunicacaoAluno']); ?>
                     <label for="meiosComunicacaoAluno">Quais os meios de comunicação da atlética com os alunos representados?</label>
                     <select name="meiosComunicacaoAluno[]" id="meiosComunicacaoAluno" class="form-control select2" multiple="multiple" data-placeholder="Meios de Comunicação" style="width: 100%;">
                         <option value="Facebook Perfil" <?php echo ( isset($post['meiosComunicacaoAluno']) && in_array('Facebook Perfil', $post['meiosComunicacaoAluno']) ) ? 'selected' : ( isset($atletica['meiosComunicacaoAluno']) && in_array('Facebook Perfil', $atletica['meiosComunicacaoAluno']) ) ? 'selected' : ''; ?>>Facebook Perfil</option>
@@ -170,6 +167,7 @@
                 </div>
                 
                 <div class="form-group <?php echo ( isset($error) && in_array('meiosComunicacaoPatrocinadora', $error) ) ? 'has-error' : ''; ?>">
+                    <?php $atletica['meiosComunicacaoPatrocinadora'] = explode(",", $atletica['meiosComunicacaoPatrocinadora']); ?>
                     <label for="meiosComunicacaoPatrocinadora">Quais os meios de comunicação que a empresa patrocinadora poderia utilizar para comunicar e apresentar os produtos e serviços aos alunos representados da Atlética?</label>
                     <select name="meiosComunicacaoPatrocinadora[]" id="meiosComunicacaoPatrocinadora" class="form-control select2" multiple="multiple" data-placeholder="Meios de Comunicação da Patrocinadora" style="width: 100%;">
                         <option value="Facebook Perfil" <?php echo ( isset($post['meiosComunicacaoPatrocinadora']) && in_array('Facebook Perfil', $post['meiosComunicacaoPatrocinadora']) ) ? 'selected' : ( isset($atletica['meiosComunicacaoPatrocinadora']) && in_array('Facebook Perfil', $atletica['meiosComunicacaoPatrocinadora']) ) ? 'selected' : ''; ?>>Facebook Perfil</option>
@@ -196,27 +194,27 @@
                 
                 <div class="form-group <?php echo ( isset($error) && in_array('patrocinio', $error) ) ? 'has-error' : ''; ?>">
                     <label for="patrocinio">Possui algum Patrocínio?</label>
-                    <input type="text" id="patrocinio" class="form-control" name="patrocinio" placeholder="Se sim, qual?" value="<?php echo ( isset($atletica['patrocinio']) && !empty($atletica['patrocinio']) ) ? $atletica['patrocinio'] : ( isset($post['patrocinio']) && !empty($post['patrocinio']) ) ? $post['patrocinio'] : ''; ?>">
+                    <input type="text" id="patrocinio" class="form-control" name="patrocinio" placeholder="Se sim, qual?" value="<?php echo ( isset($post['patrocinio']) && !empty($post['patrocinio']) ) ? $post['patrocinio'] : ( isset($atletica['patrocinio']) && !empty($atletica['patrocinio']) ) ? $atletica['patrocinio'] : ''; ?>">
                 </div>
                 
                 <div class="form-group <?php echo ( isset($error) && in_array('patrocinioCervejaria', $error) ) ? 'has-error' : ''; ?>">
                     <label for="patrocinioCervejaria">Possui patrocínio de alguma cervejaria?</label>
-                    <input type="text" id="patrocinioCervejaria" class="form-control" name="patrocinioCervejaria" placeholder="Se sim, qual?" value="<?php echo ( isset($atletica['patrocinioCervejaria']) && !empty($atletica['patrocinioCervejaria']) ) ? $atletica['patrocinioCervejaria'] : ( isset($post['patrocinioCervejaria']) && !empty($post['patrocinioCervejaria']) ) ? $post['patrocinioCervejaria'] : ''; ?>">
+                    <input type="text" id="patrocinioCervejaria" class="form-control" name="patrocinioCervejaria" placeholder="Se sim, qual?" value="<?php echo ( isset($post['patrocinioCervejaria']) && !empty($post['patrocinioCervejaria']) ) ? $post['patrocinioCervejaria'] : ( isset($atletica['patrocinioCervejaria']) && !empty($atletica['patrocinioCervejaria']) ) ? $atletica['patrocinioCervejaria'] : ''; ?>">
                 </div>
                 
                 <div class="form-group <?php echo ( isset($error) && in_array('patrocinioEnergetico', $error) ) ? 'has-error' : ''; ?>">
                     <label for="patrocinioEnergetico">Possui patrocínio de alguma empresa de energético?</label>
-                    <input type="text" id="patrocinioEnergetico" class="form-control" name="patrocinioEnergetico" placeholder="Se sim, qual?" value="<?php echo ( isset($atletica['patrocinioEnergetico']) && !empty($atletica['patrocinioEnergetico']) ) ? $atletica['patrocinioEnergetico'] : ( isset($post['patrocinioEnergetico']) && !empty($post['patrocinioEnergetico']) ) ? $post['patrocinioEnergetico'] : ''; ?>">
+                    <input type="text" id="patrocinioEnergetico" class="form-control" name="patrocinioEnergetico" placeholder="Se sim, qual?" value="<?php echo ( isset($post['patrocinioEnergetico']) && !empty($post['patrocinioEnergetico']) ) ? $post['patrocinioEnergetico'] : ( isset($atletica['patrocinioEnergetico']) && !empty($atletica['patrocinioEnergetico']) ) ? $atletica['patrocinioEnergetico'] : ''; ?>">
                 </div>
                 
                 <div class="form-group <?php echo ( isset($error) && in_array('patrocinioCerimonial', $error) ) ? 'has-error' : ''; ?>">
                     <label for="patrocinioCerimonial">Possui patrocínio de alguma empresa de cerimonial de formaturas?</label>
-                    <input type="text" id="patrocinioCerimonial" class="form-control" name="patrocinioCerimonial" placeholder="Se sim, qual?" value="<?php echo ( isset($atletica['patrocinioCerimonial']) && !empty($atletica['patrocinioCerimonial']) ) ? $atletica['patrocinioCerimonial'] : ( isset($post['patrocinioCerimonial']) && !empty($post['patrocinioCerimonial']) ) ? $post['patrocinioCerimonial'] : ''; ?>">
+                    <input type="text" id="patrocinioCerimonial" class="form-control" name="patrocinioCerimonial" placeholder="Se sim, qual?" value="<?php echo ( isset($post['patrocinioCerimonial']) && !empty($post['patrocinioCerimonial']) ) ? $post['patrocinioCerimonial'] : ( isset($atletica['patrocinioCerimonial']) && !empty($atletica['patrocinioCerimonial']) ) ? $atletica['patrocinioCerimonial'] : ''; ?>">
                 </div>
                 
                 <div class="form-group">
                     <label for="observacao">Gostaria de deixar alguma observação? Se sim, escreva abaixo:</label>
-                    <textarea name="observacao" class="form-control" rows="5" id="observacao" style="resize: none;"><?php echo ( isset($atletica['observacao']) && !empty($atletica['observacao']) ) ? $atletica['observacao'] : ( isset($post['observacao']) && !empty($post['observacao']) ) ? $post['observacao'] : ''; ?></textarea>
+                    <textarea name="observacao" class="form-control" rows="5" id="observacao" style="resize: none;"><?php echo ( isset($post['observacao']) && !empty($post['observacao']) ) ? $post['observacao'] : ( isset($atletica['observacao']) && !empty($atletica['observacao']) ) ? $atletica['observacao'] : ''; ?></textarea>
                 </div>
                 
                 <div class="form-group <?php echo ( isset($error) && in_array('autorizacaoTermo', $error) ) ? 'has-error' : ''; ?>">

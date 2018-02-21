@@ -21,30 +21,36 @@
           <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Lista de Atléticas</h3>
-                    <a href="<?php echo BASE_URL; ?>/atleticas/editar/1" class="pull-right btn btn-primary">Nova Atlética</a>
+                    <a href="<?php echo BASE_URL; ?>/atleticas/novo" class="pull-right btn btn-primary">Nova Atlética</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table class="table table-bordered table-striped dataTable" id="tableClientes">
+                    <table class="table table-bordered table-striped dataTable">
                       <thead>
                           <tr>
-                            <th>Imagem</th>
                             <th>Nome</th>
+                            <th>Sigla</th>
+                            <th>Telefone</th>
+                            <th>Email</th>
                             <th data-orderable="false">Ação</th>
                           </tr>
                       </thead>
-                      <!--<tbody>
-                          <?php //foreach ($clientes as $cliente): ?>
+                      <tbody>
+                          <?php foreach ($atleticas as $atletica): ?>
                             <tr>
-                              <td><img src="<?php //echo BASE_URL_SITE; ?>/images/clientes/<?php //echo $cliente['imgCli']; ?>" width="100" /></td>
-                              <td><?php //echo $cliente['nomCli']; ?></td>
+                              <!--<td><img src="<?php //echo BASE_URL_SITE; ?>/images/clientes/<?php //echo $cliente['imgCli']; ?>" width="100" /></td>-->
+                              <td><?php echo $atletica['nome']; ?></td>
+                              <td><?php echo $atletica['sigla']; ?></td>
+                              <td><?php echo $atletica['telefone']; ?></td>
+                              <td><?php echo $atletica['e-mail']; ?></td>
                               <td>
-                                  <a href="<?php //echo BASE_URL; ?>/clientes/editar/<?php //echo $cliente['codCli']; ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>  
-                                  <a href="<?php //echo BASE_URL; ?>/clientes/deletar/<?php //echo $cliente['codCli']; ?>" onclick="return confirm('Deseja realmente excluir este registro!');" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                                  <a href="<?php echo BASE_URL; ?>/atleticas/detalhe/<?php echo $atletica['idAtletica']; ?>" class="btn btn-default btn-xs"><i class="fa fa-search"></i></a>  
+                                  <a href="<?php echo BASE_URL; ?>/atleticas/editar/<?php echo $atletica['idAtletica']; ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>  
+                                  <a href="<?php echo BASE_URL; ?>/atleticas/deletar/<?php echo $atletica['idAtletica']; ?>" onclick="return confirm('Deseja realmente excluir este registro!');" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
                               </td>
                             </tr>
-                          <?php //endforeach; ?>
-                      </tbody>-->
+                          <?php endforeach; ?>
+                      </tbody>
                     </table>
                 </div>
                 <!-- /.box-body -->
@@ -56,31 +62,3 @@
 
 </section>
 <!-- /.content -->
-<script>
-  /*$(function(){
-    $('#tableClientes').DataTable({
-      "paging": true,
-      "info": true,
-      "bProcessing": true,
-      "bServerSide": true,
-      "sAjaxSource": "/framework/clientes/dataServer",
-      "oLanguage": {
-        "sLengthMenu": "_MENU_ registros por página",
-        "sInfo": "Mostrando registros de _START_ a _END_ de um total de _TOTAL_ registros",
-        "sInfoEmpty": "Mostrando registros de 0 a 0 de um total de 0 registros",
-        "sInfoFiltered":  "(filtrado de um total de _MAX_ registros)",
-        "zeroRecords": "Nothing found - sorry",
-        "sEmptyTable": "Nenhum registro encontrado.",
-        "sProcessing": "Processando...",
-        "sSearch": "Pesquisar:",
-        "oPaginate": {
-          "sFirst":    "Primero",
-          "sLast":    "Último",
-          "sNext":    "Seguinte",
-          "sPrevious": "Anterior"
-        }
-      }
-    });
-  })
-  */
-</script>

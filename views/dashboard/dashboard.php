@@ -1,8 +1,3 @@
-<?php
-echo '<pre>';
-print_r($_SESSION);
-echo '</pre>';
-?>
 <section class="content-header">
     <h1>Estatísticas</h1>
     <ol class="breadcrumb">

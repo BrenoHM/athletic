@@ -10,7 +10,7 @@ class atleticasController extends controller {
         
         $dados = array();
         $a = new Atleticas();
-        
+        $a->tabela = "atletica";
         $dados['atleticas'] = $a->getAtleticas();
         
         $this->loadTemplate('atleticas/index', $dados);
@@ -60,196 +60,166 @@ class atleticasController extends controller {
     
     public function editar($idAtletica) {
         
-//        if(isset($_POST['frmAtletica'])) {
-//            echo '<pre>';
-//            print_r($_POST);
-//            echo '</pre>';
-//        }
-         
-        $dados        = array();
-        $obrigatorios = array();
-        $formValidado = TRUE;
-        $dados['error'] = array();
+        $dados = array();
         
-        $a = new Atleticas();
-        $dados['atletica'] = $a->getAtleticas($idAtletica);
-        
-        if( isset($_POST['frmAtletica']) ) {
+        if( (Sessao::getSessionNivel() == 'atletica' && Sessao::getSessionIdAtletica() == $idAtletica) || Sessao::getSessionNivel() == 'admin' ) {
             
-            $passo = $dados['atletica']['passoFormulario'];
-            
-            switch ($passo){
-                case 1:
-                    $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro');
-                    break;
-                case 2:
-                    $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro', 'cursos');
-                    break;
-                case 3:
-                    $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro', 'cursos', 'possuiUniforme', 'possuiBandeirao', 'possuiMascote', 'possuiBateria', 'principaisEventos');
-                    break;
-                case 4:
-                    $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro', 'cursos', 'possuiUniforme', 'possuiBandeirao', 'possuiMascote', 'possuiBateria', 'principaisEventos', 'meiosComunicacaoAluno', 'meiosComunicacaoPatrocinadora');
-                    break;
-                case 5:
-                    $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro', 'cursos', 'possuiUniforme', 'possuiBandeirao', 'possuiMascote', 'possuiBateria', 'principaisEventos', 'meiosComunicacaoAluno', 'meiosComunicacaoPatrocinadora', 'patrocinio', 'patrocinioCervejaria', 'patrocinioEnergetico', 'patrocinioCerimonial', 'autorizacaoTermo');
-                    break;
-            }
-            
-            $this->persistirCampos();
-            
-            foreach ( $obrigatorios as $obrigatorio ) {
-                if( isset($_POST[$obrigatorio]) && empty($_POST[$obrigatorio]) ) {
-                    $formValidado = FALSE;
-                    $dados['error'][] = $obrigatorio; //GUARDA CAMPO QUE NAO FOI PREENCHIDO
+            $obrigatorios = array();
+            $formValidado = TRUE;
+            $dados['error'] = array();
+
+            $a = new Atleticas();
+            $dados['atletica'] = $a->getAtleticas($idAtletica);
+
+            $u = new Universidades();
+            $dados['universidades'] = $u->getUniversidades();
+
+            if( isset($_POST['frmAtletica']) ) {
+
+                $passo = $dados['atletica']['passoFormulario'];
+
+                switch ($passo){
+                    case 1:
+                        $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro');
+                        break;
+                    case 2:
+                        $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro', 'cursos');
+                        break;
+                    case 3:
+                        $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro', 'cursos', 'possuiUniforme', 'possuiBandeirao', 'possuiMascote', 'possuiBateria', 'principaisEventos');
+                        break;
+                    case 4:
+                        $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro', 'cursos', 'possuiUniforme', 'possuiBandeirao', 'possuiMascote', 'possuiBateria', 'principaisEventos', 'meiosComunicacaoAluno', 'meiosComunicacaoPatrocinadora');
+                        break;
+                    case 5:
+                        $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro', 'cursos', 'possuiUniforme', 'possuiBandeirao', 'possuiMascote', 'possuiBateria', 'principaisEventos', 'meiosComunicacaoAluno', 'meiosComunicacaoPatrocinadora', 'patrocinio', 'patrocinioCervejaria', 'patrocinioEnergetico', 'patrocinioCerimonial', 'autorizacaoTermo');
+                        break;
                 }
-            }
-            
-            //VALIDACAO DOS UPLOAD'S
-            //ESTATUTO
-            if( $passo == 5 && empty($dados['atletica']['urlEstatuto']) ){
-                if( empty( $_FILES['urlEstatuto']['name'] ) ){
-                    $formValidado = FALSE;
-                    $dados['error'][] = 'urlEstatuto';
+
+                $this->persistirCampos();
+
+                foreach ( $obrigatorios as $obrigatorio ) {
+                    if( isset($_POST[$obrigatorio]) && empty($_POST[$obrigatorio]) ) {
+                        $formValidado = FALSE;
+                        $dados['error'][] = $obrigatorio; //GUARDA CAMPO QUE NAO FOI PREENCHIDO
+                    }
                 }
-            }
-            //ATA
-            if( $passo == 5 && empty($dados['atletica']['urlAta']) ){
-                if( empty( $_FILES['urlAta']['name'] ) ){
-                    $formValidado = FALSE;
-                    $dados['error'][] = 'urlAta';
-                }
-            }
-            //LOGO
-            if( $passo == 5 && empty($dados['atletica']['urlLogo']) ){
-                if( empty( $_FILES['urlLogo']['name'] ) ){
-                    $formValidado = FALSE;
-                    $dados['error'][] = 'urlLogo';
-                }
-            }
-            
-            if( $formValidado ) {
-                if( $passo <= 4 ){
-                    $passo = $passo + 1;
-                    //$dados['atletica']['passoFormulario'] = ++$passo;
-                }
-                $a->populaObjeto($_POST);
-                $a->setPassoFormulario($passo);
-                $a->setIdAtletica($idAtletica);
-                
-                //UPLOAD DOS DOCUMENTOS
+
+                //VALIDACAO DOS UPLOAD'S
                 //ESTATUTO
-                $nomeArquivo = "";
-                $arquivo = $_FILES['urlEstatuto'];
-                if( !empty($arquivo['name']) ){
-                    if( in_array($arquivo['type'], array('application/msword', 'application/pdf')) ) {
-                        $caminho = "uploads/estatuto/";
-                        $ext = "doc";
-                        if($arquivo['type'] == 'application/pdf'){
-                            $ext = "pdf";
-                        }
-                        $nomeArquivo = md5(time().rand(0, 9999)) . '.' . $ext;
-                        move_uploaded_file($arquivo['tmp_name'], $caminho . $nomeArquivo);
-                        $a->setUrlEstatuto($nomeArquivo);
+                if( $passo == 5 && empty($dados['atletica']['urlEstatuto']) ){
+                    if( empty( $_FILES['urlEstatuto']['name'] ) ){
+                        $formValidado = FALSE;
+                        $dados['error'][] = 'urlEstatuto';
                     }
                 }
-                
                 //ATA
-                $arquivo = $_FILES['urlAta'];
-                if( !empty($arquivo['name']) ){
-                    if( in_array($arquivo['type'], array('application/msword', 'application/pdf')) ) {
-                        $caminho = "uploads/ata/";
-                        $ext = "doc";
-                        if($arquivo['type'] == 'application/pdf'){
-                            $ext = "pdf";
-                        }
-                        $nomeArquivo = md5(time().rand(0, 9999)) . '.' . $ext;
-                        move_uploaded_file($arquivo['tmp_name'], $caminho . $nomeArquivo);
-                        $a->setUrlAta($nomeArquivo);
+                if( $passo == 5 && empty($dados['atletica']['urlAta']) ){
+                    if( empty( $_FILES['urlAta']['name'] ) ){
+                        $formValidado = FALSE;
+                        $dados['error'][] = 'urlAta';
                     }
                 }
-                
                 //LOGO
-                $arquivo = $_FILES['urlLogo'];
-                if( !empty($arquivo['name']) ){
-                    if( in_array($arquivo['type'], array('application/msword', 'application/pdf')) ) {
-                        $caminho = "uploads/logo/";
-                        $ext = "doc";
-                        if($arquivo['type'] == 'application/pdf'){
-                            $ext = "pdf";
-                        }
-                        $nomeArquivo = md5(time().rand(0, 9999)) . '.' . $ext;
-                        move_uploaded_file($arquivo['tmp_name'], $caminho . $nomeArquivo);
-                        $a->setUrlLogo($nomeArquivo);
+                if( $passo == 5 && empty($dados['atletica']['urlLogo']) ){
+                    if( empty( $_FILES['urlLogo']['name'] ) ){
+                        $formValidado = FALSE;
+                        $dados['error'][] = 'urlLogo';
                     }
                 }
-                if( $a->atualizar() ){
-                    $dados['aviso'] = $this->mensagemSucesso("Dados atualizados com sucesso!");
-                    $dados['atletica'] = $a->getAtleticas($idAtletica);
-                }else{
-                    $dados['aviso'] = $this->mensagemErro("Erro na atualização dos dados!");
-                }
-            }else{
-                $dados['aviso'] = $this->mensagemErro("Todos os campos são de preenchimento obrigatório!");
-            }
-        }
-        
-        /*if(Sessao::getSessionId() != ""){
-            
-            $dados = array();
-            $c = new Clientes();
-            
-            if(isset($_POST['frmCliente'])) {
-                
-                $c->setCodCli($idCliente);
-                $c->setNomCli(addslashes($_POST['nomCli']));
-                $c->setUrlCli(addslashes($_POST['urlCli']));
-                $imgCli = $_FILES['imgCli'];
-                
-                if( !empty($c->getNomCli()) ){
-                
-                    //ENVIO DA IMAGEM
-                    $nomeImagem = "";
-                    if(in_array($imgCli['type'], array('image/jpeg', 'image/jpg', 'image/png'))) {
-                        $tabela = new Clientes();
-                        $this->deletaImg("images/clientes/", $tabela->tabela, $idCliente);
-                        $caminho = "images/clientes/";
-                        $ext = "jpg";
-                        if($imgCli['type'] == 'image/png'){
-                            $ext = "png";
+
+                if( $formValidado ) {
+                    if( $passo <= 4 ){
+                        $passo = $passo + 1;
+                    }
+                    $a->populaObjeto($_POST);
+                    $a->setPassoFormulario($passo);
+                    $a->setIdAtletica($idAtletica);
+
+                    //UPLOAD DOS DOCUMENTOS
+                    //ESTATUTO
+                    $nomeArquivo = "";
+                    $arquivo = $_FILES['urlEstatuto'];
+                    if( !empty($arquivo['name']) ){
+                        if( in_array($arquivo['type'], array('application/msword', 'application/pdf')) ) {
+                            $caminho = "uploads/estatuto/";
+                            $ext = "doc";
+                            if($arquivo['type'] == 'application/pdf'){
+                                $ext = "pdf";
+                            }
+                            $nomeArquivo = md5(time().rand(0, 9999)) . '.' . $ext;
+                            move_uploaded_file($arquivo['tmp_name'], $caminho . $nomeArquivo);
+                            $a->setUrlEstatuto($nomeArquivo);
                         }
-                        $nomeImagem = md5(time().rand(0, 9999)) . '.' . $ext;
-                        $c->setImgCli($nomeImagem);
-                        move_uploaded_file($imgCli['tmp_name'], $caminho . $nomeImagem);
                     }
 
-                    if( $c->atualizar() ){
-                        $dados['aviso'] = $this->mensagemSucesso("Cliente atualizado com êxito!");
-                        echo "<META http-equiv='refresh' content='1;URL=".BASE_URL."/clientes'>";
+                    //ATA
+                    $arquivo = $_FILES['urlAta'];
+                    if( !empty($arquivo['name']) ){
+                        if( in_array($arquivo['type'], array('application/msword', 'application/pdf')) ) {
+                            $caminho = "uploads/ata/";
+                            $ext = "doc";
+                            if($arquivo['type'] == 'application/pdf'){
+                                $ext = "pdf";
+                            }
+                            $nomeArquivo = md5(time().rand(0, 9999)) . '.' . $ext;
+                            move_uploaded_file($arquivo['tmp_name'], $caminho . $nomeArquivo);
+                            $a->setUrlAta($nomeArquivo);
+                        }
+                    }
+
+                    //LOGO
+                    $arquivo = $_FILES['urlLogo'];
+                    if( !empty($arquivo['name']) ){
+                        if( in_array($arquivo['type'], array('application/msword', 'application/pdf')) ) {
+                            $caminho = "uploads/logo/";
+                            $ext = "doc";
+                            if($arquivo['type'] == 'application/pdf'){
+                                $ext = "pdf";
+                            }
+                            $nomeArquivo = md5(time().rand(0, 9999)) . '.' . $ext;
+                            move_uploaded_file($arquivo['tmp_name'], $caminho . $nomeArquivo);
+                            $a->setUrlLogo($nomeArquivo);
+                        }
+                    }
+                    if( $a->atualizar() ){
+                        $dados['aviso'] = $this->mensagemSucesso("Dados atualizados com sucesso!");
+                        $dados['atletica'] = $a->getAtleticas($idAtletica);
                     }else{
-                        $dados['aviso'] = $this->mensagemErro("Erro ao atualizar cliente!");
+                        $dados['aviso'] = $this->mensagemErro("Erro na atualização dos dados!");
                     }
                 }else{
-                    $dados['aviso'] = $this->mensagemErro("Campos são de preenchimento obrigatório!");
+                    $dados['aviso'] = $this->mensagemErro("Todos os campos são de preenchimento obrigatório!");
                 }
             }
-            
-            $dados['cliente'] = $c->getClientes($idCliente);
-            $this->loadTemplate("clientes/editar", $dados);
-            
+
+            $dados['post'] = array();
+            if( isset($_POST) ){
+                $dados['post'] = $_POST; //CASO DE ERRO NA VALIDACAO, OS DADOS POSSAM SER RETORNADOS PARA A VIEW.
+            }
+            $this->loadTemplate("atleticas/editar", $dados);
         }else{
-            header("Location: " . BASE_URL . "/login");
+            $dados['aviso'] = $this->mensagemErro("Acesso não permitido!");
+            $this->loadTemplate("atleticas/not-found", $dados);
         }
-         * 
-         */
         
+    }
+    
+    public function detalhe($idAtletica) {
         
+        $dados = array();
+        $a = new Atleticas();
+        $dados['atletica'] = $a->getAtleticaDetalhe($idAtletica);
+//        $e = new Email();
+//        $e->para = "emaildobrenomol@gmail.com";
+//        $e->paraNome = "BRENO MOL";
+//        $e->assunto = "assunto";
+//        $e->mensagems = "mensagem";
+//        if($e->enviaEmail()){
+//            echo 'ok';
+//        }else{ echo 'nok'; }
         
-        $dados['post'] = $_POST; //CASO DE ERRO NA VALIDACAO, OS DADOS POSSAM SER RETORNADOS PARA A VIEW.
-        
-        $u = new Universidades();
-        $dados['universidades'] = $u->getUniversidades();
-        $this->loadTemplate("atleticas/editar", $dados);
+        $this->loadTemplate('atleticas/detalhe', $dados);
         
     }
     
@@ -299,132 +269,4 @@ class atleticasController extends controller {
         
     }
 
-    public function dataServer(){
-
-        /* Array of database columns which should be read and sent back to DataTables. Use a space where
-         * you want to insert a non-database field (for example a counter or static image)
-         */
-        $aColumns = array( 'imgCli', 'nomCli', 'codCli' );
-        $input =& $_GET;
-
-        /* Indexed column (used for fast and accurate table cardinality) */
-        $sIndexColumn = "codCli";
-
-        /* DB table to use */
-        $sTable = "c018cli";
-
-        /**
-         * Paging
-         */
-        $sLimit = "";
-        if ( isset( $input['iDisplayStart'] ) && $input['iDisplayLength'] != '-1' ) {
-            $sLimit = " LIMIT ".intval( $input['iDisplayStart'] ).", ".intval( $input['iDisplayLength'] );
-        }
-
-        /**
-         * Ordering
-         */
-        $aOrderingRules = array();
-        if ( isset( $input['iSortCol_0'] ) ) {
-            $iSortingCols = intval( $input['iSortingCols'] );
-            for ( $i=0 ; $i<$iSortingCols ; $i++ ) {
-                if ( $input[ 'bSortable_'.intval($input['iSortCol_'.$i]) ] == 'true' ) {
-                    $aOrderingRules[] =
-                        "`".$aColumns[ intval( $input['iSortCol_'.$i] ) ]."` "
-                        .($input['sSortDir_'.$i]==='asc' ? 'asc' : 'desc');
-                }
-            }
-        }
-         
-        if (!empty($aOrderingRules)) {
-            $sOrder = " ORDER BY ".implode(", ", $aOrderingRules);
-        } else {
-            $sOrder = "";
-        }
-
-        /**
-         * Filtering
-         * NOTE this does not match the built-in DataTables filtering which does it
-         * word by word on any field. It's possible to do here, but concerned about efficiency
-         * on very large tables, and MySQL's regex functionality is very limited
-         */
-        $iColumnCount = count($aColumns);
-         
-        if ( isset($input['sSearch']) && $input['sSearch'] != "" ) {
-            $aFilteringRules = array();
-            for ( $i=0 ; $i<$iColumnCount ; $i++ ) {
-                if ( isset($input['bSearchable_'.$i]) && $input['bSearchable_'.$i] == 'true' ) {
-                    $aFilteringRules[] = "`".$aColumns[$i]."` LIKE '%". $input['sSearch'] ."%'";
-                }
-            }
-            if (!empty($aFilteringRules)) {
-                $aFilteringRules = array('('.implode(" OR ", $aFilteringRules).')');
-            }
-        }
-          
-        // Individual column filtering
-        for ( $i=0 ; $i<$iColumnCount ; $i++ ) {
-            if ( isset($input['bSearchable_'.$i]) && $input['bSearchable_'.$i] == 'true' && $input['sSearch_'.$i] != '' ) {
-                $aFilteringRules[] = "`".$aColumns[$i]."` LIKE '%".$input['sSearch_'.$i]."%'";
-            }
-        }
-         
-        if (!empty($aFilteringRules)) {
-            $sWhere = " WHERE ".implode(" AND ", $aFilteringRules);
-        } else {
-            $sWhere = "";
-        }
-
-        /**
-         * SQL queries
-         * Get data to display
-         */
-        $aQueryColumns = array();
-        foreach ($aColumns as $col) {
-            if ($col != ' ') {
-                $aQueryColumns[] = $col;
-            }
-        }
-         
-        $sQuery = "
-            SELECT SQL_CALC_FOUND_ROWS `".implode("`, `", $aQueryColumns)."`
-            FROM `".$sTable."`".$sWhere.$sOrder.$sLimit;
-         
-        $rResult = $this->db->query( $sQuery );
-
-        // Data set length after filtering
-        $sQuery = "SELECT FOUND_ROWS()";
-        $rResultFilterTotal = $this->db->query( $sQuery );
-        list($iFilteredTotal) = $rResultFilterTotal->fetch();
-
-        // Total data set length
-        $sQuery = "SELECT COUNT(`".$sIndexColumn."`) FROM `".$sTable."`";
-        $rResultTotal = $this->db->query( $sQuery );
-        list($iTotal) = $rResultTotal->fetch();
-
-        $output = array(
-            "sEcho"                => intval($input['sEcho']),
-            "iTotalRecords"        => $iTotal,
-            "iTotalDisplayRecords" => $iFilteredTotal,
-            "aaData"               => array(),
-        );
-
-        foreach ( $rResult->fetchAll() as $aRow ) {
-            $row = array();
-            for ( $i=0 ; $i<$iColumnCount ; $i++ ) {
-                if ( $aColumns[$i] == 'codCli' ) {
-                    // Special output formatting for 'version' column
-                    $row[] = '<a href="'.BASE_URL.'/clientes/editar/'.$aRow[ $aColumns[$i] ].'" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
-                    <a href="'.BASE_URL.'/clientes/deletar/'.$aRow[ $aColumns[$i] ].'" onclick="return confirm(\'Deseja realmente excluir este registro!\');" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>';
-                } elseif ( $aColumns[$i] != ' ' ) {
-                    // General output
-                    $row[] = $aRow[ $aColumns[$i] ];
-                }
-            }
-            $output['aaData'][] = $row;
-        }
-        
-        echo json_encode($output);
-    }
-    
 }

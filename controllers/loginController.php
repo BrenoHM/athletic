@@ -21,6 +21,7 @@ class loginController extends controller {
             if($u->isExiste($email, sha1($senha))) {
                 
                 $usuario = $u->getByEmail($email);
+                $usuario['idAtletica'] = null; //ADMIN NAO PERTENCE A NENHUMA ATLETICA
                 $usuario['nivel'] = "admin";
                 $this->criaSessaoUsuario($usuario);
                 
@@ -115,7 +116,8 @@ class loginController extends controller {
                 $usuario['nivel']  = "atletica";
                 $this->criaSessaoUsuario($usuario);
                 
-                header("Location: " . BASE_URL);
+                //ENCAMINHA A ATLETICA PARA COMPLETAR A INSCRIÇÃO.
+                header("Location: " . BASE_URL . "/atleticas/editar/" . $usuario['idAtletica']);
                 
             }else{
                 $dados['aviso'] = $this->mensagemErro("Usuário ou senha inválidos!");
@@ -129,10 +131,11 @@ class loginController extends controller {
     public function criaSessaoUsuario($usuario) {
         
         $_SESSION['sessionUser'] = array(
-            'idUser'    => $usuario['codUsu'],
-            'nameUser'  => $usuario['nomUsu'],
-            'emailUser' => $usuario['emaUsu'],
-            'nivelUser' => $usuario['nivel']
+            'idUser'     => $usuario['codUsu'],
+            'nameUser'   => $usuario['nomUsu'],
+            'emailUser'  => $usuario['emaUsu'],
+            'nivelUser'  => $usuario['nivel'],
+            'idAtletica' => $usuario['idAtletica']
         );
         
     }

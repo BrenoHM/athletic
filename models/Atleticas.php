@@ -304,7 +304,30 @@ class Atleticas extends model {
         $sql->execute();
 
         if( $sql->rowCount() > 0 ) {
-            $dados = ( $idAtletica != "" ) ? $sql->fetch() : $sql->fetchAll();
+            $dados = ( $idAtletica != "" ) ? $sql->fetch(PDO::FETCH_ASSOC) : $sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        return $dados;
+    }
+    
+    public function getAtleticaDetalhe($idAtletica = "") {
+
+        $dados = array();
+
+        $where = ($idAtletica != "") ? "WHERE a.idAtletica = :idAtletica" : "";
+            
+        $sql = "SELECT * FROM atletica a
+                INNER JOIN formulario f ON ( a.idAtletica = f.idAtletica ) $where";
+        $sql = $this->db->prepare($sql);
+
+        if( $idAtletica != "" ){
+            $sql->bindValue(":idAtletica", $idAtletica);
+        }
+
+        $sql->execute();
+
+        if( $sql->rowCount() > 0 ) {
+            $dados = ( $idAtletica != "" ) ? $sql->fetch(PDO::FETCH_ASSOC) : $sql->fetchAll(PDO::FETCH_ASSOC);
         }
 
         return $dados;

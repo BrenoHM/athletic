@@ -38,11 +38,13 @@
         </a>
       </li>-->
       
-      <li>
-        <a href="<?php echo BASE_URL ?>/atleticas">
-          <i class="fa fa-handshake-o" aria-hidden="true"></i> <span>Atléticas</span>
-        </a>
-      </li>
+      <?php if( Sessao::getSessionNivel() == 'admin' ): ?>
+        <li>
+          <a href="<?php echo BASE_URL ?>/atleticas">
+            <i class="fa fa-handshake-o" aria-hidden="true"></i> <span>Atléticas</span>
+          </a>
+        </li>
+      <?php endif; ?>
       
       <!--<li>
         <a href="<?php echo BASE_URL ?>/clientes">
@@ -55,12 +57,13 @@
           <i class="fa fa-reply" aria-hidden="true"></i> <span>Contato</span>
         </a>
       </li>-->
-      
-      <li>
-        <a href="<?php echo BASE_URL ?>/usuarios">
-          <i class="fa fa-users"></i> <span>Usuários</span>
-        </a>
-      </li>
+      <?php if( Sessao::getSessionNivel() == 'admin' ): ?>
+        <li>
+          <a href="<?php echo BASE_URL ?>/usuarios">
+            <i class="fa fa-users"></i> <span>Usuários</span>
+          </a>
+        </li>
+      <?php endif; ?>
       
       <!--<li>
         <a href="<?php echo BASE_URL ?>/mensagens-recebidas">
