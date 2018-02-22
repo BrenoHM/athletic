@@ -55,38 +55,17 @@
         <input type="email" class="form-control" name="emaUsu" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" name="senUsu" placeholder="Senha">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
       <div class="row">
         <div class="col-xs-8">
-          <!--<div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Lembrar-me
-            </label>
-          </div>-->
-          <a href="<?php echo BASE_URL; ?>/login/esqueceu">Esqueci minha senha!</a>
+          <a href="<?php echo BASE_URL; ?>/login">Entrar</a>
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-            <button type="submit" name="formLogar" class="btn btn-primary btn-block btn-flat">Entrar</button>
+            <button type="submit" name="formLogar" class="btn btn-primary btn-block btn-flat">Enviar</button>
         </div>
         <!-- /.col -->
       </div>
     </form>
-
-<!--    <div class="social-auth-links text-center">
-      <p>- OR -</p>
-      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
-        Facebook</a>
-      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
-        Google+</a>
-    </div>-->
-    <!-- /.social-auth-links -->
-
-    <!--<a href="<?php echo BASE_URL; ?>/usuarios/recuperar">Esqueci minha senha</a><br>-->
-    <!--<a href="<?php echo BASE_URL; ?>/usuarios/registrar" class="text-center">Registrar novo Usuário</a>-->
 
   </div>
   <!-- /.login-box-body -->
@@ -97,16 +76,6 @@
 <script src="<?php echo BASE_URL; ?>/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="<?php echo BASE_URL; ?>/bootstrap/js/bootstrap.min.js"></script>
-<!-- iCheck -->
-<script src="<?php echo BASE_URL; ?>/plugins/iCheck/icheck.min.js"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    });
-  });
-</script>
+
 </body>
 </html>

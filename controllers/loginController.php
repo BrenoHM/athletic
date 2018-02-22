@@ -128,6 +128,51 @@ class loginController extends controller {
         $this->loadView("login-atletica", $dados);
     }
     
+    public function esqueceu($tipoUsuario = ""){
+        
+        $dados = array();
+        
+        if( isset($_POST['formLogar']) && isset($_POST['emaUsu']) && !empty($_POST['emaUsu']) ) {
+            
+            $email = addslashes($_POST['emaUsu']);
+            
+            $u = $tipoUsuario == 'atletica' ? new UsuarioAtletica() : new Usuario();
+            
+            if($u->isExiste($email)) {
+                
+                $usuario = $u->getByEmail($email);
+                $nome = $tipoUsuario == 'atletica' ? $usuario['nome'] : $usuario['nomUsu'];
+                $key = sha1(time().rand(0, 9999));
+                $url = BASE_URL . "/login/redefinir/" . $key;
+                
+                //INSERE NA TABELA DE REDEFINIÇÃO DE SENHA
+                
+                //TEMPLATE DE EMAIL
+                $mensagem = file_get_contents("templates/tpl_redefinir_senha.html");
+                $mensagem = str_replace("{{nome}}", $nome, $mensagem);
+                $mensagem = str_replace("{{url}}", $url, $mensagem);
+                
+                //ENVIA O EMAIL PARA REDEFINIÇÃO DE SENHA
+                $e = new Email();
+                $e->para = $email;
+                $e->paraNome = $nome;
+                $e->assunto = "Esqueceu sua senha?";
+                $e->mensagems = $mensagem;
+                if($e->enviaEmail()){
+                    $dados['aviso'] = $this->mensagemSucesso("Foi enviada uma mensagem em seu email com as instruções para redefinir sua senha!");
+                }else{ 
+                    $dados['aviso'] = $this->mensagemErro("Erro no envio do email!");
+                }
+                
+            }else{
+                $dados['aviso'] = $this->mensagemErro("Email não encontrado!");
+            }
+            
+        }
+        
+        $this->loadView("esqueceu-senha", $dados);
+    }
+    
     public function criaSessaoUsuario($usuario) {
         
         $_SESSION['sessionUser'] = array(

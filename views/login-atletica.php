@@ -66,6 +66,7 @@
               <input type="checkbox"> Lembrar-me
             </label>
           </div>
+          <a href="<?php echo BASE_URL; ?>/login/esqueceu/atletica">Esqueci minha senha!</a>
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
