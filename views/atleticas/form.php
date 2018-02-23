@@ -49,7 +49,7 @@
                 <div class="form-group col-md-12 <?php echo ( isset($error) && in_array('qtdeCampos', $error) ) ? 'has-error' : ''; ?>">
                     <label for="qtdeCampos" class="col-md-9 margin-left-0">Quantos Campus a Atlética tem representação dentro da Faculdade/Universidade?</label>
                     <div class="col-md-3 margin-right-0">
-                        <input type="number" min="1" id="qtdeCampos" class="form-control" name="qtdeCampos" value="<?php if( isset($post['qtdeCampos']) ) { echo $post['qtdeCampos']; } elseif ( isset($atletica['qtdeCampos']) ) { echo $atletica['qtdeCampos']; } ?>">
+                        <input type="number" min="1" id="qtdeCampos" class="form-control" name="qtdeCampos" value="<?php if( isset($post['qtdeCampos']) ) { echo $post['qtdeCampos']; } elseif ( isset($atletica['qtdeCampus']) ) { echo $atletica['qtdeCampus']; } ?>">
                     </div>
                 </div>
                 
@@ -235,9 +235,9 @@
         <!-- /.tab-content -->
     </div>
 
-    <div class="form-group">
-        <a href="<?php echo BASE_URL; ?>/clientes" class="btn btn-primary">Cancelar</a>
-        <input type="submit" value="Atualizar" name="frmAtletica" class="btn btn-primary" />
+    <div class="form-group text-right">
+        <!--<a href="<?php //echo BASE_URL; ?>/clientes" class="btn btn-primary">Cancelar</a>-->
+        <input type="submit" value="<?php echo $atletica['passoFormulario'] < 5 ? "Próximo Passo >" : "Finalizar"; ?>" name="frmAtletica" class="btn btn-primary" />
     </div>
     
 </form>

@@ -78,7 +78,7 @@ class atleticasController extends controller {
             if( isset($_POST['frmAtletica']) ) {
 
                 $passo = $dados['atletica']['passoFormulario'];
-
+                
                 switch ($passo){
                     case 1:
                         $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro');
@@ -184,6 +184,9 @@ class atleticasController extends controller {
                         }
                     }
                     if( $a->atualizar() ){
+                        if( $dados['atletica']['passoFormulario'] == 5 ){
+                            header("Location: " . BASE_URL . "/cadastro/confirmado");
+                        }
                         $dados['aviso'] = $this->mensagemSucesso("Dados atualizados com sucesso!");
                         $dados['atletica'] = $a->getAtleticas($idAtletica);
                     }else{

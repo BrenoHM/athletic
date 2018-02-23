@@ -1,8 +1,3 @@
-<?php
-echo '<pre>';
-print_r($atletica);
-echo '</pre>';
-?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>Atlética</h1>

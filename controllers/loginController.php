@@ -144,24 +144,29 @@ class loginController extends controller {
                 $nome = $tipoUsuario == 'atletica' ? $usuario['nome'] : $usuario['nomUsu'];
                 $key = sha1(time().rand(0, 9999));
                 $url = BASE_URL . "/login/redefinir/" . $key;
+                $tipoUsuario = $tipoUsuario == 'atletica' ? 'atletica' : 'admin';
                 
                 //INSERE NA TABELA DE REDEFINIÇÃO DE SENHA
-                
-                //TEMPLATE DE EMAIL
-                $mensagem = file_get_contents("templates/tpl_redefinir_senha.html");
-                $mensagem = str_replace("{{nome}}", $nome, $mensagem);
-                $mensagem = str_replace("{{url}}", $url, $mensagem);
-                
-                //ENVIA O EMAIL PARA REDEFINIÇÃO DE SENHA
-                $e = new Email();
-                $e->para = $email;
-                $e->paraNome = $nome;
-                $e->assunto = "Esqueceu sua senha?";
-                $e->mensagems = $mensagem;
-                if($e->enviaEmail()){
-                    $dados['aviso'] = $this->mensagemSucesso("Foi enviada uma mensagem em seu email com as instruções para redefinir sua senha!");
-                }else{ 
-                    $dados['aviso'] = $this->mensagemErro("Erro no envio do email!");
+                $r = new Recuperacao();
+                if( $r->criar($key, $email, $tipoUsuario) ) {
+                    //TEMPLATE DE EMAIL
+                    $mensagem = file_get_contents("templates/tpl_redefinir_senha.html");
+                    $mensagem = str_replace("{{NOME}}", $nome, $mensagem);
+                    $mensagem = str_replace("{{URL}}", $url, $mensagem);
+
+                    //ENVIA O EMAIL PARA REDEFINIÇÃO DE SENHA
+                    $e = new Email();
+                    $e->para = $email;
+                    $e->paraNome = $nome;
+                    $e->assunto = "Esqueceu sua senha?";
+                    $e->mensagems = $mensagem;
+                    if($e->enviaEmail()){
+                        $dados['aviso'] = $this->mensagemSucesso("Foi enviada uma mensagem em seu email com as instruções para redefinir sua senha!");
+                    }else{ 
+                        $dados['aviso'] = $this->mensagemErro("Erro no envio do email!");
+                    }
+                }else{
+                    $dados['aviso'] = $this->mensagemErro("Erro na criação do código de redefinição!");
                 }
                 
             }else{

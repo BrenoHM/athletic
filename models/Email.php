@@ -22,11 +22,11 @@
  */
 class Email extends model {
     
-    private $host     = 'smtp.casg.com.br';
-    private $usuario  = 'gestaodepessoas@casg.com.br';
-    private $senha    = 'people12';
-    public $de        = 'gestaodepessoas@casg.com.br';
-    public $deNome    = 'CIGAM EASY - CONTATO';
+    private $host     = 'srv210.prodns.com.br';
+    private $usuario  = 'naoresponda@ligauniversitariabr.com.br';
+    private $senha    = 'liga2018me';
+    public $de        = 'naoresponda@ligauniversitariabr.com.br';
+    public $deNome    = 'Liga Universitária';
     public $para;
     public $paraNome;
     public $assunto;
@@ -51,6 +51,7 @@ class Email extends model {
         $mail->Host = $this->host;
         $mail->Port = 587; // or 465
         $mail->IsHTML(true);
+        $mail->CharSet = 'UTF-8';
         $mail->Username  = $this->usuario;// SMTP username
         $mail->Password  = $this->senha;// SMTP password
         $mail->setFrom($this->de, $this->deNome);
