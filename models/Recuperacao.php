@@ -42,19 +42,19 @@ class Recuperacao extends model {
         
     }
     
-    public function getId($id) {
+    public function getDadosRecuperacao($codigo) {
         
-        $usuario = array();
+        $dados = array();
         
-        $sql = "SELECT * FROM {$this->tabela} WHERE codUsu = $id";
+        $sql = "SELECT * FROM {$this->tabela} WHERE codigo = '$codigo'";
         
         $sql = $this->db->query($sql);
         
         if($sql->rowCount() > 0){
-            $usuario = $sql->fetch();
+            $dados = $sql->fetch(PDO::FETCH_ASSOC);
         }
         
-        return $usuario;
+        return $dados;
         
     }
     

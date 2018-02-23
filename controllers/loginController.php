@@ -178,6 +178,35 @@ class loginController extends controller {
         $this->loadView("esqueceu-senha", $dados);
     }
     
+    public function redefinir($codigo) {
+        $dados = array();
+        $dados['codigoValido'] = FALSE;
+        $r = new Recuperacao();
+        $dadosRecuperacao = $r->getDadosRecuperacao($codigo);
+        if( !empty($dadosRecuperacao) ){
+            $dados['codigoValido'] = TRUE;
+            $dados['tipoUsuario'] = $dadosRecuperacao['tipoUsuario'];
+            if( isset($_POST['formRedefinir']) ) {
+                $senha  = addslashes($_POST['senUsu']);
+                $senha2 = addslashes($_POST['senha2']);
+                if( $senha == $senha2 ){
+                    $u = $dadosRecuperacao['tipoUsuario'] == 'atletica' ? new UsuarioAtletica() : new Usuario();
+                    $dadosUsuario = $u->getByEmail($dadosRecuperacao['email']);
+                    if( !empty($dadosUsuario) ){
+                        $dados['aviso'] = $this->mensagemSucesso("Senha redefinida com sucesso!");
+                    }else{
+                        $dados['aviso'] = $this->mensagemErro("Usuário inexistemte!");
+                    }
+                }else{
+                    $dados['aviso'] = $this->mensagemErro("Senhas não conferem!");
+                }
+            }
+        }else{
+            $dados['aviso'] = $this->mensagemErro("Código de redefinição inválido ou expirado!");
+        }
+        $this->loadView("redefinir-senha", $dados);
+    }
+    
     public function criaSessaoUsuario($usuario) {
         
         $_SESSION['sessionUser'] = array(
