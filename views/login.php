@@ -28,7 +28,7 @@
   <![endif]-->
   <style type="text/css">
     .login-page {
-      background: url('<?php echo BASE_URL; ?>/dist/img/matrix.jpg');
+/*      background: url('<?php //echo BASE_URL; ?>/dist/img/matrix.jpg');*/
       background-position: top center;
       background-repeat: no-repeat;
       background-size: cover;

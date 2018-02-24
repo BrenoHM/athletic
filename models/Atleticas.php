@@ -35,6 +35,7 @@ class Atleticas extends model {
     private $idUsuarioAtletica;
     private $idAtletica;
     private $idUniversidade;
+    private $status;
 
     function getIdFormulario() {
         return $this->idFormulario;
@@ -283,6 +284,14 @@ class Atleticas extends model {
     function setIdUniversidade($idUniversidade) {
         $this->idUniversidade = $idUniversidade;
     }
+    
+    function getStatus() {
+        return $this->status;
+    }
+
+    function setStatus($status) {
+        $this->status = $status;
+    }
         
     public function __construct() {
         parent::__construct();
@@ -333,14 +342,16 @@ class Atleticas extends model {
         return $dados;
     }
     
-    public function inserir() {
+    public function mudaStatus() {
         
-        $sql = "INSERT INTO {$this->tabela} (nomCli, urlCli, imgCli) VALUES (:nomCli, :urlCli, :imgCli)";
+        $sql = "UPDATE atletica SET "
+            . "status = :status "
+            . "WHERE idAtletica = :idAtletica";
+        
         $sql = $this->db->prepare($sql);
 
-        $sql->bindValue(":nomCli", $this->getNomCli());
-        $sql->bindValue(":urlCli", $this->getUrlCli());
-        $sql->bindValue(":imgCli", $this->getImgCli());
+        $sql->bindValue(":status", $this->getStatus());
+        $sql->bindValue(":idAtletica", $this->getIdAtletica());
 
         $sql->execute();
 

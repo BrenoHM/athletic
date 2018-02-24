@@ -74,25 +74,9 @@ class Recuperacao extends model {
         
     }
     
-    public function getUsuarios() {
+    public function deletar($codigo) {
         
-        $usuario = array();
-        
-        $sql = "SELECT * FROM {$this->tabela} WHERE codUsu <> 1";
-        
-        $sql = $this->db->query($sql);
-        
-        if($sql->rowCount() > 0){
-            $usuario = $sql->fetchAll();
-        }
-        
-        return $usuario;
-        
-    }
-    
-    public function deletar($id) {
-        
-        $sql = "DELETE FROM {$this->tabela} WHERE codUsu = $id;";
+        $sql = "DELETE FROM {$this->tabela} WHERE codigo = '$codigo';";
                 
         $sql = $this->db->query($sql);
         

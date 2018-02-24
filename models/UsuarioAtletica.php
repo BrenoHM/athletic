@@ -103,19 +103,14 @@ class UsuarioAtletica extends model {
         $updSenha = "";
         if( !empty($senha) ){
             $senha = sha1($senha);
-            $updSenha = "senUsu = '$senha', ";
+            $updSenha = "senha = '$senha', ";
         }
         
-//        $updImagem = "";
-//        if( !empty($this->getImgUsu()) ){
-//            $updImagem = "imgUsu = '{$this->getImgUsu()}',";
-//        }
-        
         $sql = "UPDATE {$this->tabela} SET
-                nomUsu = '$nome',
+                nome = '$nome',
                 $updSenha
-                telUsu = '$telefone'
-                WHERE codUsu = $idUsu;";
+                telefone = '$telefone'
+                WHERE idUsuarioAtletica = $idUsu;";
         
         try{
                 
@@ -139,16 +134,6 @@ class UsuarioAtletica extends model {
         }
         
         return false;
-    }
-    
-    public function getGravata($email, $width) {
-        
-        $userMail = $email;
-
-        $imageWidth = $width; //The image size
-
-        return $imgUrl = 'https://secure.gravatar.com/avatar/'.md5($userMail).'?size='.$imageWidth;
-        
     }
         
 }

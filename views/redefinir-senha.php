@@ -28,7 +28,7 @@
   <![endif]-->
   <style type="text/css">
     .login-page {
-      background: url('<?php echo BASE_URL; ?>/dist/img/matrix.jpg');
+/*      background: url('<?php //echo BASE_URL; ?>/dist/img/matrix.jpg');*/
       background-position: top center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -46,7 +46,7 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Redefina sua senha</p>
+    <p class="login-box-msg">Digite sua nova senha!</p>
 
     <?php if(isset($aviso)) { echo $aviso; } ?>
     

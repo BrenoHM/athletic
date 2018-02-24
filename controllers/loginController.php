@@ -189,11 +189,20 @@ class loginController extends controller {
             if( isset($_POST['formRedefinir']) ) {
                 $senha  = addslashes($_POST['senUsu']);
                 $senha2 = addslashes($_POST['senha2']);
-                if( $senha == $senha2 ){
+                if( !empty($senha) && $senha == $senha2 ){
                     $u = $dadosRecuperacao['tipoUsuario'] == 'atletica' ? new UsuarioAtletica() : new Usuario();
                     $dadosUsuario = $u->getByEmail($dadosRecuperacao['email']);
                     if( !empty($dadosUsuario) ){
-                        $dados['aviso'] = $this->mensagemSucesso("Senha redefinida com sucesso!");
+                        $idUsuario   = $dadosRecuperacao['tipoUsuario'] == 'atletica' ? $dadosUsuario['idUsuarioAtletica'] : $dadosUsuario['codUsu'];
+                        $nomeUsuario = $dadosRecuperacao['tipoUsuario'] == 'atletica' ? $dadosUsuario['nome'] : $dadosUsuario['nomUsu'];
+                        $telUsuario  = $dadosRecuperacao['tipoUsuario'] == 'atletica' ? $dadosUsuario['telefone'] : $dadosUsuario['telUsu'];
+                        if( $u->atualizar($idUsuario, $nomeUsuario, $telUsuario, $senha) ){
+                            //DELETA O CODIGO DE VERIFICACAO
+                            $r->deletar($codigo);
+                            $dados['aviso'] = $this->mensagemSucesso("Senha redefinida com sucesso!");
+                        }else{
+                            $dados['aviso'] = $this->mensagemErro("Não foi possível redefinir a senha!");
+                        }
                     }else{
                         $dados['aviso'] = $this->mensagemErro("Usuário inexistemte!");
                     }

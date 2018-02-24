@@ -28,7 +28,7 @@
   <![endif]-->
   <style type="text/css">
     .login-page {
-      background: url('<?php echo BASE_URL; ?>/dist/img/matrix.jpg');
+/*      background: url('<?php //echo BASE_URL; ?>/dist/img/matrix.jpg');*/
       background-position: top center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -61,11 +61,6 @@
       </div>
       <div class="row">
         <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Lembrar-me
-            </label>
-          </div>
           <a href="<?php echo BASE_URL; ?>/login/esqueceu/atletica">Esqueci minha senha!</a>
         </div>
         <!-- /.col -->

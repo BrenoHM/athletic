@@ -280,5 +280,35 @@ class atleticasController extends controller {
         $this->loadTemplate("clientes/index", $dados);
         
     }
+    
+    public function mudaStatus() {
+        $idAtletica = $_POST['idAtletica'];
+        $email      = $_POST['email'];
+        $nome       = $_POST['nome'];
+        $status     = $_POST['status'];
+        $a = new Atleticas();
+        $a->setStatus($status);
+        $a->setIdAtletica($idAtletica);
+        if( $a->mudaStatus() ){
+            
+            //TEMPLATE DE EMAIL
+            $mensagem = file_get_contents("templates/tpl_mudanca_status_atletica.html");
+            $mensagem = str_replace("{{NOME}}", $nome, $mensagem);
+            $mensagem = str_replace("{{STATUS}}", $status, $mensagem);
+            
+            //MANDA EMAIL NOTIFICANDO
+            $e = new Email();
+            $e->para = $email;
+            $e->paraNome = $nome;
+            $e->assunto = "Mudança de status na atlética!";
+            $e->mensagems = $mensagem;
+            if($e->enviaEmail()){
+                echo 'ok';
+            }else{ 
+                echo 'nok'; 
+            }
+        }
+        
+    }
 
 }

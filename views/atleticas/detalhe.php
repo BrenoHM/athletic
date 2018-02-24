@@ -32,12 +32,15 @@
                 <div class="tab-pane active" id="dados">
                     <div clas="row">
                         <div class="col-md-12">
-                            <div class="col-md-6"><strong>Nome: </strong><?php echo $atletica['nome']; ?></div>
+                            <div class="col-md-6"><strong>Nome: </strong><?php echo $atletica['nome']; ?><input type="hidden" id="idAtletica" value="<?php echo $atletica['idAtletica']; ?>" /></div>
                             <div class="col-md-6"><strong>Sigla: </strong><?php echo $atletica['sigla']; ?></div>
                             <div class="col-md-6"><strong>Apelido: </strong><?php echo $atletica['apelido']; ?></div>
                             <div class="col-md-6"><strong>Cep: </strong><?php echo $atletica['cep']; ?></div>
                             <div class="col-md-6"><strong>Endereço: </strong><?php echo $atletica['endereco']; ?></div>
-                            <div class="col-md-6"><strong>Email: </strong><?php echo $atletica['e-mail']; ?></div>
+                            <div class="col-md-6"><strong>Email: </strong><?php echo $atletica['e-mail']; ?>
+                                <input type="hidden" id="e-mail" value="<?php echo $atletica['e-mail']; ?>" />
+                                <input type="hidden" id="nome" value="<?php echo $atletica['nome']; ?>" />
+                            </div>
                             <div class="col-md-6"><strong>Telefone: </strong><?php echo $atletica['telefone']; ?></div>
                             <div class="col-md-6"><strong>Whatsapp: </strong><?php echo $atletica['whatsapp']; ?></div>
                             <div class="col-md-6"><strong>Presidente: </strong><?php echo $atletica['nomePresidente']; ?></div>
@@ -113,6 +116,13 @@
                             <div class="col-md-6"><strong>Logo: </strong>
                                 <a href="<?php echo BASE_URL; ?>/uploads/logo/<?php echo $atletica['urlLogo']; ?>" target="_blank"><i class="fa fa-download"></i></a>
                             </div>
+                            <div class="col-md-6"><strong>Status: </strong>
+                                <select name="" id="teste" onchange="mudaStatusAtletica(this.value);">
+                                    <option value="EM ANÁLISE" <?php echo $atletica['status'] == 'EM ANÁLISE' ? 'selected' : ''; ?>>EM ANÁLISE</option>
+                                    <option value="APROVADO" <?php echo $atletica['status'] == 'APROVADO' ? 'selected' : ''; ?>>APROVADO</option>
+                                    <option value="REPROVADO" <?php echo $atletica['status'] == 'REPROVADO' ? 'selected' : ''; ?>>REPROVADO</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -127,3 +137,27 @@
 
 </section>
 <!-- /.content -->
+<script>
+function mudaStatusAtletica(status){
+    var URL_BASE   = '<?php echo BASE_URL; ?>';
+    var idAtletica = $("#idAtletica").val();
+    var email      = $("#e-mail").val();
+    var nome       = $("#nome").val();
+    $.ajax({
+        url: URL_BASE + "/atleticas/mudaStatus",
+        type: 'POST',
+        data: {idAtletica:idAtletica, email:email, nome: nome, status:status},
+        //dataType: 'json',
+        //contentType: "application/json",
+        beforeSend: function() {},
+        success: function(data) {
+            if( data === 'nok' ){
+                alert("Erro no envio de mudança de status para a atlética, favor informar ao suporte!");
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log('ERROR', textStatus, errorThrown);
+        }
+    });
+}
+</script>

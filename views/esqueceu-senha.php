@@ -28,7 +28,7 @@
   <![endif]-->
   <style type="text/css">
     .login-page {
-      background: url('<?php echo BASE_URL; ?>/dist/img/matrix.jpg');
+/*      background: url('<?php //echo BASE_URL; ?>/dist/img/matrix.jpg');*/
       background-position: top center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -42,11 +42,11 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Administrador</b></a>
+    <a href="#"><b>Esqueceu sua senha?</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Inicie sua sessão</p>
+    <p class="login-box-msg">Qual seu e-mail de cadastro?</p>
 
     <?php if(isset($aviso)) { echo $aviso; } ?>
     
