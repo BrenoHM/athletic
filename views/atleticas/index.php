@@ -46,7 +46,7 @@
                               <td>
                                   <a href="<?php echo BASE_URL; ?>/atleticas/detalhe/<?php echo $atletica['idAtletica']; ?>" class="btn btn-default btn-xs"><i class="fa fa-search"></i></a>  
                                   <a href="<?php echo BASE_URL; ?>/atleticas/editar/<?php echo $atletica['idAtletica']; ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>  
-                                  <a href="<?php echo BASE_URL; ?>/atleticas/deletar/<?php echo $atletica['idAtletica']; ?>" onclick="return confirm('Deseja realmente excluir este registro!');" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                                  <!--<a href="<?php //echo BASE_URL; ?>/atleticas/deletar/<?php echo $atletica['idAtletica']; ?>" onclick="return confirm('Deseja realmente excluir este registro!');" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>-->
                               </td>
                             </tr>
                           <?php endforeach; ?>

@@ -54,7 +54,7 @@ class UsuarioAtletica extends model {
         
         $usuario = array();
         
-        $sql = "SELECT * FROM {$this->tabela} WHERE codUsu = $id";
+        $sql = "SELECT * FROM {$this->tabela} WHERE idUsuarioAtletica = $id";
         
         $sql = $this->db->query($sql);
         
@@ -134,6 +134,16 @@ class UsuarioAtletica extends model {
         }
         
         return false;
+    }
+    
+    public function getGravata($email, $width) {
+        
+        $userMail = $email;
+
+        $imageWidth = $width; //The image size
+
+        return $imgUrl = 'https://secure.gravatar.com/avatar/'.md5($userMail).'?size='.$imageWidth;
+        
     }
         
 }

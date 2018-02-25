@@ -195,8 +195,9 @@ class Usuario extends model {
     public function getUsuarios() {
         
         $usuario = array();
+        $id = Sessao::getSessionId();
         
-        $sql = "SELECT * FROM {$this->tabela} WHERE codUsu <> 1";
+        $sql = "SELECT * FROM {$this->tabela} WHERE codUsu <> $id";
         
         $sql = $this->db->query($sql);
         

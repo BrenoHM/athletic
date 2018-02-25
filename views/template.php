@@ -49,7 +49,7 @@
   <script src="<?php echo BASE_URL; ?>/plugins/jQuery/jquery-2.2.3.min.js"></script>
   
   <?php
-    $usuario = new Usuario();
+    $usuario = Sessao::getSessionNivel() == 'admin' ? new Usuario() : new UsuarioAtletica();
     $gravata = $usuario->getGravata(Sessao::getSessionEmail(), 160);
   ?>
 </head>
@@ -61,9 +61,9 @@
     <!-- Logo -->
     <a href="<?php echo BASE_URL; ?>/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>ADM</b></span>
+      <span class="logo-mini"><b><?php echo Sessao::getSessionNivel() == "admin" ? 'ADM' : 'ATL'; ?></b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Administrador</b></span>
+      <span class="logo-lg"><b><?php echo Sessao::getSessionNivel() == "admin" ? 'Administrador' : 'Atlética'; ?></b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -213,7 +213,11 @@
 
   <!-- =============================================== -->
 
-  <?php 
+  <?php
+    if( Sessao::getSessionNivel() == 'atletica' ){
+        $dadoUsuario = $usuario->getId(Sessao::getSessionId());
+        $viewData['idAtletica'] = $dadoUsuario['idAtletica'];
+    }
     $viewData['gravata'] = $gravata;
     $this->loadView("menu", $viewData); 
   ?>

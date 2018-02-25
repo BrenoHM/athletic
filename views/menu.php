@@ -9,7 +9,9 @@
       </div>
       <div class="pull-left info">
         <p><?php echo Sessao::getSessionName(); ?></p>
-        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        <a href="<?php echo BASE_URL; ?>/usuarios/perfil/<?php echo Sessao::getSessionId(); ?>" title="Editar Perfil">
+            <i class="fa fa-circle text-success"></i> Perfil
+        </a>
       </div>
     </div>
     <!-- search form -->
@@ -27,33 +29,29 @@
     <ul class="sidebar-menu">
       <li class="header">MENU</li>
       <li class="treeview">
-        <a href="<?php echo BASE_URL ?>/dashboard">
+        <a href="<?php echo BASE_URL; ?>/dashboard">
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
       
-      <!--<li>
-        <a href="<?php echo BASE_URL ?>/parceiros">
-          <i class="fa fa-handshake-o" aria-hidden="true"></i> <span>Parceiros</span>
-        </a>
-      </li>-->
-      
       <?php if( Sessao::getSessionNivel() == 'admin' ): ?>
         <li>
-          <a href="<?php echo BASE_URL ?>/atleticas">
-            <i class="fa fa-handshake-o" aria-hidden="true"></i> <span>Atléticas</span>
+          <a href="<?php echo BASE_URL; ?>/atleticas">
+            <!--<i class="fa fa-handshake-o" aria-hidden="true"></i>--> >> <span>Atléticas</span>
           </a>
         </li>
       <?php endif; ?>
       
-      <!--<li>
-        <a href="<?php echo BASE_URL ?>/clientes">
-          <i class="fa fa-handshake-o" aria-hidden="true"></i> <span>Clientes</span>
-        </a>
-      </li>-->
+      <?php if( Sessao::getSessionNivel() == 'atletica' ): ?>
+        <li>
+          <a href="<?php echo BASE_URL; ?>/atleticas/editar/<?php echo $idAtletica; ?>">
+            <!--<i class="fa fa-handshake-o" aria-hidden="true"></i>--> >> <span>Minha Atlética</span>
+          </a>
+        </li>
+      <?php endif; ?>
 
       <!--<li>
-        <a href="<?php echo BASE_URL ?>/contato">
+        <a href="<?php //echo BASE_URL ?>/contato">
           <i class="fa fa-reply" aria-hidden="true"></i> <span>Contato</span>
         </a>
       </li>-->
@@ -73,7 +71,7 @@
       
       <li>
         <a href="<?php echo BASE_URL ?>/logout">
-          <i class="fa  fa-power-off"></i> <span>Sair  </span>
+          <i class="fa  fa-power-off"></i> <span>Sair</span>
         </a>
       </li>
 

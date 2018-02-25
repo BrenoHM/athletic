@@ -96,36 +96,43 @@ class usuariosController extends controller {
     public function perfil($idUsuario = "") {
         
         if(Sessao::getSessionId() != ""){
-            
-            $dados = array();
-            $usuario = new Usuario();
-            
-            $idUsu = !empty($idUsuario) ? $idUsuario : Sessao::getSessionId();
-            
-            if(isset($_POST['formAtualizarDados'])) {
-                
-                $nome           = addslashes($_POST['nomUsu']);
-                $telefone       = addslashes($_POST['telUsu']);
-                $senha          = addslashes($_POST['senUsu']);
-                $repetir_senha  = addslashes($_POST['repetir_senha']);
-                
-                if( !empty($nome) ) {
-                    if( $senha == $repetir_senha ) {
-                        if( $usuario->atualizar($idUsu, $nome, $telefone, $senha) ) {
-                            $dados['aviso'] = $this->mensagemSucesso("Dados atualizados com sucesso!");
+        
+            if( Sessao::getSessionNivel() == "admin" || ( Sessao::getSessionNivel() == "atletica" && Sessao::getSessionId() == $idUsuario) ){
+                $dados = array();
+                $usuario = Sessao::getSessionNivel() == 'admin' ? new Usuario() : new UsuarioAtletica();
+
+                $idUsu = !empty($idUsuario) ? $idUsuario : Sessao::getSessionId();
+
+                if(isset($_POST['formAtualizarDados'])) {
+
+                    $nome           = addslashes($_POST['nomUsu']);
+                    $telefone       = addslashes($_POST['telUsu']);
+                    $senha          = addslashes($_POST['senUsu']);
+                    $repetir_senha  = addslashes($_POST['repetir_senha']);
+
+                    if( !empty($nome) ) {
+                        if( $senha == $repetir_senha ) {
+                            if( $usuario->atualizar($idUsu, $nome, $telefone, $senha) ) {
+                                $dados['aviso'] = $this->mensagemSucesso("Dados atualizados com sucesso!");
+                            }else{
+                                $dados['aviso'] = $this->mensagemErro("Erro na atualização dos dados!");
+                            }
                         }else{
-                            $dados['aviso'] = $this->mensagemErro("Erro na atualização dos dados!");
+                            $dados['aviso'] = $this->mensagemErro("Senhas devem ser iguais!");
                         }
                     }else{
-                        $dados['aviso'] = $this->mensagemErro("Senhas devem ser iguais!");
+                        $dados['aviso'] = $this->mensagemErro("Nome é obrigatório!");
                     }
-                }else{
-                    $dados['aviso'] = $this->mensagemErro("Nome é obrigatório!");
                 }
+
+                $dados['usuario'] = $usuario->getId($idUsu);
+                $dados['usuario']['nomUsu'] = Sessao::getSessionNivel() == 'admin' ? $dados['usuario']['nomUsu'] : $dados['usuario']['nome'];
+                $dados['usuario']['emaUsu'] = Sessao::getSessionNivel() == 'admin' ? $dados['usuario']['emaUsu'] : $dados['usuario']['email'];
+                $dados['usuario']['telUsu'] = Sessao::getSessionNivel() == 'admin' ? $dados['usuario']['telUsu'] : $dados['usuario']['telefone'];
+                $this->loadTemplate("perfil-usuario", $dados);
+            }else{
+                header("Location: " . BASE_URL . "/");
             }
-            
-            $dados['usuario'] = $usuario->getId($idUsu);
-            $this->loadTemplate("perfil-usuario", $dados);
             
         }else{
             header("Location: " . BASE_URL . "/login");
