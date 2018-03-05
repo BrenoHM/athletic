@@ -48,6 +48,11 @@
             <!--<i class="fa fa-handshake-o" aria-hidden="true"></i>--> >> <span>Minha Atlética</span>
           </a>
         </li>
+        <li>
+          <a href="<?php echo BASE_URL; ?>/eventos">
+            <i class="fa fa-calendar-o" aria-hidden="true"></i> <span>Meus Eventos</span>
+          </a>
+        </li>
       <?php endif; ?>
 
       <!--<li>
