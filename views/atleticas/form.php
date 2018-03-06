@@ -92,17 +92,8 @@
             <div class="tab-pane <?php echo ( isset($atletica['passoFormulario']) && $atletica['passoFormulario'] == 2 ) ? 'active' : ''; ?>" id="passo_2">
                 
                 <div class="form-group <?php echo ( isset($error) && in_array('cursos', $error) ) ? 'has-error' : ''; ?>">
-                    <?php $atletica['cursos'] = explode(",", $atletica['cursos']); ?>
                     <label for="cursos">Cursos</label>
-                    <select name="cursos[]" class="form-control select2" multiple="multiple" data-placeholder="Cursos" style="width: 100%;">
-                        <option value="1" <?php if( isset($post['cursos']) && in_array(1, $post['cursos']) ) { echo 'selected'; } elseif( isset($post['cursos']) && empty($post['cursos']) ) { } elseif( isset($atletica['cursos']) && in_array(1, $atletica['cursos']) ) { echo 'selected'; } ?>>Alabama</option>
-                        <option value="2" <?php if( isset($post['cursos']) && in_array(2, $post['cursos']) ) { echo 'selected'; } elseif( isset($post['cursos']) && empty($post['cursos']) ) { } elseif( isset($atletica['cursos']) && in_array(2, $atletica['cursos']) ) { echo 'selected'; } ?>>Alaska</option>
-                        <option value="3" <?php if( isset($post['cursos']) && in_array(3, $post['cursos']) ) { echo 'selected'; } elseif( isset($post['cursos']) && empty($post['cursos']) ) { } elseif( isset($atletica['cursos']) && in_array(3, $atletica['cursos']) ) { echo 'selected'; } ?>>California</option>
-                        <option value="4" <?php if( isset($post['cursos']) && in_array(4, $post['cursos']) ) { echo 'selected'; } elseif( isset($post['cursos']) && empty($post['cursos']) ) { } elseif( isset($atletica['cursos']) && in_array(4, $atletica['cursos']) ) { echo 'selected'; } ?>>Delaware</option>
-                        <option value="5" <?php if( isset($post['cursos']) && in_array(5, $post['cursos']) ) { echo 'selected'; } elseif( isset($post['cursos']) && empty($post['cursos']) ) { } elseif( isset($atletica['cursos']) && in_array(5, $atletica['cursos']) ) { echo 'selected'; } ?>>Tennessee</option>
-                        <option value="6" <?php if( isset($post['cursos']) && in_array(6, $post['cursos']) ) { echo 'selected'; } elseif( isset($post['cursos']) && empty($post['cursos']) ) { } elseif( isset($atletica['cursos']) && in_array(6, $atletica['cursos']) ) { echo 'selected'; } ?>>Texas</option>
-                        <option value="7" <?php if( isset($post['cursos']) && in_array(7, $post['cursos']) ) { echo 'selected'; } elseif( isset($post['cursos']) && empty($post['cursos']) ) { } elseif( isset($atletica['cursos']) && in_array(7, $atletica['cursos']) ) { echo 'selected'; } ?>>Washington</option>
-                    </select>
+                    <input type="text" id="cursos" class="form-control" name="cursos" placeholder="Cursos" value="<?php if( isset($post['cursos']) ) { echo $post['cursos']; } elseif ( isset($atletica['cursos']) ) { echo $atletica['cursos']; } ?>">
                 </div>
                 
                 <div class="clearfix"></div>
@@ -223,7 +214,7 @@
                 </div>
                 
                 <div class="form-group <?php echo ( isset($error) && in_array('urlLogo', $error) ) ? 'has-error' : ''; ?>">
-                    <label for="urlLogo">UPLOAD da logo VETORIZADA em COREL/ILUSTRADOR/PNG SEM FUNDO COM 300dpis - Arquivo em PDF ou WORD</label>
+                    <label for="urlLogo">UPLOAD da logo VETORIZADA em COREL/ILUSTRADOR/PNG SEM FUNDO COM 300dpis</label>
                     <input type="file" name="urlLogo" id="urlLogo" />
                 </div>
                 

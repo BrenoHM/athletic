@@ -74,7 +74,7 @@ class eventosController extends controller {
         
         $e = new Eventos();
         $evento = $e->getEventos($idEvento);
-        if( Sessao::getSessionId() != "" && $evento['idAtletica'] == Sessao::getSessionIdAtletica() ){
+        if( Sessao::getSessionNivel() == "atletica" && $evento['idAtletica'] == Sessao::getSessionIdAtletica() ){
             
             $dados = array();
             

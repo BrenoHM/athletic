@@ -202,7 +202,7 @@ class Atleticas extends model {
     }
 
     function setCursos($cursos) {
-        $this->cursos = !empty($cursos) ? implode(",", $cursos) : null;
+        $this->cursos = $cursos;
     }
 
     function setPossuiUniforme($possuiUniforme) {

@@ -172,17 +172,20 @@ class atleticasController extends controller {
                     //LOGO
                     $arquivo = $_FILES['urlLogo'];
                     if( !empty($arquivo['name']) ){
-                        if( in_array($arquivo['type'], array('application/msword', 'application/pdf')) ) {
+                        if( in_array($arquivo['type'], array('application/cdr', 'application/octet-stream', 'application/pdf')) ) {
                             $caminho = "uploads/logo/";
-                            $ext = "doc";
+                            $ext = "cdr";
                             if($arquivo['type'] == 'application/pdf'){
                                 $ext = "pdf";
+                            }else if($arquivo['type'] == 'application/octet-stream'){
+                                $ext = "psd";
                             }
                             $nomeArquivo = md5(time().rand(0, 9999)) . '.' . $ext;
                             move_uploaded_file($arquivo['tmp_name'], $caminho . $nomeArquivo);
                             $a->setUrlLogo($nomeArquivo);
                         }
                     }
+                    
                     if( $a->atualizar() ){
                         if( $dados['atletica']['passoFormulario'] == 5 ){
                             header("Location: " . BASE_URL . "/cadastro/confirmado");
@@ -192,6 +195,7 @@ class atleticasController extends controller {
                     }else{
                         $dados['aviso'] = $this->mensagemErro("Erro na atualização dos dados!");
                     }
+                    
                 }else{
                     $dados['aviso'] = $this->mensagemErro("Todos os campos são de preenchimento obrigatório!");
                 }
