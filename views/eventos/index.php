@@ -38,11 +38,11 @@
                             <tr>
                               <!--<td><img src="<?php //echo BASE_URL_SITE; ?>/images/clientes/<?php //echo $cliente['imgCli']; ?>" width="100" /></td>-->
                               <td><?php echo $evento['nome']; ?></td>
-                              <td><?php echo $evento['dataCad']; ?></td>
+                              <td><?php echo date("d/m/Y H:i", strtotime($evento['dataCad'])); ?></td>
                               <td>
-                                  <a href="<?php echo BASE_URL; ?>/atleticas/detalhe/<?php echo $atletica['idAtletica']; ?>" class="btn btn-default btn-xs"><i class="fa fa-search"></i></a>  
-                                  <a href="<?php echo BASE_URL; ?>/atleticas/editar/<?php echo $atletica['idAtletica']; ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>  
-                                  <!--<a href="<?php //echo BASE_URL; ?>/atleticas/deletar/<?php echo $atletica['idAtletica']; ?>" onclick="return confirm('Deseja realmente excluir este registro!');" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>-->
+                                  <!--<a href="<?php //echo BASE_URL; ?>/atleticas/detalhe/<?php //echo $atletica['idAtletica']; ?>" class="btn btn-default btn-xs"><i class="fa fa-search"></i></a>-->
+                                  <a href="<?php echo BASE_URL; ?>/eventos/editar/<?php echo $evento['idEvento']; ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>  
+                                  <a href="<?php echo BASE_URL; ?>/eventos/deletar/<?php echo $evento['idEvento']; ?>" onclick="return confirm('Deseja realmente excluir este registro!');" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
                               </td>
                             </tr>
                           <?php endforeach; ?>

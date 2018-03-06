@@ -8,12 +8,36 @@ class Eventos extends model {
         parent::__construct();
     }
     
-    public function getEventos() {
+    public function getEventos($idEvento = null) {
         
         $dados = array();
         $id = Sessao::getSessionIdAtletica();
         
-        $sql = "SELECT * FROM {$this->tabela} WHERE idAtletica = $id";
+        if( empty($idEvento) ){
+            $sql = "SELECT * FROM {$this->tabela} WHERE idAtletica = $id";
+        }else{
+            $sql = "SELECT * FROM {$this->tabela} WHERE idEvento = $idEvento";
+        }
+        
+        $sql = $this->db->query($sql);
+        
+        if($sql->rowCount() > 0){
+            if( empty($idEvento) ){
+                $dados = $sql->fetchAll();
+            }else{
+                $dados = $sql->fetch();
+            }
+        }
+        
+        return $dados;
+        
+    }
+    
+    public function getGaleria($idEvento) {
+        
+        $dados = array();
+        
+        $sql = "SELECT * FROM galeria WHERE idEvento = $idEvento";
         
         $sql = $this->db->query($sql);
         
@@ -25,20 +49,23 @@ class Eventos extends model {
         
     }
     
-    public function criar($nome, $email, $senha) {
+    public function criar($nome, $idAtletica, $idUsuarioAtletica) {
         
-        //$urlFoto = "";
-        //if(!empty($foto)){
-        //    $urlFoto = "imgUsu = '$foto',";
-        //}
-        $idUsu = 0;
-        $senha = sha1($senha);
-        
-        $sql = "INSERT INTO {$this->tabela} SET nomUsu = '$nome', emaUsu = '$email', senUsu = '$senha', telUsu = '123', useCad = 1";
+        $idEvento = 0;
+        $sql = "INSERT INTO {$this->tabela} SET nome = '$nome', idAtletica = '$idAtletica', idUsuarioAtletica = '$idUsuarioAtletica'";
         $sql = $this->db->query($sql);
-        $idUsu = $this->db->lastInsertId();
-        return $idUsu;
+        $idEvento = $this->db->lastInsertId();
+        return $idEvento;
         
+    }
+    
+    public function criarGaleria($url, $idEvento, $idUsuarioAtletica) {
+        $sql = "INSERT INTO galeria SET url = '$url', idEvento = '$idEvento', idUsuarioAtletica = '$idUsuarioAtletica'";
+        $sql = $this->db->query($sql);
+        if($sql->rowCount() > 0){
+            return true;
+        }
+        return false;
     }
     
     public function getId($id) {

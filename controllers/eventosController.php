@@ -16,163 +16,106 @@ class eventosController extends controller {
         
     }
     
-    public function recuperar() {
-        
-        $dados = array();
-        
-        if( isset($_POST['emaUsu']) && !empty($_POST['emaUsu']) ) {
-            
-            $email = addslashes($_POST['emaUsu']);
-            
-            $u = new usuario();
-            
-            if( $u->isExiste($email) ) {
-                $dados['aviso'] = $this->mensagemSucesso("Um Email foi enviado com instruções para recuperação da senha!");
-                unset($_POST['emaUsu']);
-            }else{
-                $dados['aviso'] = $this->mensagemErro("Email não encontrado!");
-            }
-            
-        }else{
-            $dados['aviso'] = $this->mensagemErro("Email é obrigatório!");
-        }
-        
-        $this->loadView("recuperar-senha", $dados);
-        
-    }
-    
-    public function redefinir() {
-        
-        $dados = array();
-        
-        $this->loadView("redefinir-senha", $dados);
-        
-    }
-    
-//    public function dashboard() {
-//        if( Sessao::getSessionId() != "" ){
-//            $dados = array();
-//            $this->loadTemplate("dashboard-usuario", $dados, "template-area-usuario");
-//        }else{
-//            header("Location: " . BASE_URL . "/login");
-//        }
-//    }
-    
-    public function registrar() { 
-        
-        $dados = array();
-        $usuario = new Usuario();
-        
-        if( isset($_POST['frmRegistrarUsuario']) ) {
-            $nome        = addslashes($_POST['nomUsu']);
-            $email       = addslashes($_POST['emaUsu']);
-            $senha       = addslashes($_POST['senUsu']);
-            $repet_senha = addslashes($_POST['repetir_senha']);
-            
-            if( !empty($nome) && !empty($email) && !empty($senha) && !empty($repet_senha) ) {
-                if( $senha == $repet_senha ) {
-                    if( !$usuario->isExiste($email) ) {
-                        if( $usuario->criar($nome, $email, $senha) > 0 ) {
-                            $dados['aviso'] = $this->mensagemSucesso("Usuário criado com sucesso!");
-                            echo "<META http-equiv='refresh' content='2;URL=".BASE_URL."/login'>";
-                        }else{
-                            $dados['aviso'] = $this->mensagemErro("Erro na criação de usuário!");
-                        }
-                    }else{
-                        $dados['aviso'] = $this->mensagemErro("Email existente!");
-                    }
-                }else{
-                    $dados['aviso'] = $this->mensagemErro("Campos de senha não estão iguais!");
-                }
-            }else{
-                $dados['aviso'] = $this->mensagemErro("Todos os campos são obrigatórios!");
-            }
-        }
-        
-        $this->loadView("registrar-usuario", $dados);
-        
-    }
-    
-    public function perfil($idUsuario = "") {
+    public function novo() {
         
         if(Sessao::getSessionId() != ""){
-        
-            if( Sessao::getSessionNivel() == "admin" || ( Sessao::getSessionNivel() == "atletica" && Sessao::getSessionId() == $idUsuario) ){
-                $dados = array();
-                $usuario = Sessao::getSessionNivel() == 'admin' ? new Usuario() : new UsuarioAtletica();
-
-                $idUsu = !empty($idUsuario) ? $idUsuario : Sessao::getSessionId();
-
-                if(isset($_POST['formAtualizarDados'])) {
-
-                    $nome           = addslashes($_POST['nomUsu']);
-                    $telefone       = addslashes($_POST['telUsu']);
-                    $senha          = addslashes($_POST['senUsu']);
-                    $repetir_senha  = addslashes($_POST['repetir_senha']);
-
-                    if( !empty($nome) ) {
-                        if( $senha == $repetir_senha ) {
-                            if( $usuario->atualizar($idUsu, $nome, $telefone, $senha) ) {
-                                $dados['aviso'] = $this->mensagemSucesso("Dados atualizados com sucesso!");
-                            }else{
-                                $dados['aviso'] = $this->mensagemErro("Erro na atualização dos dados!");
-                            }
-                        }else{
-                            $dados['aviso'] = $this->mensagemErro("Senhas devem ser iguais!");
-                        }
-                    }else{
-                        $dados['aviso'] = $this->mensagemErro("Nome é obrigatório!");
-                    }
-                }
-
-                $dados['usuario'] = $usuario->getId($idUsu);
-                $dados['usuario']['nomUsu'] = Sessao::getSessionNivel() == 'admin' ? $dados['usuario']['nomUsu'] : $dados['usuario']['nome'];
-                $dados['usuario']['emaUsu'] = Sessao::getSessionNivel() == 'admin' ? $dados['usuario']['emaUsu'] : $dados['usuario']['email'];
-                $dados['usuario']['telUsu'] = Sessao::getSessionNivel() == 'admin' ? $dados['usuario']['telUsu'] : $dados['usuario']['telefone'];
-                $this->loadTemplate("perfil-usuario", $dados);
-            }else{
-                header("Location: " . BASE_URL . "/");
-            }
             
+            $dados = array();
+            $e = new Eventos();
+            
+            if(isset($_POST['frmEvento'])) {
+                
+                $nome        = addslashes($_POST['nome']);
+                $fotos       = $_FILES['url'];
+
+                if( !empty($nome) ) {
+                    
+                    //INSERE EVENTO
+                    $idAtletica = Sessao::getSessionIdAtletica();
+                    $idUsuarioAtletica = Sessao::getSessionId();
+                    $idEventoInserido = $e->criar($nome, $idAtletica, $idUsuarioAtletica);
+                    if( $idEventoInserido > 0 ){
+                        
+                        if( !empty($fotos['name'][0]) ) {
+                            $caminho = "uploads/galeria/";
+                            for($i = 0; $i < count($fotos['name']); $i++) {
+                                if( in_array($fotos['type'][$i], array('image/jpeg', 'image/jpg', 'image/png')) ) {
+                                    $ext = strtolower(substr($fotos['name'][$i],-4));
+                                    $nomeImagem = md5(time().rand(0, 9999)) . $ext;
+                                    if( move_uploaded_file($fotos['tmp_name'][$i], $caminho . $nomeImagem) ){
+                                        $e->criarGaleria($nomeImagem, $idEventoInserido, $idUsuarioAtletica);
+                                    }
+                                }else{
+                                    $dados['extensoesInvalidas'][] = $fotos['name'][$i];
+                                }
+                            }                            
+                        }
+                        
+                        $dados['aviso'] = $this->mensagemSucesso("Evento criado com sucesso!");
+                        echo "<META http-equiv='refresh' content='2;URL=".BASE_URL."/eventos'>";
+                    }
+                    
+                }else{
+                    $dados['aviso'] = $this->mensagemErro("Campo nom é obrigatório!");
+                }
+            }
+        
+            $this->loadTemplate("eventos/criar", $dados);
+        
         }else{
             header("Location: " . BASE_URL . "/login");
         }
         
     }
     
-    public function novo() {
+    public function editar($idEvento) {
         
         if(Sessao::getSessionId() != ""){
             
             $dados = array();
-            $usuario = new Usuario();
+            $e = new Eventos();
+            
+            if(isset($_POST['frmEvento'])) {
+                
+                $nome        = addslashes($_POST['nome']);
+                $fotos       = $_FILES['url'];
 
-            if(isset($_POST['frmUsuario'])) {
-                $nome        = addslashes($_POST['nomUsu']);
-                $email       = addslashes($_POST['emaUsu']);
-                $senha       = addslashes($_POST['senUsu']);
-                $repet_senha = addslashes($_POST['repetir_senha']);
-
-                if( !empty($nome) && !empty($email) && !empty($senha) && !empty($repet_senha) ) {
-                    if($senha == $repet_senha) {
-                        if(!$usuario->isExiste($email)) {
-                            if( $usuario->criar($nome, $email, $senha) > 0 ) {
-                                $dados['aviso'] = $this->mensagemSucesso("Usuário criado com sucesso!");
-                            }else{
-                                $dados['aviso'] = $this->mensagemErro("Erro na criação de usuário!");
-                            }
-                        }else{
-                            $dados['aviso'] = $this->mensagemErro("Email existente!");
+                if( !empty($nome) ) {
+                    
+                    //INSERE EVENTO
+                    $idAtletica = Sessao::getSessionIdAtletica();
+                    $idUsuarioAtletica = Sessao::getSessionId();
+                    $idEventoInserido = $e->criar($nome, $idAtletica, $idUsuarioAtletica);
+                    if( $idEventoInserido > 0 ){
+                        
+                        if( !empty($fotos['name'][0]) ) {
+                            $caminho = "uploads/galeria/";
+                            for($i = 0; $i < count($fotos['name']); $i++) {
+                                if( in_array($fotos['type'][$i], array('image/jpeg', 'image/jpg', 'image/png')) ) {
+                                    $ext = strtolower(substr($fotos['name'][$i],-4));
+                                    $nomeImagem = md5(time().rand(0, 9999)) . $ext;
+                                    if( move_uploaded_file($fotos['tmp_name'][$i], $caminho . $nomeImagem) ){
+                                        $e->criarGaleria($nomeImagem, $idEventoInserido, $idUsuarioAtletica);
+                                    }
+                                }else{
+                                    $dados['extensoesInvalidas'][] = $fotos['name'][$i];
+                                }
+                            }                            
                         }
-                    }else{
-                        $dados['aviso'] = $this->mensagemErro("Campos de senha não estão iguais!");
+                        
+                        $dados['aviso'] = $this->mensagemSucesso("Evento criado com sucesso!");
+                        echo "<META http-equiv='refresh' content='2;URL=".BASE_URL."/eventos'>";
                     }
+                    
                 }else{
-                    $dados['aviso'] = $this->mensagemErro("Todos os campos são obrigatórios!");
+                    $dados['aviso'] = $this->mensagemErro("Campo nom é obrigatório!");
                 }
             }
+            
+            $dados['evento'] = $e->getEventos($idEvento);
+            $dados['fotos']  = $e->getGaleria($idEvento);
         
-            $this->loadTemplate("novo-usuario", $dados);
+            $this->loadTemplate("eventos/editar", $dados);
         
         }else{
             header("Location: " . BASE_URL . "/login");
