@@ -7,18 +7,20 @@ class eventosController extends controller {
     }
     
     public function index() {
-        
-        $dados = array();
-        $e = new Eventos();
-        $dados['eventos'] = $e->getEventos();
-           
-        $this->loadTemplate("eventos/index", $dados);
-        
+        if(Sessao::getSessionNivel() == "atletica"){
+            $dados = array();
+            $e = new Eventos();
+            $dados['eventos'] = $e->getEventos();
+
+            $this->loadTemplate("eventos/index", $dados);
+        }else{
+            header("Location: " . BASE_URL);
+        }
     }
     
     public function novo() {
         
-        if(Sessao::getSessionId() != ""){
+        if(Sessao::getSessionId() != "" && Sessao::getSessionNivel() == "atletica"){
             
             $dados = array();
             $e = new Eventos();
@@ -63,7 +65,7 @@ class eventosController extends controller {
             $this->loadTemplate("eventos/criar", $dados);
         
         }else{
-            header("Location: " . BASE_URL . "/login");
+            header("Location: " . BASE_URL);
         }
         
     }
@@ -135,7 +137,7 @@ class eventosController extends controller {
             $this->loadTemplate("eventos/editar", $dados);
         
         }else{
-            header("Location: " . BASE_URL . "/login");
+            header("Location: " . BASE_URL);
         }
         
     }
@@ -167,7 +169,7 @@ class eventosController extends controller {
             $this->loadTemplate("eventos/index", $dados);
             
         }else{
-            header("Location: " . BASE_URL . "/login");
+            header("Location: " . BASE_URL);
         }
         
     }
