@@ -81,22 +81,6 @@ class Eventos extends model {
         return false;
     }
     
-    public function getId($id) {
-        
-        $usuario = array();
-        
-        $sql = "SELECT * FROM {$this->tabela} WHERE codUsu = $id";
-        
-        $sql = $this->db->query($sql);
-        
-        if($sql->rowCount() > 0){
-            $usuario = $sql->fetch();
-        }
-        
-        return $usuario;
-        
-    }
-    
     public function atualizar($idEvento, $nome) {
         
         $sql = "UPDATE {$this->tabela} SET
@@ -114,7 +98,7 @@ class Eventos extends model {
     
     public function deletar($id) {
         
-        $sql = "DELETE FROM {$this->tabela} WHERE codUsu = $id;";
+        $sql = "DELETE FROM {$this->tabela} WHERE idEvento = $id;";
                 
         $sql = $this->db->query($sql);
         
@@ -123,16 +107,6 @@ class Eventos extends model {
         }
         
         return false;
-    }
-    
-    public function getGravata($email, $width) {
-        
-        $userMail = $email;
-
-        $imageWidth = $width; //The image size
-
-        return $imgUrl = 'https://secure.gravatar.com/avatar/'.md5($userMail).'?size='.$imageWidth;
-        
     }
         
 }

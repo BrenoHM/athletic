@@ -103,7 +103,7 @@ class eventosController extends controller {
                         }
                         
                         $dados['aviso'] = $this->mensagemSucesso("Evento atualizado com sucesso!");
-                        echo "<META http-equiv='refresh' content='2;URL=".BASE_URL."/eventos'>";
+                        //echo "<META http-equiv='refresh' content='2;URL=".BASE_URL."/eventos'>";
                     }
                     
                 }else{
@@ -112,13 +112,15 @@ class eventosController extends controller {
             }
             
             if(isset($_POST['frmGaleria'])) {
-                $urls = $_POST['url'];
-                $caminho = "uploads/galeria/";
-                if( !empty( $urls ) ) {
-                    foreach ( $urls as $url ) {
-                        if( $e->deletarGaleria($url) ) {
-                            if(file_exists($caminho . $url) ){
-                                unlink($caminho . $url);
+                if( isset($_POST['url']) ){
+                    $urls = $_POST['url'];
+                    $caminho = "uploads/galeria/";
+                    if( !empty( $urls ) ) {
+                        foreach ( $urls as $url ) {
+                            if( $e->deletarGaleria($url) ) {
+                                if(file_exists($caminho . $url) ){
+                                    unlink($caminho . $url);
+                                }
                             }
                         }
                     }
@@ -127,7 +129,7 @@ class eventosController extends controller {
                 }
             }
             
-            $dados['evento'] = $evento;
+            $dados['evento'] = $e->getEventos($idEvento);
             $dados['fotos']  = $e->getGaleria($idEvento);
         
             $this->loadTemplate("eventos/editar", $dados);
@@ -138,26 +140,35 @@ class eventosController extends controller {
         
     }
     
-    public function deletar($id) {
+    public function deletar($idEvento) {
         
         $dados = array();
-        $usuario = new Usuario();
-        
-        if( !empty($id) ) {
-            if($id != Sessao::getSessionId()){
-                $id = addslashes($id);
-                if( $usuario->deletar($id) ){
-                    $dados['aviso'] = $this->mensagemSucesso("Usuário excluído com êxito!");
-                }else{
-                    $dados['aviso'] = $this->mensagemErro("Erro ao deletar usuário!");
+        $e = new Eventos();
+        $evento = $e->getEventos($idEvento);
+        if( Sessao::getSessionId() != "" && $evento['idAtletica'] == Sessao::getSessionIdAtletica() ) {
+            $urls = $e->getGaleria($idEvento);
+            if( $e->deletar($idEvento) ){
+                if( !empty($urls) ){
+                    $caminho = "uploads/galeria/";
+                    if( !empty( $urls ) ) {
+                        foreach ( $urls as $url ) {
+                            if(file_exists($caminho . $url['url']) ){
+                                unlink($caminho . $url['url']);
+                            }
+                        }
+                    }
                 }
+                $dados['aviso'] = $this->mensagemSucesso("Evento excluído com êxito!");
             }else{
-                $dados['aviso'] = $this->mensagemErro("Usuário logado não pode ser excluído!");
+                $dados['aviso'] = $this->mensagemErro("Erro ao deletar evento!");
             }
+            
+            $dados['eventos'] = $e->getEventos();
+            $this->loadTemplate("eventos/index", $dados);
+            
+        }else{
+            header("Location: " . BASE_URL . "/login");
         }
-        
-        $dados['usuarios'] = $usuario->getUsuarios();
-        $this->loadTemplate("usuarios", $dados);
         
     }
 
