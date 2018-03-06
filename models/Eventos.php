@@ -68,6 +68,19 @@ class Eventos extends model {
         return false;
     }
     
+    public function deletarGaleria($url) {
+        
+        $sql = "DELETE FROM galeria WHERE url = '$url';";
+                
+        $sql = $this->db->query($sql);
+        
+        if($sql->rowCount() > 0){
+            return true;
+        }
+        
+        return false;
+    }
+    
     public function getId($id) {
         
         $usuario = array();
@@ -84,46 +97,15 @@ class Eventos extends model {
         
     }
     
-    public function getByEmail($email) {
-        
-        $usuario = array();
-        
-        $sql = "SELECT * FROM {$this->tabela} WHERE emaUsu = '$email'";
-        
-        $sql = $this->db->query($sql);
-        
-        if($sql->rowCount() > 0){
-            $usuario = $sql->fetch();
-        }
-        
-        return $usuario;
-        
-    }
-    
-    public function atualizar($idUsu, $nome, $telefone, $senha) {
-        
-        $updSenha = "";
-        if( !empty($senha) ){
-            $senha = sha1($senha);
-            $updSenha = "senUsu = '$senha', ";
-        }
-        
-//        $updImagem = "";
-//        if( !empty($this->getImgUsu()) ){
-//            $updImagem = "imgUsu = '{$this->getImgUsu()}',";
-//        }
+    public function atualizar($idEvento, $nome) {
         
         $sql = "UPDATE {$this->tabela} SET
-                nomUsu = '$nome',
-                $updSenha
-                telUsu = '$telefone'
-                WHERE codUsu = $idUsu;";
+                nome = '$nome'
+                WHERE idEvento = $idEvento;";
         
         try{
-                
             $sql = $this->db->query($sql);
             return true;
-            
         } catch (PDOException $e){
             return false;
         }

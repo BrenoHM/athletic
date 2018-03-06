@@ -56,7 +56,7 @@ class eventosController extends controller {
                     }
                     
                 }else{
-                    $dados['aviso'] = $this->mensagemErro("Campo nom é obrigatório!");
+                    $dados['aviso'] = $this->mensagemErro("Campo nome é obrigatório!");
                 }
             }
         
@@ -70,10 +70,11 @@ class eventosController extends controller {
     
     public function editar($idEvento) {
         
-        if(Sessao::getSessionId() != ""){
+        $e = new Eventos();
+        $evento = $e->getEventos($idEvento);
+        if( Sessao::getSessionId() != "" && $evento['idAtletica'] == Sessao::getSessionIdAtletica() ){
             
             $dados = array();
-            $e = new Eventos();
             
             if(isset($_POST['frmEvento'])) {
                 
@@ -82,11 +83,9 @@ class eventosController extends controller {
 
                 if( !empty($nome) ) {
                     
-                    //INSERE EVENTO
-                    $idAtletica = Sessao::getSessionIdAtletica();
+                    //EDITAR EVENTO
                     $idUsuarioAtletica = Sessao::getSessionId();
-                    $idEventoInserido = $e->criar($nome, $idAtletica, $idUsuarioAtletica);
-                    if( $idEventoInserido > 0 ){
+                    if( $e->atualizar($idEvento, $nome) ) {
                         
                         if( !empty($fotos['name'][0]) ) {
                             $caminho = "uploads/galeria/";
@@ -95,7 +94,7 @@ class eventosController extends controller {
                                     $ext = strtolower(substr($fotos['name'][$i],-4));
                                     $nomeImagem = md5(time().rand(0, 9999)) . $ext;
                                     if( move_uploaded_file($fotos['tmp_name'][$i], $caminho . $nomeImagem) ){
-                                        $e->criarGaleria($nomeImagem, $idEventoInserido, $idUsuarioAtletica);
+                                        $e->criarGaleria($nomeImagem, $idEvento, $idUsuarioAtletica);
                                     }
                                 }else{
                                     $dados['extensoesInvalidas'][] = $fotos['name'][$i];
@@ -103,16 +102,32 @@ class eventosController extends controller {
                             }                            
                         }
                         
-                        $dados['aviso'] = $this->mensagemSucesso("Evento criado com sucesso!");
+                        $dados['aviso'] = $this->mensagemSucesso("Evento atualizado com sucesso!");
                         echo "<META http-equiv='refresh' content='2;URL=".BASE_URL."/eventos'>";
                     }
                     
                 }else{
-                    $dados['aviso'] = $this->mensagemErro("Campo nom é obrigatório!");
+                    $dados['aviso'] = $this->mensagemErro("Campo nome é obrigatório!");
                 }
             }
             
-            $dados['evento'] = $e->getEventos($idEvento);
+            if(isset($_POST['frmGaleria'])) {
+                $urls = $_POST['url'];
+                $caminho = "uploads/galeria/";
+                if( !empty( $urls ) ) {
+                    foreach ( $urls as $url ) {
+                        if( $e->deletarGaleria($url) ) {
+                            if(file_exists($caminho . $url) ){
+                                unlink($caminho . $url);
+                            }
+                        }
+                    }
+                }else{
+                    $dados['aviso'] = $this->mensagemErro("Nenhuma foto foi selecionada!");
+                }
+            }
+            
+            $dados['evento'] = $evento;
             $dados['fotos']  = $e->getGaleria($idEvento);
         
             $this->loadTemplate("eventos/editar", $dados);

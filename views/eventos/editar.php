@@ -24,7 +24,27 @@
             </div>
         <?php endif; ?>
         <?php if( isset($aviso) ){ echo $aviso; } ?>
-        <?php $this->loadView("eventos/form", array('evento' => $evento, 'fotos' => $fotos, 'botao' => 'Editar')); ?>
+        <?php $this->loadView("eventos/form", array('evento' => $evento, 'botao' => 'Editar')); ?>
+        
+        <form action="" method="post">
+            <input type="submit" name="frmGaleria" value="Excluir" class="btn btn-primary" />
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>Foto</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ( $fotos as $foto ): ?>
+                        <tr>
+                            <td><input type="checkbox" name="url[]" value="<?php echo $foto['url']; ?>"</td>
+                            <td><img src="<?php echo BASE_URL; ?>/uploads/galeria/<?php echo $foto['url']; ?>" width="200" /></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </form>
       
     </div>
     <!-- /.box-body -->
