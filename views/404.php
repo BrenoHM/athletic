@@ -2,11 +2,11 @@
 <h1>
   404 Erro na página
 </h1>
-<ol class="breadcrumb">
+<!--<ol class="breadcrumb">
   <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
   <li><a href="#">Examples</a></li>
   <li class="active">404 error</li>
-</ol>
+</ol>-->
 </section>
 
 <!-- Main content -->
@@ -19,10 +19,10 @@
 
     <p>  
        Não foi possível encontrar a página que você estava procurando. Enquanto isso, 
-       você pode retornar ao <a href="<?php echo BASE_URL ?>/">painel de controle</a> ou tentar usar o formulário de pesquisa.
+       você pode retornar ao <a href="<?php echo BASE_URL ?>/">painel de controle</a>. <!--ou tentar usar o formulário de pesquisa.-->
     </p>
 
-    <form class="search-form">
+    <!--<form class="search-form">
       <div class="input-group">
         <input type="text" name="search" class="form-control" placeholder="Search">
 
@@ -31,8 +31,8 @@
           </button>
         </div>
       </div>
-      <!-- /.input-group -->
-    </form>
+      <!-- /.input-group 
+    </form>-->
   </div>
   <!-- /.error-content -->
 </div>

@@ -37,8 +37,8 @@
                             <div class="col-md-6"><strong>Apelido: </strong><?php echo $atletica['apelido']; ?></div>
                             <div class="col-md-6"><strong>Cep: </strong><?php echo $atletica['cep']; ?></div>
                             <div class="col-md-6"><strong>Endereço: </strong><?php echo $atletica['endereco']; ?></div>
-                            <div class="col-md-6"><strong>Email: </strong><?php echo $atletica['e-mail']; ?>
-                                <input type="hidden" id="e-mail" value="<?php echo $atletica['e-mail']; ?>" />
+                            <div class="col-md-6"><strong>Email: </strong><?php echo $atletica['email']; ?>
+                                <input type="hidden" id="email" value="<?php echo $atletica['email']; ?>" />
                                 <input type="hidden" id="nome" value="<?php echo $atletica['nome']; ?>" />
                             </div>
                             <div class="col-md-6"><strong>Telefone: </strong><?php echo $atletica['telefone']; ?></div>
@@ -141,7 +141,7 @@
 function mudaStatusAtletica(status){
     var URL_BASE   = '<?php echo BASE_URL; ?>';
     var idAtletica = $("#idAtletica").val();
-    var email      = $("#e-mail").val();
+    var email      = $("#email").val();
     var nome       = $("#nome").val();
     $.ajax({
         url: URL_BASE + "/atleticas/mudaStatus",

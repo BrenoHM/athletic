@@ -33,7 +33,17 @@ class Core {
             
         }
         
+        if( !class_exists($currentController) ) {
+            $currentController = "erroController";
+        }
+        
         $c = new $currentController();
+        
+        if( !method_exists($c, $currentAction) ) {
+            $currentController = "erroController";
+            $currentAction = 'index';
+            $c = new $currentController();
+        }
         
         call_user_func_array(array($c, $currentAction), $params);
         

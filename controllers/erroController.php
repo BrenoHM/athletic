@@ -4,18 +4,15 @@ class erroController extends controller {
     
     function __construct() {
         parent::__construct();
+        if( Sessao::getSessionId() == "" ){
+            header("Location: " . BASE_URL);
+        }
     }
 
-    //put your code here
     public function index() {
-        
-        $this->loadTemplate("naoencontrado", array());
-        
-    }
-    
-    public function paginaNaoEncontrada(){
         
         $this->loadTemplate("404", array());
         
     }
+    
 }
