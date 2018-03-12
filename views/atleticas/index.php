@@ -21,7 +21,7 @@
           <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Lista de Atléticas</h3>
-                    <a href="<?php echo BASE_URL; ?>/atleticas/novo" class="pull-right btn btn-primary">Nova Atlética</a>
+                    <!--<a href="<?php //echo BASE_URL; ?>/atleticas/novo" class="pull-right btn btn-primary">Nova Atlética</a>-->
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
