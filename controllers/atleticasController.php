@@ -223,6 +223,9 @@ class atleticasController extends controller {
     }
     
     public function persistirCampos(){
+        if( isset($_POST['repasseFinanceiro']) && $_POST['repasseFinanceiro'] == 'Outro' ){
+            $_POST['repasseFinanceiro'] = $_POST['outroRepasseFinanceiro'];
+        }
         if( !isset($_POST['registroCartorio']) ){
             $_POST['registroCartorio'] = "";
         }

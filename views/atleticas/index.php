@@ -42,7 +42,7 @@
                               <td><?php echo $atletica['nome']; ?></td>
                               <td><?php echo $atletica['sigla']; ?></td>
                               <td><?php echo $atletica['telefone']; ?></td>
-                              <td><?php echo $atletica['email']; ?></td>
+                              <td><?php echo $atletica['e-mail']; ?></td>
                               <td>
                                   <a href="<?php echo BASE_URL; ?>/atleticas/detalhe/<?php echo $atletica['idAtletica']; ?>" class="btn btn-default btn-xs"><i class="fa fa-search"></i></a>  
                                   <a href="<?php echo BASE_URL; ?>/atleticas/editar/<?php echo $atletica['idAtletica']; ?>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>  

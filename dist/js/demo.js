@@ -374,6 +374,7 @@
     
     $("input.mascaracep").mask("99.999-999");
     $("input.mascaradata").mask("99/99/9999");
+    $("#cnpj").mask("99.999.999/9999-99");
     
     $(".select2").select2();
     

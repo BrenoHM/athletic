@@ -35,7 +35,7 @@
                 </div>
                 
                 <div class="form-group col-md-6 <?php echo ( isset($error) && in_array('idUniversidade', $error) ) ? 'has-error' : ''; ?>">
-                    <label for="idUniversidade">Universidade</label>
+                    <label for="idUniversidade">Instituição de Ensino</label>
                     <select class="form-control select2" name="idUniversidade" id="idUniversidade" style="width: 100%;">
                         <option value="">Selecione</option>
                         <?php foreach ( $universidades as $universidade ): ?>
@@ -47,7 +47,7 @@
                 </div>
                 
                 <div class="form-group col-md-12 <?php echo ( isset($error) && in_array('qtdeCampos', $error) ) ? 'has-error' : ''; ?>">
-                    <label for="qtdeCampos" class="col-md-9 margin-left-0">Quantos Campus a Atlética tem representação dentro da Faculdade/Universidade?</label>
+                    <label for="qtdeCampos" class="col-md-9 margin-left-0">Quantos Campus a Atlética tem representação dentro da Instituição de Ensino?</label>
                     <div class="col-md-3 margin-right-0">
                         <input type="number" min="1" id="qtdeCampos" class="form-control" name="qtdeCampos" value="<?php if( isset($post['qtdeCampos']) ) { echo $post['qtdeCampos']; } elseif ( isset($atletica['qtdeCampus']) ) { echo $atletica['qtdeCampus']; } ?>">
                     </div>
@@ -66,7 +66,7 @@
                 </div>
                 
                 <div class="form-group col-md-6 <?php echo ( isset($error) && in_array('qtdeAlunosFaculdade', $error) ) ? 'has-error' : ''; ?>">    
-                    <label for="qtdeAlunosFaculdade" class="col-md-9 margin-left-0">Número de alunos de toda a faculdade</label>
+                    <label for="qtdeAlunosFaculdade" class="col-md-9 margin-left-0">Número de alunos de toda a instituição de ensino</label>
                     <div class="col-md-3 margin-right-0">
                         <input type="number" min="1" id="qtdeAlunosFaculdade" class="form-control" name="qtdeAlunosFaculdade" value="<?php if( isset($post['qtdeAlunosFaculdade']) ) { echo $post['qtdeAlunosFaculdade']; } elseif ( isset($atletica['qtdeAlunosFaculdade']) ) { echo $atletica['qtdeAlunosFaculdade']; } ?>">
                     </div>
@@ -80,7 +80,14 @@
                 
                 <div class="form-group col-md-4 <?php echo ( isset($error) && in_array('repasseFinanceiro', $error) ) ? 'has-error' : ''; ?>">
                     <label for="repasseFinanceiro">Repasse</label>
-                    <input type="text" id="repasseFinanceiro" class="form-control" name="repasseFinanceiro" placeholder="Repasse Financeiro" value="<?php if( isset($post['repasseFinanceiro']) ) { echo $post['repasseFinanceiro']; } elseif ( isset($atletica['repasseFinanceiro']) ) { echo $atletica['repasseFinanceiro']; } ?>">
+                    <select name="repasseFinanceiro" id="repasseFinanceiro" class="form-control">
+                        <option value="Aluno" <?php echo ( isset($atletica['repasseFinanceiro']) && $atletica['repasseFinanceiro'] == 'Aluno' ) ? 'selected' : ( isset($post['repasseFinanceiro']) && $post['repasseFinanceiro'] == 'Aluno' ) ? 'selected' : ''; ?>>Aluno</option>
+                        <option value="Instituição" <?php echo ( isset($atletica['repasseFinanceiro']) && $atletica['repasseFinanceiro'] == 'Instituição' ) ? 'selected' : ( isset($post['repasseFinanceiro']) && $post['repasseFinanceiro'] == 'Instituição' ) ? 'selected' : ''; ?>>Instituição</option>
+                        <option value="Outro" <?php echo ( isset($atletica['repasseFinanceiro']) && ($atletica['repasseFinanceiro'] != 'Aluno' && $atletica['repasseFinanceiro'] != 'Instituição')) ? 'selected' : ( isset($post['repasseFinanceiro']) && ($post['repasseFinanceiro'] != 'Aluno' && $post['repasseFinanceiro'] != 'Instituição')) ? 'selected' : ''; ?>>Outro</option>
+                    </select><br>
+                    <input type="text" id="outroRepasseFinanceiro" class="form-control" name="outroRepasseFinanceiro" placeholder="Quais?" 
+                            value="<?php if( (isset($post['repasseFinanceiro'])) && ($post['repasseFinanceiro'] != 'Aluno' && $post['repasseFinanceiro'] != 'Instituição') ) { echo $post['repasseFinanceiro']; } elseif ( (isset($atletica['repasseFinanceiro'])) && ($atletica['repasseFinanceiro'] != 'Aluno' && $atletica['repasseFinanceiro'] != 'Instituição') ) { echo $atletica['repasseFinanceiro']; } ?>"
+                            style="display: <?php if( (isset($post['repasseFinanceiro'])) && ($post['repasseFinanceiro'] != 'Aluno' && $post['repasseFinanceiro'] != 'Instituição') ) { echo 'block'; } elseif ( (isset($atletica['repasseFinanceiro'])) && ($atletica['repasseFinanceiro'] != 'Aluno' && $atletica['repasseFinanceiro'] != 'Instituição') ) { echo 'bock'; }else{ echo 'none'; } ?>">
                 </div>
                 
                 <div class="clearfix"></div>
@@ -232,3 +239,16 @@
     </div>
     
 </form>
+
+<script type="text/javascript">
+    $(function(){
+        $("#repasseFinanceiro").on('change', function(){
+            var valor = $(this).val();
+            if(valor == "Outro"){
+                $("#outroRepasseFinanceiro").show().focus();
+            }else{
+                $("#outroRepasseFinanceiro").hide().val('');
+            }
+        });
+    });
+</script>
