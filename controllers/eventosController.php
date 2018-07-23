@@ -11,6 +11,8 @@ class eventosController extends controller {
             $dados = array();
             $e = new Eventos();
             $dados['eventos'] = $e->getEventos();
+            $idAtletica = Sessao::getSessionIdAtletica();
+            $dados['qtdEventosCadastrados'] = $e->qtdEventosCadastrados($idAtletica);
 
             $this->loadTemplate("eventos/index", $dados);
         }else{
@@ -24,6 +26,12 @@ class eventosController extends controller {
             
             $dados = array();
             $e = new Eventos();
+
+            $idAtletica = Sessao::getSessionIdAtletica();
+            if( $e->qtdEventosCadastrados($idAtletica) >= $e->limiteEventosCadastrados ) {
+                //die('ok');
+                header('Location:' . BASE_URL . '/eventos');
+            }
             
             if(isset($_POST['frmEvento'])) {
                 
@@ -170,6 +178,8 @@ class eventosController extends controller {
             }
             
             $dados['eventos'] = $e->getEventos();
+            $idAtletica = Sessao::getSessionIdAtletica();
+            $dados['qtdEventosCadastrados'] = $e->qtdEventosCadastrados($idAtletica);
             $this->loadTemplate("eventos/index", $dados);
             
         }else{

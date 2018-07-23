@@ -3,6 +3,7 @@
 class Eventos extends model {
     
     private $tabela = "evento";
+    public $limiteEventosCadastrados = 3;
     
     public function __construct() {
         parent::__construct();
@@ -109,6 +110,22 @@ class Eventos extends model {
         }
         
         return false;
+    }
+
+    public function qtdEventosCadastrados($idAtletica)
+
+    {
+
+        $dados = array();
+
+        $sql = "SELECT count(*) as total FROM {$this->tabela} WHERE idAtletica = $idAtletica;";
+
+        $sql = $this->db->query($sql);
+
+        $dados = $sql->fetch();
+
+        return $dados['total'];
+
     }
         
 }
