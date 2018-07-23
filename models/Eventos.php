@@ -49,10 +49,10 @@ class Eventos extends model {
         
     }
     
-    public function criar($nome, $idAtletica, $idUsuarioAtletica) {
+    public function criar($nome, $mes, $frequencia, $idAtletica, $idUsuarioAtletica) {
         
         $idEvento = 0;
-        $sql = "INSERT INTO {$this->tabela} SET nome = '$nome', idAtletica = '$idAtletica', idUsuarioAtletica = '$idUsuarioAtletica'";
+        $sql = "INSERT INTO {$this->tabela} SET nome = '$nome', mes = '$mes', frequencia = '$frequencia', idAtletica = '$idAtletica', idUsuarioAtletica = '$idUsuarioAtletica'";
         $sql = $this->db->query($sql);
         $idEvento = $this->db->lastInsertId();
         return $idEvento;
@@ -81,10 +81,12 @@ class Eventos extends model {
         return false;
     }
     
-    public function atualizar($idEvento, $nome) {
+    public function atualizar($idEvento, $nome, $mes, $frequencia) {
         
         $sql = "UPDATE {$this->tabela} SET
-                nome = '$nome'
+                nome = '$nome',
+                mes = '$mes',
+                frequencia = '$frequencia'
                 WHERE idEvento = $idEvento;";
         
         try{

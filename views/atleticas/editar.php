@@ -20,11 +20,12 @@
         <?php if( isset($aviso) ){ echo $aviso; } ?>
         <?php
             $dados = array(
-                'atletica' => $atletica,
-                'universidades' => $universidades,
+                'atletica'         => $atletica,
+                'universidades'    => $universidades,
                 'meiosComunicacao' => $meiosComunicacao,
-                'post' => $post,
-                'error' => $error
+                'cursos'           => $cursos,
+                'post'             => $post,
+                'error'            => $error
             );
             $this->loadView("atleticas/form", $dados);
         ?>

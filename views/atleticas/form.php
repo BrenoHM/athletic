@@ -99,8 +99,15 @@
             <div class="tab-pane <?php echo ( isset($atletica['passoFormulario']) && $atletica['passoFormulario'] == 2 ) ? 'active' : ''; ?>" id="passo_2">
                 
                 <div class="form-group <?php echo ( isset($error) && in_array('cursos', $error) ) ? 'has-error' : ''; ?>">
+                    <?php $atletica['cursos'] = explode(",", $atletica['cursos']); ?>
                     <label for="cursos">Cursos</label>
-                    <input type="text" id="cursos" class="form-control" name="cursos" placeholder="Cursos" value="<?php if( isset($post['cursos']) ) { echo $post['cursos']; } elseif ( isset($atletica['cursos']) ) { echo $atletica['cursos']; } ?>">
+                    <select name="cursos[]" id="cursos" class="form-control select2" multiple="multiple" data-placeholder="Cursos" style="width: 100%;">
+                        <?php foreach ( $cursos as $curso ): ?>
+                            <option value="<?php echo $curso['curso']; ?>" <?php if( isset($post['cursos']) && in_array($curso['curso'], $post['cursos']) ){ echo 'selected'; }elseif( isset($post['cursos']) && empty($post['cursos']) ) { } elseif( isset($atletica['cursos']) && in_array($curso['curso'], $atletica['cursos']) ){ echo 'selected'; } ?>>
+                                <?php echo $curso['curso']; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
                 
                 <div class="clearfix"></div>

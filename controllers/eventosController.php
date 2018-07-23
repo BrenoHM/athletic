@@ -28,6 +28,8 @@ class eventosController extends controller {
             if(isset($_POST['frmEvento'])) {
                 
                 $nome        = addslashes($_POST['nome']);
+                $mes         = addslashes($_POST['mes']);
+                $frequencia  = addslashes($_POST['frequencia']);
                 $fotos       = $_FILES['url'];
 
                 if( !empty($nome) ) {
@@ -35,7 +37,7 @@ class eventosController extends controller {
                     //INSERE EVENTO
                     $idAtletica = Sessao::getSessionIdAtletica();
                     $idUsuarioAtletica = Sessao::getSessionId();
-                    $idEventoInserido = $e->criar($nome, $idAtletica, $idUsuarioAtletica);
+                    $idEventoInserido = $e->criar($nome, $mes, $frequencia, $idAtletica, $idUsuarioAtletica);
                     if( $idEventoInserido > 0 ){
                         
                         if( !empty($fotos['name'][0]) ) {
@@ -81,13 +83,15 @@ class eventosController extends controller {
             if(isset($_POST['frmEvento'])) {
                 
                 $nome        = addslashes($_POST['nome']);
+                $mes         = addslashes($_POST['mes']);
+                $frequencia  = addslashes($_POST['frequencia']);
                 $fotos       = $_FILES['url'];
 
                 if( !empty($nome) ) {
                     
                     //EDITAR EVENTO
                     $idUsuarioAtletica = Sessao::getSessionId();
-                    if( $e->atualizar($idEvento, $nome) ) {
+                    if( $e->atualizar($idEvento, $nome, $mes, $frequencia) ) {
                         
                         if( !empty($fotos['name'][0]) ) {
                             $caminho = "uploads/galeria/";
@@ -105,7 +109,7 @@ class eventosController extends controller {
                         }
                         
                         $dados['aviso'] = $this->mensagemSucesso("Evento atualizado com sucesso!");
-                        //echo "<META http-equiv='refresh' content='2;URL=".BASE_URL."/eventos'>";
+                        echo "<META http-equiv='refresh' content='2;URL=".BASE_URL."/eventos'>";
                     }
                     
                 }else{

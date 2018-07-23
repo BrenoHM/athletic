@@ -68,12 +68,15 @@ class atleticasController extends controller {
             $formValidado = TRUE;
             $dados['error'] = array();
 
-            $a = new Atleticas();
+            $a                 = new Atleticas();
             $dados['atletica'] = $a->getAtleticas($idAtletica);
 
-            $u = new Universidades();
-            $dados['universidades'] = $u->getUniversidades();
+            $u                         = new Universidades();
+            $dados['universidades']    = $u->getUniversidades();
             $dados['meiosComunicacao'] = $this->meiosComunicacao();
+
+            $c               = new Cursos();
+            $dados['cursos'] = $c->getCursos();
 
             if( isset($_POST['frmAtletica']) ) {
 
@@ -249,20 +252,23 @@ class atleticasController extends controller {
         }
     }
     
-    public function meiosComunicacao(){
+    public function meiosComunicacao()
+
+    {
+        
         $meios = array(
             'Facebook Perfil',
             'Facebook Fanpage',
             'Grupos de Whatsapp',
             'Instagram',
-            'Snapchat',
-            'Twitter',
-            'Mailling (Lista de email dos Associados)',
+            'Site',
+            'Mailling',
             'Através do site da Instituição',
-            'Quadro de Aviso próprio (Mural de Recados)',
+            'Quadro de Avisos',
             'Passagem em sala de aula',
             'Ação de ativação de marketing dentro da instituição'
         );
+
         return $meios;
     }
     
