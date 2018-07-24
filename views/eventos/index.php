@@ -18,8 +18,8 @@
             
           <?php if(isset($aviso)) { echo $aviso; } ?>
 
-          <?php if ($qtdEventosCadastrados >= 3): ?>
-              <div class="alert alert-warning ct-u-marginBottom10" role="alert">
+          <?php if (!$limiteLiberado): ?>
+              <div class="alert alert-info ct-u-marginBottom10" role="alert">
                   <strong>Atenção:</strong> o limite de eventos cadastrados foi atingido!
               </div>
           <?php endif; ?>
@@ -28,7 +28,7 @@
                 <div class="box-header">
                     <h3 class="box-title">Lista de Atléticas</h3>
 
-                    <?php if ($qtdEventosCadastrados < 3): ?>
+                    <?php if ($limiteLiberado): ?>
                         <a href="<?php echo BASE_URL; ?>/eventos/novo" class="pull-right btn btn-primary">Novo Evento</a>
                     <?php endif; ?>
                     

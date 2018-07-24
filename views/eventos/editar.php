@@ -23,12 +23,20 @@
                 <?php echo implode("<br />", $extensoesInvalidas); ?>
             </div>
         <?php endif; ?>
+
         <?php if( isset($aviso) ){ echo $aviso; } ?>
+
         <?php $this->loadView("eventos/form", array('evento' => $evento, 'botao' => 'Editar')); ?>
+
+        <?php if (!$limiteImagemLiberado): ?>
+            <div class="alert alert-info ct-u-marginBottom10" role="alert">
+                <strong>Atenção:</strong> o limite de imagens cadastradas foi atingido!
+            </div>
+        <?php endif; ?>
         
         <?php if( !empty($fotos) ): ?>
             <form action="" method="post">
-                <input type="submit" name="frmGaleria" value="Excluir" class="btn btn-primary" />
+                <input type="submit" name="frmGaleria" value="Excluir" class="btn btn-primary" onclick="return confirm('Deseja realmente excluir esta(s) imagem(ns)!')" />
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>

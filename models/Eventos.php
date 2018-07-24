@@ -3,13 +3,16 @@
 class Eventos extends model {
     
     private $tabela = "evento";
-    public $limiteEventosCadastrados = 3;
+    public $limiteEventosCadastrados = 10;
+    public $limiteImagensCadastradas = 20;
     
     public function __construct() {
         parent::__construct();
     }
     
-    public function getEventos($idEvento = null) {
+    public function getEventos($idEvento = null) 
+
+    {
         
         $dados = array();
         $id = Sessao::getSessionIdAtletica();
@@ -34,7 +37,9 @@ class Eventos extends model {
         
     }
     
-    public function getGaleria($idEvento) {
+    public function getGaleria($idEvento) 
+
+    {
         
         $dados = array();
         
@@ -50,7 +55,9 @@ class Eventos extends model {
         
     }
     
-    public function criar($nome, $mes, $frequencia, $idAtletica, $idUsuarioAtletica) {
+    public function criar($nome, $mes, $frequencia, $idAtletica, $idUsuarioAtletica) 
+
+    {
         
         $idEvento = 0;
         $sql = "INSERT INTO {$this->tabela} SET nome = '$nome', mes = '$mes', frequencia = '$frequencia', idAtletica = '$idAtletica', idUsuarioAtletica = '$idUsuarioAtletica'";
@@ -60,7 +67,9 @@ class Eventos extends model {
         
     }
     
-    public function criarGaleria($url, $idEvento, $idUsuarioAtletica) {
+    public function criarGaleria($url, $idEvento, $idUsuarioAtletica) 
+
+    {
         $sql = "INSERT INTO galeria SET url = '$url', idEvento = '$idEvento', idUsuarioAtletica = '$idUsuarioAtletica'";
         $sql = $this->db->query($sql);
         if($sql->rowCount() > 0){
@@ -69,7 +78,9 @@ class Eventos extends model {
         return false;
     }
     
-    public function deletarGaleria($url) {
+    public function deletarGaleria($url) 
+
+    {
         
         $sql = "DELETE FROM galeria WHERE url = '$url';";
                 
@@ -82,7 +93,9 @@ class Eventos extends model {
         return false;
     }
     
-    public function atualizar($idEvento, $nome, $mes, $frequencia) {
+    public function atualizar($idEvento, $nome, $mes, $frequencia) 
+
+    {
         
         $sql = "UPDATE {$this->tabela} SET
                 nome = '$nome',
@@ -99,7 +112,9 @@ class Eventos extends model {
         
     }
     
-    public function deletar($id) {
+    public function deletar($id) 
+
+    {
         
         $sql = "DELETE FROM {$this->tabela} WHERE idEvento = $id;";
                 
@@ -119,6 +134,22 @@ class Eventos extends model {
         $dados = array();
 
         $sql = "SELECT count(*) as total FROM {$this->tabela} WHERE idAtletica = $idAtletica;";
+
+        $sql = $this->db->query($sql);
+
+        $dados = $sql->fetch();
+
+        return $dados['total'];
+
+    }
+
+    public function qtdImagensGaleria($idEvento)
+
+    {
+
+        $dados = array();
+
+        $sql = "SELECT count(*) as total FROM galeria WHERE idEvento = $idEvento;";
 
         $sql = $this->db->query($sql);
 

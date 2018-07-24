@@ -6,18 +6,26 @@ class eventosController extends controller {
         parent::__construct();
     }
     
-    public function index() {
+    public function index() 
+
+    {
+        
         if(Sessao::getSessionNivel() == "atletica"){
-            $dados = array();
-            $e = new Eventos();
-            $dados['eventos'] = $e->getEventos();
-            $idAtletica = Sessao::getSessionIdAtletica();
-            $dados['qtdEventosCadastrados'] = $e->qtdEventosCadastrados($idAtletica);
+
+            $dados                   = array();
+            $e                       = new Eventos();
+            $dados['eventos']        = $e->getEventos();
+            $idAtletica              = Sessao::getSessionIdAtletica();
+            $dados['limiteLiberado'] = true;
+            if ( $e->qtdEventosCadastrados($idAtletica) >= $e->limiteEventosCadastrados ){
+                $dados['limiteLiberado'] = false;
+            }
 
             $this->loadTemplate("eventos/index", $dados);
         }else{
             header("Location: " . BASE_URL);
         }
+
     }
     
     public function novo() {
@@ -52,15 +60,20 @@ class eventosController extends controller {
                             $caminho = "uploads/galeria/";
                             for($i = 0; $i < count($fotos['name']); $i++) {
                                 if( in_array($fotos['type'][$i], array('image/jpeg', 'image/jpg', 'image/png')) ) {
+
                                     $ext = strtolower(substr($fotos['name'][$i],-4));
                                     $nomeImagem = md5(time().rand(0, 9999)) . $ext;
-                                    if( move_uploaded_file($fotos['tmp_name'][$i], $caminho . $nomeImagem) ){
-                                        $e->criarGaleria($nomeImagem, $idEventoInserido, $idUsuarioAtletica);
+
+                                    if ( $e->qtdImagensGaleria($idEventoInserido) < $e->limiteImagensCadastradas ){
+                                        if( move_uploaded_file($fotos['tmp_name'][$i], $caminho . $nomeImagem) ){
+                                            $e->criarGaleria($nomeImagem, $idEventoInserido, $idUsuarioAtletica);
+                                        }
                                     }
+
                                 }else{
                                     $dados['extensoesInvalidas'][] = $fotos['name'][$i];
                                 }
-                            }                            
+                            }
                         }
                         
                         $dados['aviso'] = $this->mensagemSucesso("Evento criado com sucesso!");
@@ -84,8 +97,9 @@ class eventosController extends controller {
         
         $e = new Eventos();
         $evento = $e->getEventos($idEvento);
+
         if( Sessao::getSessionNivel() == "atletica" && $evento['idAtletica'] == Sessao::getSessionIdAtletica() ){
-            
+
             $dados = array();
             
             if(isset($_POST['frmEvento'])) {
@@ -105,11 +119,16 @@ class eventosController extends controller {
                             $caminho = "uploads/galeria/";
                             for($i = 0; $i < count($fotos['name']); $i++) {
                                 if( in_array($fotos['type'][$i], array('image/jpeg', 'image/jpg', 'image/png')) ) {
+
                                     $ext = strtolower(substr($fotos['name'][$i],-4));
                                     $nomeImagem = md5(time().rand(0, 9999)) . $ext;
-                                    if( move_uploaded_file($fotos['tmp_name'][$i], $caminho . $nomeImagem) ){
-                                        $e->criarGaleria($nomeImagem, $idEvento, $idUsuarioAtletica);
+
+                                    if ( $e->qtdImagensGaleria($idEvento) < $e->limiteImagensCadastradas ){
+                                        if( move_uploaded_file($fotos['tmp_name'][$i], $caminho . $nomeImagem) ){
+                                            $e->criarGaleria($nomeImagem, $idEvento, $idUsuarioAtletica);
+                                        }
                                     }
+
                                 }else{
                                     $dados['extensoesInvalidas'][] = $fotos['name'][$i];
                                 }
@@ -145,6 +164,11 @@ class eventosController extends controller {
             
             $dados['evento'] = $e->getEventos($idEvento);
             $dados['fotos']  = $e->getGaleria($idEvento);
+
+            $dados['limiteImagemLiberado'] = true;
+            if ( $e->qtdImagensGaleria($idEvento) >= $e->limiteImagensCadastradas ){
+                $dados['limiteImagemLiberado'] = false;
+            }
         
             $this->loadTemplate("eventos/editar", $dados);
         
@@ -179,7 +203,10 @@ class eventosController extends controller {
             
             $dados['eventos'] = $e->getEventos();
             $idAtletica = Sessao::getSessionIdAtletica();
-            $dados['qtdEventosCadastrados'] = $e->qtdEventosCadastrados($idAtletica);
+            $dados['limiteLiberado'] = true;
+            if ( $e->qtdEventosCadastrados($idAtletica) >= $e->limiteEventosCadastrados ){
+                $dados['limiteLiberado'] = false;
+            }
             $this->loadTemplate("eventos/index", $dados);
             
         }else{
