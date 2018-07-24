@@ -175,13 +175,19 @@ class atleticasController extends controller {
                     //LOGO
                     $arquivo = $_FILES['urlLogo'];
                     if( !empty($arquivo['name']) ){
-                        if( in_array($arquivo['type'], array('application/cdr', 'application/octet-stream', 'application/pdf')) ) {
+                        if( in_array($arquivo['type'], array('application/octet-stream', 'image/png', 'application/postscript')) ) {
                             $caminho = "uploads/logo/";
-                            $ext = "cdr";
-                            if($arquivo['type'] == 'application/pdf'){
-                                $ext = "pdf";
+                            $ext = "";
+                            if($arquivo['type'] == 'image/png'){
+                                $ext = "png";
                             }else if($arquivo['type'] == 'application/octet-stream'){
-                                $ext = "psd";
+                                if(substr($arquivo['name'], -3) == 'psd'){
+                                    $ext = "psd";    
+                                }elseif (substr($arquivo['name'], -3) == 'cdr') {
+                                    $ext = "cdr";
+                                }
+                            }else if($arquivo['type'] == 'application/postscript'){
+                                $ext = "ai";
                             }
                             $nomeArquivo = md5(time().rand(0, 9999)) . '.' . $ext;
                             move_uploaded_file($arquivo['tmp_name'], $caminho . $nomeArquivo);

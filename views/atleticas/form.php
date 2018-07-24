@@ -228,7 +228,7 @@
                 </div>
                 
                 <div class="form-group <?php echo ( isset($error) && in_array('urlLogo', $error) ) ? 'has-error' : ''; ?>">
-                    <label for="urlLogo">UPLOAD da logo VETORIZADA em COREL/ILUSTRADOR/PNG SEM FUNDO COM 300dpis</label>
+                    <label for="urlLogo">UPLOAD da logo VETORIZADA em Corel/Ilustrator/Photoshop/PNG SEM FUNDO COM 300dpis</label>
                     <input type="file" name="urlLogo" id="urlLogo" />
                 </div>
                 
