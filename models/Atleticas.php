@@ -15,6 +15,17 @@ class Atleticas extends model {
     private $repasseFinanceiro;
     private $passoFormulario;
     private $cursos;
+
+    private $possuiCamisa;
+    private $possuiSambaCancao;
+    private $possuiBone;
+    private $possuiGorro;
+    private $possuiOculos;
+    private $possuiCaneca;
+    private $possuiTirante;
+    private $possuiJaqueta;
+    private $possuiEquipEsportivo;
+
     private $possuiUniforme;
     private $possuiBandeirao;
     private $possuiMascote;
@@ -79,6 +90,42 @@ class Atleticas extends model {
 
     function getCursos() {
         return $this->cursos;
+    }
+
+    function getPossuiCamisa() {
+        return $this->possuiCamisa;
+    }
+
+    function getPossuiSambaCancao() {
+        return $this->possuiSambaCancao;
+    }
+
+    function getPossuiBone() {
+        return $this->possuiBone;
+    }
+
+    function getPossuiGorro() {
+        return $this->possuiGorro;
+    }
+
+    function getPossuiOculos() {
+        return $this->possuiOculos;
+    }
+
+    function getPossuiCaneca() {
+        return $this->possuiCaneca;
+    }
+
+    function getPossuiTirante() {
+        return $this->possuiTirante;
+    }
+
+    function getPossuiJaqueta() {
+        return $this->possuiJaqueta;
+    }
+
+    function getPossuiEquipEsportivo() {
+        return $this->possuiEquipEsportivo;
     }
 
     function getPossuiUniforme() {
@@ -203,6 +250,42 @@ class Atleticas extends model {
 
     function setCursos($cursos) {
         $this->cursos = !empty($cursos) ? implode(",", $cursos) : null;
+    }
+
+    function setPossuiCamisa($possuiCamisa) {
+        $this->possuiCamisa = $possuiCamisa;
+    }
+
+    function setPossuiSambaCancao($possuiSambaCancao) {
+        $this->possuiSambaCancao = $possuiSambaCancao;
+    }
+
+    function setPossuiBone($possuiBone) {
+        $this->possuiBone = $possuiBone;
+    }
+
+    function setPossuiGorro($possuiGorro) {
+        $this->possuiGorro = $possuiGorro;
+    }
+
+    function setPossuiOculos($possuiOculos) {
+        $this->possuiOculos = $possuiOculos;
+    }
+
+    function setPossuiCaneca($possuiCaneca) {
+        $this->possuiCaneca = $possuiCaneca;
+    }
+
+    function setPossuiTirante($possuiTirante) {
+        $this->possuiTirante = $possuiTirante;
+    }
+
+    function setPossuiJaqueta($possuiJaqueta) {
+        $this->possuiJaqueta = $possuiJaqueta;
+    }
+
+    function setPossuiEquipEsportivo($possuiEquipEsportivo) {
+        $this->possuiEquipEsportivo = $possuiEquipEsportivo;
     }
 
     function setPossuiUniforme($possuiUniforme) {
@@ -387,6 +470,15 @@ class Atleticas extends model {
             . "repasseFinanceiro = :repasseFinanceiro, "
             . "passoFormulario = :passoFormulario, "
             . "cursos = :cursos, "
+            . "possuiCamisa = :possuiCamisa, "
+            . "possuiSambaCancao = :possuiSambaCancao, "
+            . "possuiBone = :possuiBone, "
+            . "possuiGorro = :possuiGorro, "
+            . "possuiOculos = :possuiOculos, "
+            . "possuiCaneca = :possuiCaneca, "
+            . "possuiTirante = :possuiTirante, "
+            . "possuiJaqueta = :possuiJaqueta, "
+            . "possuiEquipEsportivo = :possuiEquipEsportivo, "
             . "possuiUniforme = :possuiUniforme, "
             . "possuiBandeirao = :possuiBandeirao, "
             . "possuiMascote = :possuiMascote, "
@@ -415,6 +507,15 @@ class Atleticas extends model {
         $sql->bindValue(":repasseFinanceiro", $this->getRepasseFinanceiro());
         $sql->bindValue(":passoFormulario", $this->getPassoFormulario());
         $sql->bindValue(":cursos", $this->getCursos());
+        $sql->bindValue(":possuiCamisa", $this->getPossuiCamisa());
+        $sql->bindValue(":possuiSambaCancao", $this->getPossuiSambaCancao());
+        $sql->bindValue(":possuiBone", $this->getPossuiBone());
+        $sql->bindValue(":possuiGorro", $this->getPossuiGorro());
+        $sql->bindValue(":possuiOculos", $this->getPossuiOculos());
+        $sql->bindValue(":possuiCaneca", $this->getPossuiCaneca());
+        $sql->bindValue(":possuiTirante", $this->getPossuiTirante());
+        $sql->bindValue(":possuiJaqueta", $this->getPossuiJaqueta());
+        $sql->bindValue(":possuiEquipEsportivo", $this->getPossuiEquipEsportivo());
         $sql->bindValue(":possuiUniforme", $this->getPossuiUniforme());
         $sql->bindValue(":possuiBandeirao", $this->getPossuiBandeirao());
         $sql->bindValue(":possuiMascote", $this->getPossuiMascote());
@@ -474,6 +575,15 @@ class Atleticas extends model {
         $this->setSalaPropria($post['salaPropria']);
         $this->setRepasseFinanceiro($post['repasseFinanceiro']);
         $this->setCursos(isset($post['cursos']) ? $post['cursos'] : "");
+        $this->setPossuiCamisa($post['possuiCamisa']);
+        $this->setPossuiSambaCancao($post['possuiSambaCancao']);
+        $this->setPossuiBone($post['possuiBone']);
+        $this->setPossuiGorro($post['possuiGorro']);
+        $this->setPossuiOculos($post['possuiOculos']);
+        $this->setPossuiCaneca($post['possuiCaneca']);
+        $this->setPossuiTirante($post['possuiTirante']);
+        $this->setPossuiJaqueta($post['possuiJaqueta']);
+        $this->setPossuiEquipEsportivo($post['possuiEquipEsportivo']);
         $this->setPossuiUniforme($post['possuiUniforme']);
         $this->setPossuiBandeirao($post['possuiBandeirao']);
         $this->setPossuiMascote($post['possuiMascote']);

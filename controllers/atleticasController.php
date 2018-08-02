@@ -90,13 +90,13 @@ class atleticasController extends controller {
                         $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro', 'cursos');
                         break;
                     case 3:
-                        $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro', 'cursos', 'possuiUniforme', 'possuiBandeirao', 'possuiMascote', 'possuiBateria', 'principaisEventos');
+                        $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro', 'cursos', 'possuiCamisa', 'possuiSambaCancao', 'possuiBone', 'possuiGorro', 'possuiOculos', 'possuiCaneca', 'possuiTirante', 'possuiJaqueta', 'possuiEquipEsportivo', 'possuiUniforme', 'possuiBandeirao', 'possuiMascote', 'possuiBateria', 'principaisEventos');
                         break;
                     case 4:
-                        $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro', 'cursos', 'possuiUniforme', 'possuiBandeirao', 'possuiMascote', 'possuiBateria', 'principaisEventos', 'meiosComunicacaoAluno', 'meiosComunicacaoPatrocinadora');
+                        $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro', 'cursos', 'possuiCamisa', 'possuiSambaCancao', 'possuiBone', 'possuiGorro', 'possuiOculos', 'possuiCaneca', 'possuiTirante', 'possuiJaqueta', 'possuiEquipEsportivo', 'possuiUniforme', 'possuiBandeirao', 'possuiMascote', 'possuiBateria', 'principaisEventos', 'meiosComunicacaoAluno', 'meiosComunicacaoPatrocinadora');
                         break;
                     case 5:
-                        $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro', 'cursos', 'possuiUniforme', 'possuiBandeirao', 'possuiMascote', 'possuiBateria', 'principaisEventos', 'meiosComunicacaoAluno', 'meiosComunicacaoPatrocinadora', 'patrocinio', 'patrocinioCervejaria', 'patrocinioEnergetico', 'patrocinioCerimonial', 'autorizacaoTermo');
+                        $obrigatorios = array('registroCartorio', 'cnpj', 'idUniversidade', 'qtdeCampos', 'campus', 'qtdeAlunosCurso', 'qtdeAlunosFaculdade', 'salaPropria', 'repasseFinanceiro', 'cursos', 'possuiCamisa', 'possuiSambaCancao', 'possuiBone', 'possuiGorro', 'possuiOculos', 'possuiCaneca', 'possuiTirante', 'possuiJaqueta', 'possuiEquipEsportivo', 'possuiUniforme', 'possuiBandeirao', 'possuiMascote', 'possuiBateria', 'principaisEventos', 'meiosComunicacaoAluno', 'meiosComunicacaoPatrocinadora', 'patrocinio', 'patrocinioCervejaria', 'patrocinioEnergetico', 'patrocinioCerimonial', 'autorizacaoTermo');
                         break;
                 }
 

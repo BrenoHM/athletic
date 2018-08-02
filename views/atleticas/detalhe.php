@@ -37,8 +37,8 @@
                             <div class="col-md-6"><strong>Apelido: </strong><?php echo $atletica['apelido']; ?></div>
                             <div class="col-md-6"><strong>Cep: </strong><?php echo $atletica['cep']; ?></div>
                             <div class="col-md-6"><strong>Endereço: </strong><?php echo $atletica['endereco']; ?></div>
-                            <div class="col-md-6"><strong>Email: </strong><?php echo $atletica['email']; ?>
-                                <input type="hidden" id="email" value="<?php echo $atletica['email']; ?>" />
+                            <div class="col-md-6"><strong>Email: </strong><?php echo $atletica['e-mail']; ?>
+                                <input type="hidden" id="email" value="<?php echo $atletica['e-mail']; ?>" />
                                 <input type="hidden" id="nome" value="<?php echo $atletica['nome']; ?>" />
                             </div>
                             <div class="col-md-6"><strong>Telefone: </strong><?php echo $atletica['telefone']; ?></div>
@@ -81,11 +81,20 @@
                 <div class="tab-pane" id="passo_3">
                     <div clas="row">
                         <div class="col-md-12">
-                            <div class="col-md-6"><strong>Possui uniforme de equipe: </strong><?php echo $atletica['possuiUniforme']; ?></div>
-                            <div class="col-md-6"><strong>Possui bandeirão: </strong><?php echo $atletica['possuiBandeirao']; ?></div>
-                            <div class="col-md-6"><strong>Possui mascote: </strong><?php echo $atletica['possuiMascote']; ?></div>
-                            <div class="col-md-6"><strong>Possui bateria: </strong><?php echo $atletica['possuiBateria']; ?></div>
-                            <div class="col-md-6"><strong>Quais os principais eventos que a Atlética participa e em que data/período: </strong><?php echo $atletica['principaisEventos']; ?></div>
+                            <div class="col-md-12"><strong>Possui camisa de delegação: </strong><?php echo $atletica['possuiCamisa']; ?></div>
+                            <div class="col-md-12"><strong>Possui samba canção de delegação: </strong><?php echo $atletica['possuiSambaCancao']; ?></div>
+                            <div class="col-md-12"><strong>Possui boné de delegação: </strong><?php echo $atletica['possuiBone']; ?></div>
+                            <div class="col-md-12"><strong>Possui gorro de delegação: </strong><?php echo $atletica['possuiGorro']; ?></div>
+                            <div class="col-md-12"><strong>Possui óculos de delegação: </strong><?php echo $atletica['possuiOculos']; ?></div>
+                            <div class="col-md-12"><strong>Possui caneca de delegação: </strong><?php echo $atletica['possuiCaneca']; ?></div>
+                            <div class="col-md-12"><strong>Possui tirante: </strong><?php echo $atletica['possuiTirante']; ?></div>
+                            <div class="col-md-12"><strong>Possui jaqueta: </strong><?php echo $atletica['possuiJaqueta']; ?></div>
+                            <div class="col-md-12"><strong>Possui equipamento esportivo: </strong><?php echo $atletica['possuiEquipEsportivo']; ?></div>
+                            <div class="col-md-12"><strong>Possui uniforme de equipe: </strong><?php echo $atletica['possuiUniforme']; ?></div>
+                            <div class="col-md-12"><strong>Possui bandeirão: </strong><?php echo $atletica['possuiBandeirao']; ?></div>
+                            <div class="col-md-12"><strong>Possui mascote: </strong><?php echo $atletica['possuiMascote']; ?></div>
+                            <div class="col-md-12"><strong>Possui bateria: </strong><?php echo $atletica['possuiBateria']; ?></div>
+                            <div class="col-md-12"><strong>Quais os principais eventos que a Atlética participa e em que data/período: </strong><?php echo $atletica['principaisEventos']; ?></div>
                         </div>
                     </div>
                     <div class="clearfix"></div>

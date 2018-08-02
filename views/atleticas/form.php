@@ -117,6 +117,60 @@
             
             <!-- INICIO PASSO3 -->
             <div class="tab-pane <?php echo ( isset($atletica['passoFormulario']) && $atletica['passoFormulario'] == 3 ) ? 'active' : ''; ?>" id="passo_3">
+
+                <div class="form-group <?php echo ( isset($error) && in_array('possuiCamisa', $error) ) ? 'has-error' : ''; ?>">
+                    <label>Possui camisa de delegação?</label><br />
+                    <label class="font-normal"><input type="radio" name="possuiCamisa" value="SIM" <?php if( isset($post['possuiCamisa']) && $post['possuiCamisa'] == 'SIM' ) { echo 'checked'; } elseif( isset($atletica['possuiCamisa']) && $atletica['possuiCamisa'] == 'SIM' ) { echo 'checked'; } ?>> Sim</label>&nbsp;
+                    <label class="font-normal"><input type="radio" name="possuiCamisa" value="NÃO" <?php if( isset($post['possuiCamisa']) && $post['possuiCamisa'] == 'NÃO' ) { echo 'checked'; } elseif( isset($atletica['possuiCamisa']) && $atletica['possuiCamisa'] == 'NÃO' ) { echo 'checked'; } ?>> Não</label>
+                </div>
+
+                <div class="form-group <?php echo ( isset($error) && in_array('possuiSambaCancao', $error) ) ? 'has-error' : ''; ?>">
+                    <label>Possui samba canção de delegação?</label><br />
+                    <label class="font-normal"><input type="radio" name="possuiSambaCancao" value="SIM" <?php if( isset($post['possuiSambaCancao']) && $post['possuiSambaCancao'] == 'SIM' ) { echo 'checked'; } elseif( isset($atletica['possuiSambaCancao']) && $atletica['possuiSambaCancao'] == 'SIM' ) { echo 'checked'; } ?>> Sim</label>&nbsp;
+                    <label class="font-normal"><input type="radio" name="possuiSambaCancao" value="NÃO" <?php if( isset($post['possuiSambaCancao']) && $post['possuiSambaCancao'] == 'NÃO' ) { echo 'checked'; } elseif( isset($atletica['possuiSambaCancao']) && $atletica['possuiSambaCancao'] == 'NÃO' ) { echo 'checked'; } ?>> Não</label>
+                </div>
+
+                <div class="form-group <?php echo ( isset($error) && in_array('possuiBone', $error) ) ? 'has-error' : ''; ?>">
+                    <label>Possui boné de delegação?</label><br />
+                    <label class="font-normal"><input type="radio" name="possuiBone" value="SIM" <?php if( isset($post['possuiBone']) && $post['possuiBone'] == 'SIM' ) { echo 'checked'; } elseif( isset($atletica['possuiBone']) && $atletica['possuiBone'] == 'SIM' ) { echo 'checked'; } ?>> Sim</label>&nbsp;
+                    <label class="font-normal"><input type="radio" name="possuiBone" value="NÃO" <?php if( isset($post['possuiBone']) && $post['possuiBone'] == 'NÃO' ) { echo 'checked'; } elseif( isset($atletica['possuiBone']) && $atletica['possuiBone'] == 'NÃO' ) { echo 'checked'; } ?>> Não</label>
+                </div>
+
+                <div class="form-group <?php echo ( isset($error) && in_array('possuiGorro', $error) ) ? 'has-error' : ''; ?>">
+                    <label>Possui gorro de delegação?</label><br />
+                    <label class="font-normal"><input type="radio" name="possuiGorro" value="SIM" <?php if( isset($post['possuiGorro']) && $post['possuiGorro'] == 'SIM' ) { echo 'checked'; } elseif( isset($atletica['possuiGorro']) && $atletica['possuiGorro'] == 'SIM' ) { echo 'checked'; } ?>> Sim</label>&nbsp;
+                    <label class="font-normal"><input type="radio" name="possuiGorro" value="NÃO" <?php if( isset($post['possuiGorro']) && $post['possuiGorro'] == 'NÃO' ) { echo 'checked'; } elseif( isset($atletica['possuiGorro']) && $atletica['possuiGorro'] == 'NÃO' ) { echo 'checked'; } ?>> Não</label>
+                </div>
+
+                <div class="form-group <?php echo ( isset($error) && in_array('possuiOculos', $error) ) ? 'has-error' : ''; ?>">
+                    <label>Possui óculos de delegação?</label><br />
+                    <label class="font-normal"><input type="radio" name="possuiOculos" value="SIM" <?php if( isset($post['possuiOculos']) && $post['possuiOculos'] == 'SIM' ) { echo 'checked'; } elseif( isset($atletica['possuiOculos']) && $atletica['possuiOculos'] == 'SIM' ) { echo 'checked'; } ?>> Sim</label>&nbsp;
+                    <label class="font-normal"><input type="radio" name="possuiOculos" value="NÃO" <?php if( isset($post['possuiOculos']) && $post['possuiOculos'] == 'NÃO' ) { echo 'checked'; } elseif( isset($atletica['possuiOculos']) && $atletica['possuiOculos'] == 'NÃO' ) { echo 'checked'; } ?>> Não</label>
+                </div>
+
+                <div class="form-group <?php echo ( isset($error) && in_array('possuiCaneca', $error) ) ? 'has-error' : ''; ?>">
+                    <label>Possui caneca de delegação?</label><br />
+                    <label class="font-normal"><input type="radio" name="possuiCaneca" value="SIM" <?php if( isset($post['possuiCaneca']) && $post['possuiCaneca'] == 'SIM' ) { echo 'checked'; } elseif( isset($atletica['possuiCaneca']) && $atletica['possuiCaneca'] == 'SIM' ) { echo 'checked'; } ?>> Sim</label>&nbsp;
+                    <label class="font-normal"><input type="radio" name="possuiCaneca" value="NÃO" <?php if( isset($post['possuiCaneca']) && $post['possuiCaneca'] == 'NÃO' ) { echo 'checked'; } elseif( isset($atletica['possuiCaneca']) && $atletica['possuiCaneca'] == 'NÃO' ) { echo 'checked'; } ?>> Não</label>
+                </div>
+
+                <div class="form-group <?php echo ( isset($error) && in_array('possuiTirante', $error) ) ? 'has-error' : ''; ?>">
+                    <label>Possui tirante de delegação?</label><br />
+                    <label class="font-normal"><input type="radio" name="possuiTirante" value="SIM" <?php if( isset($post['possuiTirante']) && $post['possuiTirante'] == 'SIM' ) { echo 'checked'; } elseif( isset($atletica['possuiTirante']) && $atletica['possuiTirante'] == 'SIM' ) { echo 'checked'; } ?>> Sim</label>&nbsp;
+                    <label class="font-normal"><input type="radio" name="possuiTirante" value="NÃO" <?php if( isset($post['possuiTirante']) && $post['possuiTirante'] == 'NÃO' ) { echo 'checked'; } elseif( isset($atletica['possuiTirante']) && $atletica['possuiTirante'] == 'NÃO' ) { echo 'checked'; } ?>> Não</label>
+                </div>
+
+                <div class="form-group <?php echo ( isset($error) && in_array('possuiJaqueta', $error) ) ? 'has-error' : ''; ?>">
+                    <label>Possui jaqueta college de delegação?</label><br />
+                    <label class="font-normal"><input type="radio" name="possuiJaqueta" value="SIM" <?php if( isset($post['possuiJaqueta']) && $post['possuiJaqueta'] == 'SIM' ) { echo 'checked'; } elseif( isset($atletica['possuiJaqueta']) && $atletica['possuiJaqueta'] == 'SIM' ) { echo 'checked'; } ?>> Sim</label>&nbsp;
+                    <label class="font-normal"><input type="radio" name="possuiJaqueta" value="NÃO" <?php if( isset($post['possuiJaqueta']) && $post['possuiJaqueta'] == 'NÃO' ) { echo 'checked'; } elseif( isset($atletica['possuiJaqueta']) && $atletica['possuiJaqueta'] == 'NÃO' ) { echo 'checked'; } ?>> Não</label>
+                </div>
+
+                <div class="form-group <?php echo ( isset($error) && in_array('possuiEquipEsportivo', $error) ) ? 'has-error' : ''; ?>">
+                    <label>Possui equipamento esportivo de delegação?</label><br />
+                    <label class="font-normal"><input type="radio" name="possuiEquipEsportivo" value="SIM" <?php if( isset($post['possuiEquipEsportivo']) && $post['possuiEquipEsportivo'] == 'SIM' ) { echo 'checked'; } elseif( isset($atletica['possuiEquipEsportivo']) && $atletica['possuiEquipEsportivo'] == 'SIM' ) { echo 'checked'; } ?>> Sim</label>&nbsp;
+                    <label class="font-normal"><input type="radio" name="possuiEquipEsportivo" value="NÃO" <?php if( isset($post['possuiEquipEsportivo']) && $post['possuiEquipEsportivo'] == 'NÃO' ) { echo 'checked'; } elseif( isset($atletica['possuiEquipEsportivo']) && $atletica['possuiEquipEsportivo'] == 'NÃO' ) { echo 'checked'; } ?>> Não</label>
+                </div>
                 
                 <div class="form-group <?php echo ( isset($error) && in_array('possuiUniforme', $error) ) ? 'has-error' : ''; ?>">
                     <label>Possui uniforme de equipe?</label><br />
