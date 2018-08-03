@@ -140,12 +140,14 @@ class atleticasController extends controller {
                     $a->setPassoFormulario($passo);
                     $a->setIdAtletica($idAtletica);
 
+                    $sizeImages = 3 * 1024 * 1024; //3MB
+
                     //UPLOAD DOS DOCUMENTOS
                     //ESTATUTO
                     $nomeArquivo = "";
                     $arquivo = $_FILES['urlEstatuto'];
                     if( !empty($arquivo['name']) ){
-                        if( in_array($arquivo['type'], array('application/msword', 'application/pdf')) ) {
+                        if( in_array($arquivo['type'], array('application/msword', 'application/pdf')) && $arquivo['type']['size'] <= $sizeImages ) {
                             $caminho = "uploads/estatuto/";
                             $ext = "doc";
                             if($arquivo['type'] == 'application/pdf'){
@@ -160,7 +162,7 @@ class atleticasController extends controller {
                     //ATA
                     $arquivo = $_FILES['urlAta'];
                     if( !empty($arquivo['name']) ){
-                        if( in_array($arquivo['type'], array('application/msword', 'application/pdf')) ) {
+                        if( in_array($arquivo['type'], array('application/msword', 'application/pdf')) && $arquivo['type']['size'] <= $sizeImages ) {
                             $caminho = "uploads/ata/";
                             $ext = "doc";
                             if($arquivo['type'] == 'application/pdf'){
@@ -175,7 +177,7 @@ class atleticasController extends controller {
                     //LOGO
                     $arquivo = $_FILES['urlLogo'];
                     if( !empty($arquivo['name']) ){
-                        if( in_array($arquivo['type'], array('application/octet-stream', 'image/png', 'application/postscript')) ) {
+                        if( in_array($arquivo['type'], array('application/octet-stream', 'image/png', 'application/postscript')) && $arquivo['type']['size'] <= $sizeImages ) {
                             $caminho = "uploads/logo/";
                             $ext = "";
                             if($arquivo['type'] == 'image/png'){

@@ -26,7 +26,7 @@ if( ENVIRONMENT == "development" ) {
     $config['dbuser'] = 'admligau_adm';
     $config['dbpass'] = 'liga2018me';
     
-    define("BASE_URL", "http://cigameasy.com.br/admin");
-    define("BASE_URL_SITE", "http://cigameasy.com.br");
+    define("BASE_URL", "http://ligauniversitariasite.meeweb.com.br/admin");
+    define("BASE_URL_SITE", "http://ligauniversitariasite.meeweb.com.br");
     
 }

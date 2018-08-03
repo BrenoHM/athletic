@@ -41,7 +41,7 @@
     
     <div class="row">
         <div class="form-group col-md-6">
-            <label for="url">Fotos - Arquivo em PNG ou JPG</label>
+            <label for="url">Fotos - Arquivo em PNG ou JPG - Tamanho: 3MB</label>
             <input type="file" name="url[]" id="url" multiple="multiple" />
         </div>
     </div>

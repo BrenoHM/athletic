@@ -14,7 +14,7 @@ class Cursos extends model {
         
         $dados = array();
             
-        $sql = "SELECT * FROM {$this->tabela}";
+        $sql = "SELECT * FROM {$this->tabela} ORDER BY curso";
         $sql = $this->db->query($sql);
 
         if( $sql->rowCount() > 0 ) {

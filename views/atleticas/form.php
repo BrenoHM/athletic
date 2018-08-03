@@ -272,17 +272,17 @@
                 </div>
                 
                 <div class="form-group <?php echo ( isset($error) && in_array('urlEstatuto', $error) ) ? 'has-error' : ''; ?>">
-                    <label for="urlEstatuto">UPLOAD do ESTATUTO - Arquivo em PDF ou WORD</label>
+                    <label for="urlEstatuto">UPLOAD do ESTATUTO - Arquivo em PDF ou WORD - Tamanho: 3MB</label>
                     <input type="file" name="urlEstatuto" id="urlEstatuto" />
                 </div>
                 
                 <div class="form-group <?php echo ( isset($error) && in_array('urlAta', $error) ) ? 'has-error' : ''; ?>">
-                    <label for="urlAta">UPLOAD da ATA - Arquivo em PDF ou WORD</label>
+                    <label for="urlAta">UPLOAD da ATA - Arquivo em PDF ou WORD - Tamanho: 3MB</label>
                     <input type="file" name="urlAta" id="urlAta" />
                 </div>
                 
                 <div class="form-group <?php echo ( isset($error) && in_array('urlLogo', $error) ) ? 'has-error' : ''; ?>">
-                    <label for="urlLogo">UPLOAD da logo VETORIZADA em Corel/Ilustrator/Photoshop/PNG SEM FUNDO COM 300dpis</label>
+                    <label for="urlLogo">UPLOAD da logo VETORIZADA em Corel/Ilustrator/Photoshop/PNG SEM FUNDO COM 300dpis - Tamanho: 3MB</label>
                     <input type="file" name="urlLogo" id="urlLogo" />
                 </div>
                 

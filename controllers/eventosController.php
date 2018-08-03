@@ -48,6 +48,8 @@ class eventosController extends controller {
                 $frequencia  = addslashes($_POST['frequencia']);
                 $fotos       = $_FILES['url'];
 
+                $sizeImages = 3 * 1024 * 1024; //3MB
+
                 if( !empty($nome) ) {
                     
                     //INSERE EVENTO
@@ -59,7 +61,7 @@ class eventosController extends controller {
                         if( !empty($fotos['name'][0]) ) {
                             $caminho = "uploads/galeria/";
                             for($i = 0; $i < count($fotos['name']); $i++) {
-                                if( in_array($fotos['type'][$i], array('image/jpeg', 'image/jpg', 'image/png')) ) {
+                                if( in_array($fotos['type'][$i], array('image/jpeg', 'image/jpg', 'image/png')) && $fotos['size'][$i] <= $sizeImages ) {
 
                                     $ext = strtolower(substr($fotos['name'][$i],-4));
                                     $nomeImagem = md5(time().rand(0, 9999)) . $ext;
