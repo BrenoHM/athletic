@@ -2,9 +2,9 @@
 
 require_once 'environment.php';
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 
 global $config;
 $config = array();
@@ -16,8 +16,8 @@ if( ENVIRONMENT == "development" ) {
     $config['dbuser'] = 'admligau_adm';
     $config['dbpass'] = 'liga2018me';
     
-    define("BASE_URL", "http://localhost/atleticas");
-    define("BASE_URL_SITE", "http://localhost/atleticas");
+    define("BASE_URL", "http://localhost/atleticas2");
+    define("BASE_URL_SITE", "http://localhost/atleticas2");
     
 } else {
     

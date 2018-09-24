@@ -158,5 +158,50 @@ class Eventos extends model {
         return $dados['total'];
 
     }
+
+    public function adicionar($evento, $dataInicial, $dataFinal, $idAtletica) 
+
+    {
+        
+        $idEvento = 0;
+        $sql = "INSERT INTO eventoAtleticaPartipa SET evento = '$evento', dataInicial = '$dataInicial', dataFinal = '$dataFinal', idAtletica = '$idAtletica'";
+        $sql = $this->db->query($sql);
+        $idEvento = $this->db->lastInsertId();
+        return $idEvento;
+        
+    }
+
+    public function getEventosAtleticaParticipa($idAtletica) 
+
+    {
+        
+        $dados = array();
+        
+        $sql = "SELECT id, evento, DATE_FORMAT(dataInicial, '%d/%m/%Y') as dataInicial, DATE_FORMAT(dataFinal, '%d/%m/%Y') as dataFinal FROM eventoAtleticaPartipa WHERE idAtletica = $idAtletica";
+        
+        $sql = $this->db->query($sql);
+        
+        if($sql->rowCount() > 0){
+            $dados = $sql->fetchAll();
+        }
+        
+        return $dados;
+        
+    }
+
+    public function del($id) 
+
+    {
+        
+        $sql = "DELETE FROM eventoAtleticaPartipa WHERE id = $id;";
+                
+        $sql = $this->db->query($sql);
+        
+        if($sql->rowCount() > 0){
+            return true;
+        }
+        
+        return false;
+    }
         
 }

@@ -217,4 +217,22 @@ class eventosController extends controller {
         
     }
 
+    public function adicionar() {
+        $evento      = strtoupper($_POST['evento']);
+        $dataInicial = $_POST['dataInicial'];
+        $dataFinal   = $_POST['dataFinal'];
+        $idAtletica  = $_POST['idAtletica'];
+        $e = new Eventos();
+        $idEvento = 0;
+        $idEvento = $e->adicionar($evento, $dataInicial, $dataFinal, $idAtletica);
+        echo json_encode($idEvento);
+    }
+
+    public function del() {
+        $id = $_POST['id'];
+        $e = new Eventos();
+        $deletado = $e->del($id);
+        echo json_encode($deletado);
+    }
+
 }

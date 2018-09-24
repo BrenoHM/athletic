@@ -33,6 +33,8 @@
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>/plugins/select2/select2.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>/plugins/datatables/dataTables.bootstrap.css">
+  <!-- Croopie -->
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>/plugins/croppie/croppie.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo BASE_URL; ?>/dist/css/AdminLTE.min.css">
   <!-- System style -->
@@ -47,7 +49,6 @@
   
   <!-- jQuery 2.2.3 -->
   <script src="<?php echo BASE_URL; ?>/plugins/jQuery/jquery-2.2.3.min.js"></script>
-  
   <?php
     $usuario = Sessao::getSessionNivel() == 'admin' ? new Usuario() : new UsuarioAtletica();
     $gravata = $usuario->getGravata(Sessao::getSessionEmail(), 160);
@@ -440,6 +441,7 @@
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 
+
 <!-- DataTables -->
 <script src="<?php echo BASE_URL; ?>/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?php echo BASE_URL; ?>/plugins/datatables/dataTables.bootstrap.min.js"></script>
@@ -471,11 +473,15 @@
 <script src="<?php echo BASE_URL; ?>/plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo BASE_URL; ?>/dist/js/app.min.js"></script>
+
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo BASE_URL; ?>/dist/js/demo.js"></script>
 <!-- CK Editor -->
 <!--<script src="<?php //echo BASE_URL; ?>/plugins/ckeditor/ckeditor.js"></script>
 <script src="<?php //echo BASE_URL; ?>/plugins/ckfinder/ckfinder.js"></script>-->
+
+<!-- Croopie -->
+<script type="text/javascript" src="<?php echo BASE_URL; ?>/plugins/croppie/croppie.js"></script>
 
 <script>
     

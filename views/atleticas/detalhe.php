@@ -94,7 +94,32 @@
                             <div class="col-md-12"><strong>Possui bandeirão: </strong><?php echo $atletica['possuiBandeirao']; ?></div>
                             <div class="col-md-12"><strong>Possui mascote: </strong><?php echo $atletica['possuiMascote']; ?></div>
                             <div class="col-md-12"><strong>Possui bateria: </strong><?php echo $atletica['possuiBateria']; ?></div>
-                            <div class="col-md-12"><strong>Quais os principais eventos que a Atlética participa e em que data/período: </strong><?php echo $atletica['principaisEventos']; ?></div>
+                            <div class="col-md-12"><strong>Quais os principais eventos que a Atlética participa e em que data/período: </strong>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Evento</th>
+                                            <th>Data Inicial</th>
+                                            <th>Data Final</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="listaEventos">
+                                        <?php if( !empty($eventos) ): ?>
+                                        <?php foreach( $eventos as $evento ): ?>
+                                            <tr>
+                                                <td><?php echo $evento['evento']; ?></td>
+                                                <td><?php echo $evento['dataInicial']; ?></td>
+                                                <td><?php echo $evento['dataFinal']; ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <tr>
+                                                <td colspan="3">Nenhum evento ainda cadastrado!</td>
+                                            </tr>
+                                        <?php endif; ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -124,6 +149,9 @@
                             </div>
                             <div class="col-md-6"><strong>Logo: </strong>
                                 <a href="<?php echo BASE_URL; ?>/uploads/logo/<?php echo $atletica['urlLogo']; ?>" target="_blank"><i class="fa fa-download"></i></a>
+                            </div>
+                            <div class="col-md-6"><strong>Logo de exibição: </strong>
+                                <a href="<?php echo BASE_URL; ?>/uploads/logo-exibicao/<?php echo $atletica['urlLogoExibicao']; ?>" target="_blank"><i class="fa fa-download"></i></a>
                             </div>
                             <div class="col-md-6"><strong>Status: </strong>
                                 <select name="" id="teste" onchange="mudaStatusAtletica(this.value);">

@@ -24,9 +24,9 @@ class Email extends model {
     
     private $host     = 'srv210.prodns.com.br';
     private $usuario  = 'naoresponda@ligauniversitariabr.com.br';
-    private $senha    = 'liga2018me';
+    private $senha    = 'ligauniversitariabr2018me';
     public $de        = 'naoresponda@ligauniversitariabr.com.br';
-    public $deNome    = 'Liga Universitária';
+    public $deNome    = 'Liga Universitária BR';
     public $para;
     public $paraNome;
     public $assunto;
